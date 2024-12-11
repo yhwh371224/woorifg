@@ -14,7 +14,11 @@ ENVIRONMENT = config('ENVIRONMENT', default='production')
 
 if ENVIRONMENT == 'production':
     DEBUG = config('DEBUG', cast=bool, default=True)
-    ALLOWED_HOSTS = [ ]
+    ALLOWED_HOSTS = [
+	'ec2-3-27-167-92.ap-southeast-2.compute.amazonaws.com',
+	'suychurch.site',
+	'www.suychurch.site',
+	'3.27.167.92' ]
 
     SECURE_SSL_REDIRECT = True
     CSRF_COOKIE_SECURE = True
