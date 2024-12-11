@@ -1,0 +1,32 @@
+{% extends 'gallery/base.html' %}
+
+{% block content %}
+<section class="page-section" id="subpages">
+    <div class="container">
+        <div class="gallery-section" style="padding: 20px;">  
+            <br/> 
+            <!-- Title -->
+            <h3>{{ object.title }}</h3>
+            <!-- Author -->
+            <p class="lead">
+                by
+                <a href="#">{{ object.author }}</a>
+            </p>
+            {% if request.user %}
+                <button type="button" class="btn btn-sm btn-success float-right" onclick="location.href='{{ object.get_update_url }}'">EDIT</button>
+            {% endif %}
+            <hr>
+
+            <!-- Date/Time -->
+            <p>{{ object.date }}</p>
+
+            <hr>
+
+            <!-- Preview Image -->
+            {% if object.head_image %}
+                <img class="img-fluid rounded" src="{{ object.head_image.url }}" alt="{{ object.title }}">
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

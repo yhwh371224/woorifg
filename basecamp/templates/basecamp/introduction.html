@@ -1,0 +1,61 @@
+{% extends 'basecamp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="page-section" id="subpages">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase" style="font-size: 2rem;">담임목사님 소개</h2>
+            <h3 class="section-subheading text-muted">지혜와 사랑으로 이끄시는 목사님</h3>
+        </div>
+        <div class="row mb-4 pb-4">
+            <!-- 왼쪽 섹션 -->
+            <div class="col-lg-3 text-center">
+                <img src="{% static 'basecamp/assets/img/team/profile1.webp' %}" alt="김곤주 목사" class="img-fluid mb-3">                
+                <p class="text-muted" style="font-size: 1rem;">
+                    김곤주 목사는 한국에서 학부와 신대원 그리고 강도사를 거쳐 목사 안수를 받기까지 
+                    한국에서 10여년 이상 부교역자로 사역을 하였습니다.
+                </p>
+                <p class="text-muted" style="font-size: 1rem;">
+                    호주에서 유학생활 및 이민생활을 시작하면서 호주 신학교에서 신학공부를 계속하였고, 
+                    새언약 교회를 개척하여 섬기고 있습니다.
+                </p>
+                <p class="text-muted text-left" style="font-size: 0.9rem; margin-left: 0; padding-left: 0; display: inline-block; text-align: left;">
+                    • 안양대 및 안양대 신대원 졸 (BA, M.Div)<br>
+                    • 호주 몰링(Morling) 신대원 졸 (MA in Th)<br>
+                    • 무어(Moore) 신대원 졸 (MA in Th)<br>
+                    • 알파크루시스(Alphacrusis) 신대원 졸 (MTh 및 MPh)
+                </p>         
+            </div>
+            <div class="col-lg-1"></div>
+            <!-- 오른쪽 섹션 -->
+            <div class="col-lg-7">                
+                <p>
+                    김곤주 목사님은 모든 성도가 하나님의 말씀을 통해 성장하여 온전한 그리스도의 몸으로 세워지기를 지향하며, 
+                    그런 하나님의 나라가 확장되기를 소망하십니다.
+                </p>
+                <p>
+                    또한, 두 군데 신학교에서 강의하시고 계시며 평생을 목회와 신학에 인생을 바치신 
+                    하나님이 쓰시는 목회자요 신학자이십니다.
+                </p>
+                <p>
+                    목사님 저서로는 <em>'원문 중심의 이야기 로마서'</em>와 <em>'바른 해석과 바른 신앙'</em>이 있습니다.
+                </p>
+                <br><br>
+                <!-- 책 이미지 섹션 -->
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <img src="{% static 'basecamp/assets/img/book1.webp' %}" alt="원문 중심의 이야기 로마서" class="img-fluid w-75 shadow-sm mb-2">
+                        <p class="text-muted" style="font-size: 0.9rem;"><em>원문 중심의 이야기 로마서</em></p>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <img src="{% static 'basecamp/assets/img/book2.webp' %}" alt="바른 해석과 바른 신앙" class="img-fluid w-75 shadow-sm mb-2">
+                        <p class="text-muted" style="font-size: 0.9rem;"><em>바른 해석과 바른 신앙</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

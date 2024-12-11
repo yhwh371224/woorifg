@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>새언약교회</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="/static/basecamp/favi/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/static/basecamp/css/styles.css" rel="stylesheet" />
+        <style>
+            #mainNav {
+              padding-top: 1rem;
+              padding-bottom: 1rem;
+              background-color: #5a6268 !important;
+            }
+            #subpages {
+                margin-top: 4rem; 
+            }
+            a {
+                color: #ad5207; /* Change this to any color you like */
+            }
+          </style>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="/home"><span class="logo-text">새언약교회</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <!-- 교회소개 드롭다운 메뉴 -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                                교회안내
+                            </a>
+                            <ul class="dropdown-menu" >
+                                <li><a class="dropdown-item" href="/home/#about">교회소개</a></li>
+                                <li><a class="dropdown-item" href="/introduction">목사님소개</a></li>
+                                <li><a class="dropdown-item" href="/workers">섬기는 사람들</a></li>
+                                <li><a class="dropdown-item" href="/location">교회위치 및 온라인헌금</a></li>                                
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                                예배안내
+                            </a>
+                            <ul class="dropdown-menu" >
+                                <li><a class="dropdown-item" href="/meetings">예배와 모임</a></li>
+                                <li><a class="dropdown-item" href="/blog/bulletins">교회주보</a></li>
+                                <li><a class="dropdown-item" href="/worship_music">찬양악보</a></li>
+                            </ul>
+                        </li>     
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                                하나님의 말씀
+                            </a>
+                            <ul class="dropdown-menu" >
+                                <li><a class="dropdown-item" href="/home/#words">주일설교</a></li>
+                                <li><a class="dropdown-item" href="/review">목사님 칼럼</a></li>
+                            </ul>
+                        </li>                             
+                        <li class="nav-item"><a class="nav-link" href="/gallery">갤러리</a></li>                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        {% block content %}
+        {% endblock %}
+
+        <!-- Footer-->
+        <footer class="footer" style="background-color: #5a6268; padding-top: 4rem; padding-bottom: 4rem;" id="contact">
+            <div class="container" style="padding-top: 0.5rem; padding-bottom: 1rem;">                
+                <div class="row align-items-center">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.youtube.com" aria-label="Twitter" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/peterkim1515" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.google.com/maps/search/?api=1&query=109+Priam+St,+Chester+Hill" aria-label="Google" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+            </div>
+            <div class="container" style="padding-top: 1rem;">                
+                <div class="row align-items-center">                    
+                    <div class="col-12 text-center" style="color: white;"><a class="link-dark text-decoration-none hover-effect" href="sms:+61466386584">0466 386 584 </a>(담임목사 김곤주)</div>
+                </div>
+            </div>
+            <div class="container" style="">                
+                <div class="row align-items-center">                    
+                    <div class="col-12 text-center" style="color: white;">이메일 주소: <a class="link-dark text-decoration-none hover-effect" href="mailto:suy.church@gmail.com">kkj1515@hotmail.com</a></div>
+                </div>
+            </div>
+            <div class="container" style="padding-top: 1rem;">                
+                <div class="row align-items-center">                    
+                    <div class="col-12 text-center" style="color: white;">교회주소: <a class="link-dark text-decoration-none me-3 hover-effect" 
+                        href="https://www.google.com/maps/search/?api=1&query=109+Priam+St,+Chester+Hill" 
+                        target="_blank">
+                        109 Priam St, Chester Hill NSW 2162
+                    </a></div>
+                </div>
+            </div>
+            <div class="container" style="">                
+                <div class="row align-items-center">                    
+                    <div class="col-12 text-center" style="color: white;">사랑방주소: <a class="link-dark text-decoration-none me-3 hover-effect" 
+                        href="https://www.google.com/maps?q=2/2+Amy+Street,+Regents+Park+NSW+2143" 
+                        target="_blank">
+                        2/2 Amy Street, Regents Park NSW 2143
+                    </a></div>
+                </div>
+            </div>
+            <div class="container" style="padding-top: 1rem;">                
+                <div class="row align-items-center">                    
+                    <div class="col-12 text-center" style="color: white;">2024 All rights reserved &copy; 시드니 새언약교회</div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/static/basecamp/js/scripts.js"></script>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>    
+        <style>
+            /* 링크 및 버튼 색상 변화 */
+            .hover-effect {
+                color: white; /* 기본 색상 */
+                transition: color 0.3s, background-color 0.3s; /* 부드러운 전환 효과 */
+            }
+        
+            .hover-effect:hover {
+                color: #ffd700 !important/* 마우스를 올렸을 때 색상 */
+                
+            }
+        </style>
+    </body>      
+</html>

@@ -1,0 +1,39 @@
+{% extends 'review/base.html' %}
+
+{% block content %}
+<section class="page-section" id="subpages">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table>
+                        {{ form.non_field_errors }}
+                        <tr>
+                            <th>{{ form.name.label_tag }}</th>
+                            <td>{{ form.name }}</td>
+                        </tr> 
+                        <tr>
+                            <th>{{ form.title.label_tag }}</th>
+                            <td>{{ form.title }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ form.date.label_tag }}</th>
+                            <td>{{ form.date }}</td>
+                        </tr>              
+                        <tr>
+                            <th>{{ form.content.label_tag }}</th>
+                            <td>{{ form.content|safe }}</td>
+                        </tr>
+                    </table>
+                    <div class="text-center"> 
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>        
+        </div>
+    </div>
+</section>
+{{ form.media }}
+
+{% endblock %}

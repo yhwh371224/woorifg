@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /db.sqlite3
+Disallow: /awskeypair.pem
+Disallow: /manage.py
+Disallow: /test/
+
+Sitemap: https://suychurch.site/sitemap.xml
+
+

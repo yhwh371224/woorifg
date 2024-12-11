@@ -1,0 +1,86 @@
+{% extends 'basecamp/base.html' %}
+
+{% block content %}
+<section class="page-section" id="subpages">
+    <div class="container">
+        <div class="text-center">
+            <h3>교회 주보</h3>
+        </div>
+        <div>      
+            <!-- 파일 업로드 폼 -->
+            {% if user.is_authenticated %}
+            <div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}  
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">주보업로드</button>
+                    <button id="merge-pdfs-button" class="btn btn-danger">업로드한 주보병합</button>
+                </div>
+            </form>
+            {% else %}
+                <a href="{% url 'account_login' %}?next={% url 'bulletin_upload' %}" class="btn btn-success">주보업로드</a>
+            {% endif %}
+            <!-- 주보 목록 -->
+        </div>              
+
+        
+        <div class="bulletin-list mt-4">
+            {% for bulletin in bulletins %}
+                <div class="bulletin-item">
+                    <div class="bulletin-info">
+                        <p class="bulletin-date">{{ bulletin.date|date:"Y년 m월 d일" }}
+                        {% if bulletin.pdf_file %}
+                            <a href="{{ bulletin.pdf_file.url }}" target="_blank" class="btn-view-bulletin">&nbsp;주보 보기</a></p>
+                        {% else %}
+                            <p class="text-danger">PDF 파일이 없습니다.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <p>등록된 주보가 없습니다.</p>
+            {% endfor %}
+        </div>     
+        <!-- Pagination Controls -->
+        <div class="pagination mt-4 text-center" style="font-size: small;">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">[처음페이지]&nbsp;&nbsp;</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">next&nbsp;&nbsp;</a>
+                {% endif %}
+                
+                <span class="current-page">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">&nbsp;&nbsp;previous</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">&nbsp;&nbsp;[끝페이지]</a>
+                {% endif %}
+            </span>
+        </div>   
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $('#merge-pdfs-button').click(function(e) {
+        e.preventDefault();  // Prevents the default form submission
+
+        $.ajax({
+            url: '{% url "merge_pdfs" %}',  // Django template tag for the correct URL
+            method: 'GET',
+            success: function(response) {
+                if (response.message) {
+                    // If the response contains a success message
+                    alert(response.message);
+                    location.reload();  // Reload the page to reflect changes
+                }
+            },
+            error: function(xhr, status, error) {
+                // If the request fails, show the error message
+                alert('병합 작업 중 오류가 발생했습니다. ' + (xhr.responseJSON.error || error));
+            }
+        });
+    });
+</script>
+
+{% endblock %}
+

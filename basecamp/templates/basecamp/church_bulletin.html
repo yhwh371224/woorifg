@@ -1,0 +1,28 @@
+{% extends 'basecamp/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="page-section" id="subpages">
+    <div class="container">
+        <div class="text-center">
+            <h3>교회 주보</h3>
+        </div>
+        <div class="bulletin_list mt-4">
+            {% for bulletin in bulletins %}
+                <div class="bulletin-item">
+                    <h5>{{ bulletin.title }}</h5>
+                    <p>날짜: {{ bulletin.date|date:"Y년 m월 d일" }}</p>
+                    {% if bulletin.pdf_file %}
+                        <a href="{{ bulletin.pdf_file.url }}" target="_blank" class="btn btn-primary">주보 보기</a>
+                    {% else %}
+                        <p class="text-danger">PDF 파일이 없습니다.</p>
+                    {% endif %}
+                </div>
+                <hr>
+            {% empty %}
+                <p>등록된 주보가 없습니다.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

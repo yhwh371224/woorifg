@@ -1,0 +1,89 @@
+{% extends 'review/base.html' %}
+
+{% block content %}
+<section class="page-section" id="subpages">
+    <div class="container">
+        <div class="text-center">
+            <h3>설교문 및 칼럼</h3>
+        </div>
+        {% if user.is_authenticated %}
+            <div class="d-flex justify-content-end mb-3">
+                <a href="{% url 'review:review_create' %}" class="btn btn-success">글쓰기</a>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-12" id="main-div">
+                <br/>                
+                <br/>
+                {% if object_list %}
+                    {% for post in object_list %}
+                        <div class="card mb-4" id="post-card-{{ post.pk }}">
+                            <div class="card-header text-muted">
+                                Title: {{ post.title }} &nbsp;&nbsp;posted by {{ post.name }}&nbsp;&nbsp;&nbsp;{{ post.date }}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">{{ post.get_markdown_content|striptags|safe|truncatewords:50 }}</p>
+                                <br/>
+                                {% if post.name %}
+                                    <p class="card-text">
+                                        <a href="{{ post.get_absolute_url }}" class="btn btn-secondary" id="read-more-post-{{ post.pk }}">Read More &rarr;</a>
+                                    </p>
+                                {% endif %}
+                            </div>                            
+                        </div>
+                    {% endfor %}
+
+                    {% if is_paginated %}
+                        <ul class="pagination justify-content-center mb-4">
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">&larr; Older</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">&larr; Older</a>
+                                </li>
+                            {% endif %}
+
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Newer &rarr;</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Newer &rarr;</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    {% endif %}
+                {% else %}
+                    <h5>No Post</h5>
+                {% endif %}
+            </div>
+
+            <!-- <div class="col-md-3" id="side-div">
+                <h5 class="side-h"><br/></h5>
+                <h5 class="side-h"><br/></h5>
+                
+                <div class="search-widget">                    
+                    <div class="input-group">
+                        <input type="text" id="search-input" onkeyup="wait_for_enterkey()" class="form-control" placeholder="단어로 찾으세요..."/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" onclick="search_post();">검색 !</button>
+                        </span>
+                    </div>
+                    <div id="error-message" class="text-danger mt-2" style="display: none;"></div>                    
+                </div>
+                
+                {% if search_error %}
+                    <script>
+                        alert("{{ search_error|escapejs }}");
+                    </script>
+                {% endif %}
+            </div> -->
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

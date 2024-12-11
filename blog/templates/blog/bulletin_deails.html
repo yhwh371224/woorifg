@@ -1,0 +1,24 @@
+{% extends 'basecamp/base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="page-section" id="subpages">
+    <div class="container">
+        <div class="text-center">
+            <h3>{{ bulletin.title }}</h3>
+            <p><strong>날짜:</strong> {{ bulletin.date|date:"Y년 m월 d일" }}</p>
+        </div>
+        <div class="bulletin-pdf mt-4">
+            {% if bulletin.pdf_file %}
+                <iframe src="{{ bulletin.pdf_file.url }}" width="100%" height="600px" style="border: none;"></iframe>
+            {% else %}
+                <p class="text-danger">PDF 파일이 없습니다.</p>
+            {% endif %}
+        </div>
+        <div class="text-center mt-3">
+            <a href="{% url 'bulletin_list' %}" class="btn btn-light">목록으로 돌아가기</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

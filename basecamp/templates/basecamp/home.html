@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />       
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />        
+        <title>새언약교회</title>
+        <meta name="application-name" content="새언약교회">
+        <meta name="description" content="새언약교회는 호주 시드니 Chestser Hill에 있는 한인교회입니다" />
+        <meta name="author" content="감승재 전도사" />
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="/static/basecamp/favi/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+        <link href="/static/basecamp/css/styles.css" rel="stylesheet" />
+        <style>
+            .enlarged-img {
+                width: 100%; /* 기본 크기로 설정 */
+                max-width: 200%; /* 너비를 2배로 키움 */
+                height: auto; /* 비율을 유지 */
+            }
+            </style>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand" href="#page-top">
+                    <!-- <img src="{% static 'basecamp/assets/img/suy_log.webp' %}" alt="새언약교회 로고" /> -->
+                    <img src="{% static 'basecamp/assets/img/favicon.png' %}" alt="파비콘" class="favicon-img" />
+                    <span class="logo-text">새언약교회</span>                    
+                </a>
+                <a class="btn btn-dark btn-social mx-2" href="https://www.youtube.com" aria-label="Twitter" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/peterkim1515" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-dark btn-social mx-2" href="https://www.google.com/maps/search/?api=1&query=109+Priam+St,+Chester+Hill" aria-label="Google" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <!-- 교회소개 드롭다운 메뉴 -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                                교회안내
+                            </a>
+                            <ul class="dropdown-menu" >
+                                <li><a class="dropdown-item" href="#about">교회소개</a></li>
+                                <li><a class="dropdown-item" href="/introduction">목사님소개</a></li>
+                                <li><a class="dropdown-item" href="/workers">섬기는 분들</a></li>
+                                <li><a class="dropdown-item" href="/location">교회위치 및 온라인헌금</a></li>                                
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                                예배안내
+                            </a>
+                            <ul class="dropdown-menu" >
+                                <li><a class="dropdown-item" href="/meetings">예배와 모임</a></li>
+                                <li><a class="dropdown-item" href="/blog/bulletins">교회주보</a></li>
+                                <li><a class="dropdown-item" href="/worship_music">찬양악보</a></li>
+                                <li><a class="dropdown-item" href="{% url 'basecamp:contact_list' %}" target="_blank">장년부 교인연락처</a></li>
+                            </ul>
+                        </li>     
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                                하나님의 말씀
+                            </a>
+                            <ul class="dropdown-menu" >
+                                <li><a class="dropdown-item" href="#words">주일설교</a></li>
+                                <li><a class="dropdown-item" href="/review">목사님 칼럼</a></li>
+                            </ul>
+                        </li>                             
+                        <li class="nav-item"><a class="nav-link" href="/gallery">갤러리</a></li>                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead text-center">
+            <div class="container">
+                <div class="masthead-subheading">Welcome To Our Church!</div>
+                <div class="masthead-heading text-uppercase welcome-text">새언약교회에 오신걸 환영합니다</div>
+                <div class="masthead-subheading">I will put my laws in their minds and write them on their hearts. I will be their God, and they will be my people</div>
+            </div>
+            <!-- Notice Box -->
+            <div class="notice-box">
+                <button class="close-btn" onclick="this.parentElement.style.display='none'">&times;</button>
+                <h2>공지사항</h2>
+                <p>아래 링크를 클릭하시면 장년부 연락처 보실 수 있습니다:</p>
+                <p>
+                    <a href="{% url 'basecamp:contact_list' %}" target="_blank">
+                        장년부 연락처 보기 (PDF)
+                    </a>
+                </p>
+                <p>목사님께서 이 번 주일날 프린터해서 교회 주보함에 비치한다고 합니다.</p>
+            </div>
+        </header>
+        <!-- Services-->
+        <section class="page-section" id="services">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">교회안내</h2>
+                    <h3 class="section-subheading text-muted">건강한 교회, 성숙한 교회, 섬기는 교회</h3>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <a href="/meetings/" class="circle-link">
+                            <div class="circle-container">
+                                <img src="{% static 'basecamp/images/church_inside.png' %}" class="circle-image" alt="주일예배">
+                            </div>
+                        </a>                        
+                        <h4 class="my-3">주일예배</h4>
+                        <p class="text-muted">상한 마음과 목마른 영혼이 소생하는 예배 바른 진리의 말씀이 선포되는 예배로 초대합니다. 말씀의 깊이와 넓이를 더해주고, 그 말씀을 따라 살아가도록 이끌어 줍니다.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/review" class="circle-link">
+                            <div class="circle-container">
+                                <img src="{% static 'basecamp/images/bible.png' %}" class="circle-image" alt="하나님의 말씀">
+                            </div>
+                        </a>
+                        <h4 class="my-3">하나님의 말씀</h4>
+                        <p class="text-muted">성경 66권을 차례대로 공부합니다. 담임목사의 강해와 참여자들의 질문과 토론이 함께 어우러지는 실제적인 성경공부 시간입니다. </p>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="/gallery" class="circle-link">
+                            <div class="circle-container">
+                                <img src="{% static 'basecamp/images/church members.png' %}" class="circle-image" alt="교회사진첩">
+                            </div>
+                        </a>
+                        <h4 class="my-3">교회사진첩</h4>
+                        <p class="text-muted">새언약 교회와 성도님들의 다양한 모습들을 사진으로 담았습니다. 사진은 계속 업데이트되며 여러분들도 사진의 추억속에 함께 하기를 소망합니다!</p>
+                    </div>
+                                   
+                </div>
+            </div>
+        </section>
+        <!-- Portfolio Grid-->
+        <section class="page-section bg-dark" id="words" >
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase"></h2>
+                    <h3 class="section-subheading text-muted">매주 설교말씀은 업데이트 됩니다</h3>
+                </div>
+                <div class="row">                    
+                    <div class="row justify-content-center"> 
+                        <div class="col-lg-4 col-sm-6 mb-4 d-flex justify-content-center"> 
+                            <!-- item 1-->
+                            <div class="portfolio-item">
+                                <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
+                                    <div class="portfolio-hover">
+                                        <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                    </div>
+                                    <img class="img-fluid" src="{% static 'basecamp/assets/img/portfolio/youtube1.PNG' %}" alt="..." />
+                                </a>
+                                <div class="portfolio-caption">
+                                    <div class="portfolio-caption-heading">주일설교</div>
+                                    <a href="https://www.youtube.com" target="_blank">
+                                        <div class="portfolio-caption-subheading ">동영상 보기 >></div>
+                                    </a>
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>                          
+                </div>
+            </div>
+        </section>
+        <!-- About-->
+        <section class="page-section" id="about">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">새언약교회 이모저모 </h2>
+                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                </div>
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'basecamp/assets/img/about/worship_team.webp' %}" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <!-- <h4>2009-2011</h4> -->
+                                <h4 class="subheading">교회찬양팀</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">
+                                    우리 교회의 찬양팀은 하나님께 드리는 예배와 찬양을 통해 성도들이 더 깊은 은혜를 경험할 수 있도록 섬기고 있습니다. 
+                                    각자의 자리에서 마음과 목소리를 모아 하나님께 영광 돌리는 찬양팀의 모습을 함께 나누고 싶습니다. 
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'basecamp/assets/img/about/bible_study1.PNG' %}" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <!-- <h4>March 2011</h4> -->
+                                <h4 class="subheading">성경공부</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">
+                                    성경공부는 하나님의 말씀을 깊이 묵상하고, 삶 속에서 그 뜻을 발견하며, 믿음의 뿌리를 더욱 견고히 하는 귀한 시간입니다. 
+                                    함께 모여 말씀을 나누고 질문하며 성장하는 이 여정에 여러분을 초대합니다. 
+                                    성경을 통해 하나님의 사랑과 계획을 더 깊이 경험해 보세요!
+                                </p>
+                        </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'basecamp/assets/img/about/lunch.webp' %}" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <!-- <h4>December 2015</h4> -->
+                                <h4 class="subheading">뷔페식점심</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">
+                                    예배 후에는 뷔페식 점심으로 풍성한 교제의 시간을 나눕니다. 
+                                    다양한 음식과 함께 서로의 삶을 나누며 따뜻한 사랑과 환영을 경험해 보세요. 
+                                    모두가 함께하는 기쁨의 식탁에 여러분을 초대합니다!
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="{% static 'basecamp/assets/img/about/church_kids2.PNG' %}" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <!-- <h4>July 2020</h4> -->
+                                <h4 class="subheading">유치부와 학생부</h4>
+                            </div>
+                            <div class="timeline-body">
+                                <p class="text-muted">
+                                    유치부와 학생부는 다음 세대가 하나님의 사랑을 배우고 믿음 안에서 성장할 수 있도록 돕는 소중한 공동체입니다. 
+                                    유치부는 즐겁고 창의적인 활동과 성경 이야기를 통해 아이들이 믿음의 첫걸음을 내딛도록 돕고, 학생부는 말씀과 찬양, 
+                                    나눔을 통해 청소년들이 자신의 정체성과 삶의 방향을 하나님 안에서 발견하며 성장하도록 이끕니다. 
+                                    사랑과 은혜가 가득한 이 여정에 함께하세요!
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <h4>
+                                Be Part
+                                <br />
+                                Of Our
+                                <br />
+                                Church!
+                            </h4>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- Team-->
+        <section class="page-section bg-light" id="subpages">
+            <div class="container">
+                <div class="row text-center" id="photo-grid">                    
+                    <div class="col-md-3 col-sm-6 mb-4 image-container">
+                        <img src="{% static 'basecamp/assets/img/meeting.PNG' %}" alt="" class="img-fluid rounded enlarged-img">
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4 image-container">
+                        <img src="{% static 'basecamp/assets/img/meeting.PNG' %}" alt="" class="img-fluid rounded enlarged-img">
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4 image-container">
+                        <img src="{% static 'basecamp/assets/img/meeting.PNG' %}" alt="" class="img-fluid rounded enlarged-img">
+                    </div>
+                    <div class="col-md-3 col-sm-6 mb-4 image-container">
+                        <img src="{% static 'basecamp/assets/img/meeting.PNG' %}" alt="" class="img-fluid rounded enlarged-img">
+                    </div>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <a href="/gallery/" class="btn btn-primary btn-lg">갤러리 보기</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer-->
+        <footer class="footer" style="background-color: #5a6268; padding-top: 4rem; padding-bottom: 4rem;" id="contact">
+            <div class="container" style="padding-top: 0.5rem; padding-bottom: 1rem;">                
+                <div class="row align-items-center">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.youtube.com" aria-label="Twitter" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/peterkim1515" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="https://www.google.com/maps/search/?api=1&query=109+Priam+St,+Chester+Hill" aria-label="Google" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
+                    </div>
+                    <div class="col-lg-4"></div>
+                </div>
+            </div>
+            <div class="container" style="padding-top: 1rem;">                
+                <div class="row align-items-center">                    
+                    <div class="col-12 text-center" style="color: white;"><a class="link-dark text-decoration-none hover-effect" href="sms:+61466386584">0466 386 584 </a>(담임목사 김곤주)</div>
+                </div>
+            </div>
+            <div class="container" style="">                
+                <div class="row align-items-center">                    
+                    <div class="col-12 text-center" style="color: white;">이메일 주소: <a class="link-dark text-decoration-none hover-effect" href="mailto:suy.church@gmail.com">kkj1515@hotmail.com</a></div>
+                </div>
+            </div>
+            <div class="container" style="padding-top: 1rem;">                
+                <div class="row align-items-center">                    
+                    <div class="col-12 text-center" style="color: white;">교회주소: <a class="link-dark text-decoration-none me-3 hover-effect" 
+                        href="https://www.google.com/maps/search/?api=1&query=109+Priam+St,+Chester+Hill" 
+                        target="_blank">
+                        109 Priam St, Chester Hill NSW 2162
+                    </a></div>
+                </div>
+            </div>
+            <div class="container" style="">                
+                <div class="row align-items-center">                    
+                    <div class="col-12 text-center" style="color: white;">사랑방주소: <a class="link-dark text-decoration-none me-3 hover-effect" 
+                        href="https://www.google.com/maps?q=2/2+Amy+Street,+Regents+Park+NSW+2143" 
+                        target="_blank">
+                        2/2 Amy Street, Regents Park NSW 2143
+                    </a></div>
+                </div>
+            </div>
+            <div class="container" style="padding-top: 1rem;">                
+                <div class="row align-items-center">                    
+                    <div class="col-12 text-center" style="color: white;">2024 All rights reserved &copy; 시드니 새언약교회</div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/static/basecamp/js/scripts.js"></script>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>    
+        <style>
+            /* 링크 및 버튼 색상 변화 */
+            .hover-effect {
+                color: white; /* 기본 색상 */
+                transition: color 0.3s, background-color 0.3s; /* 부드러운 전환 효과 */
+            }
+        
+            .hover-effect:hover {
+                color: #ffd700 !important/* 마우스를 올렸을 때 색상 */
+                
+            }
+        </style>
+        <script>        
+            const images = [
+            "{% static 'basecamp/assets/img/suy8.webp' %}",
+            "{% static 'basecamp/assets/img/suy7.webp' %}",
+            "{% static 'basecamp/assets/img/suy5.webp' %}" 
+            ];
+        
+            let currentIndex = 0; 
+        
+            function changeBackgroundImage() {
+            const header = document.querySelector('header.masthead');          
+            
+            header.style.backgroundImage = `url(${images[currentIndex]})`;          
+            
+            currentIndex = (currentIndex + 1) % images.length;
+            }      
+            
+            setInterval(changeBackgroundImage, 3000);
+        </script>
+    </body>      
+</html>

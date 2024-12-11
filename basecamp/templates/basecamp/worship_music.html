@@ -1,0 +1,76 @@
+{% extends 'basecamp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="page-section" id="subpages">
+    <div class="container">
+        <div class="row">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase" style="font-size: 2rem;">PDF 파일 리스트</h2>
+                <h3 class="section-subheading text-muted">
+                    <p class="large text-muted">
+                        찬양, 말씀 등 필요한 파일 리스트 입니다. 혹시 올리고 싶으신 파일이 있으시면 감승재 전도사에게 말씀해 주세요 
+                    </p>
+                </h3>
+            </div>
+            <!-- PDF 리스트 -->
+            <div class="col-lg-4 text-center">
+                <h3 class="section-heading text-uppercase" style="font-size: 1.5rem;">장년부찬양</h3>
+                <ul class="pdf-list">
+                    <li><a href="weekly1.pdf" target="_blank">2024-12-01 찬양</a></li>
+                    <li><a href="weekly2.pdf" target="_blank">2024-12-08 찬양</a></li>
+                    <li><a href="weekly3.pdf" target="_blank">2024-12-15 찬양</a></li>
+                    <!-- 파일 추가 -->
+                </ul>
+            </div>
+
+            <!-- 찬양 PDF 리스트 -->
+            <div class="col-lg-4 text-center">
+                <h3 class="section-heading text-uppercase" style="font-size: 1.5rem;">학생부찬양</h3>
+                <ul class="pdf-list">
+                    <li><a href="praise1.pdf" target="_blank">2024-12-01 찬양</a></li>
+                    <li><a href="praise2.pdf" target="_blank">2024-12-08 찬양</a></li>
+                    <li><a href="praise3.pdf" target="_blank">2024-12-15 찬양</a></li>
+                    <!-- 찬양 파일 추가 -->
+                </ul>
+            </div>
+
+            <!-- 말씀 PDF 리스트 -->
+            <div class="col-lg-4 text-center">
+                <h3 class="section-heading text-uppercase" style="font-size: 1.5rem;">그 외 파일들</h3>
+                <ul class="pdf-list">
+                    <li><a href="sermon1.pdf" target="_blank">2024-12-01 말씀</a></li>
+                    <li><a href="sermon2.pdf" target="_blank">2024-12-08 말씀</a></li>
+                    <li><a href="sermon3.pdf" target="_blank">2024-12-15 말씀</a></li>
+                    <!-- 말씀 파일 추가 -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .pdf-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .pdf-list li {
+        margin-bottom: 5px;
+    }
+    .pdf-list a {
+        text-decoration: none;
+        color: #007bff;
+        font-size: 0.9rem;
+    }
+    .pdf-list a:hover {
+        text-decoration: underline;
+    }
+    .section-heading {
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+</style>
+
+{% endblock %}
