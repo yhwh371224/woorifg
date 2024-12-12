@@ -11244,7 +11244,7 @@ header.base_masthead {
 }
 @media (max-width: 767px) {
   .timeline > li .timeline-image h4, .timeline > li .timeline-image .h4 {
-    font-size: 12px;
+    font-size: 6px;
     margin-top: 10px;
   }
 }
