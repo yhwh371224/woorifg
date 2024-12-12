@@ -10978,7 +10978,7 @@ header.masthead .masthead-subheading {
   font-size: 1.5rem;
   font-style: italic;
   color: #fff;
-  line-height: 1.5rem;
+  line-height: 1.8rem;
   margin-bottom: 0px;
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -11022,16 +11022,28 @@ header.base_masthead {
     padding-bottom: 12.5rem;
   }
   header.masthead .masthead-subheading {
-    font-size: 1.2rem;
+    font-size: 1.2rem !important;
     font-style: italic;
     line-height: 2.25rem;
     margin-bottom: 2rem;
   }
   header.masthead .masthead-heading {
-    font-size: 1.5rem;
+    font-size: 1.5rem !important;
     font-weight: 700;
     line-height: 4.5rem;
     margin-bottom: 4rem;
+  }
+  .notice-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
   }
 }
 #portfolio .portfolio-item {
@@ -11404,17 +11416,6 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-weight: bold;
 }
 /* 더 큰 화면에서 공지사항 박스가 잘 보이도록 */
-@media (min-width: 768px) {
-  .notice-box {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 80%;
-      transform: translate(-50%, -50%);
-      font-size: 18px; /* 글자 크기 조정 */
-      padding: 15px;
-  }
-}
 .bulletin-item {
   margin-bottom: 20px;
   padding: 10px;
