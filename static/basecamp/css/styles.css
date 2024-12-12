@@ -11243,8 +11243,9 @@ header.base_masthead {
   margin-bottom: 0;
 }
 @media (max-width: 767px) {
-  .timeline > li .timeline-image h4, .timeline > li .timeline-image .h4 {
-    font-size: 3px;
+  .timeline-inverted .timeline-image h4 {
+    font-size: 6px; /* 모바일 화면에서 폰트 크기 조정 */
+    line-height: 12px; /* 모바일에서 라인 높이 조정 */
     
   }
 }
