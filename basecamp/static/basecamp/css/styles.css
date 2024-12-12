@@ -24,7 +24,7 @@
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #ffc800;
+  --bs-primary: #693025;
   --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
@@ -11046,7 +11046,7 @@ header.base_masthead {
     margin-bottom: 2rem;
   }
   header.masthead .masthead-heading {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-weight: 700;
     line-height: 4.5rem;
     margin-bottom: 4rem;
