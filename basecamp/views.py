@@ -39,8 +39,8 @@ def location(request):
     return render(request, 'basecamp/location.html')
 
 
-def worship_music(request):
-    return render(request, 'basecamp/worship_music.html')
+def notice(request):
+    return render(request, 'basecamp/notice.html')
 
 
 @login_required

@@ -14,7 +14,7 @@ urlpatterns = [
     path('workers/', views.workers, name='workers'), 
     path('column/', views.column, name='column'),
     path('location/', views.location, name='location'),
-    path('worship_music/', views.worship_music, name='worship_music'),
+    path('notice/', views.notice, name='notice'),
     path('protected/contact_list', views.serve_pdf, name='contact_list'), 
 ] 
 

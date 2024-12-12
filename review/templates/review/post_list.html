@@ -37,7 +37,7 @@
                         <ul class="pagination justify-content-center mb-4">
                             <span class="page-links">
                                 {% if page_obj.has_previous %}
-                                    <a href="?page=1">[처음페이지]&nbsp;&nbsp;</a>
+                                    <a href="?page=1">[최근페이지]&nbsp;&nbsp;</a>
                                     <a href="?page={{ page_obj.previous_page_number }}">next&nbsp;&nbsp;</a>
                                 {% endif %}
                                 
@@ -45,7 +45,7 @@
                                 
                                 {% if page_obj.has_next %}
                                     <a href="?page={{ page_obj.next_page_number }}">&nbsp;&nbsp;previous</a>
-                                    <a href="?page={{ page_obj.paginator.num_pages }}">&nbsp;&nbsp;[끝페이지]</a>
+                                    <a href="?page={{ page_obj.paginator.num_pages }}">&nbsp;&nbsp;[가장오래된페이지]</a>
                                 {% endif %}
                             </span>
                         </ul>
