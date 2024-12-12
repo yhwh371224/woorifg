@@ -11328,6 +11328,12 @@ header.masthead .notice-box p {
     padding: 0 100px 20px 20px;
   }
 }
+@media (min-width: 1200px) {
+  header.masthead {
+    background-size: contain; /* 큰 화면에서는 비율에 맞춰 더 크게 표시 */
+  }
+}
+
 .team-member {
   margin-bottom: 3rem;
   text-align: center;
