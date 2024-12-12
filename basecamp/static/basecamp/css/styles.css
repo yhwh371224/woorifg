@@ -11020,7 +11020,7 @@ header.masthead .notice-box {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50%;  /* 큰 화면에서 적당한 너비 */
+  width: 60%;  /* 큰 화면에서 적당한 너비 */
   background-color: rgba(255, 255, 255, 0.9);
   padding: 20px;
   border-radius: 10px;
@@ -11328,12 +11328,6 @@ header.masthead .notice-box p {
     padding: 0 100px 20px 20px;
   }
 }
-@media (min-width: 1200px) {
-  header.masthead {
-    background-size: contain; /* 큰 화면에서는 비율에 맞춰 더 크게 표시 */
-  }
-}
-
 .team-member {
   margin-bottom: 3rem;
   text-align: center;
