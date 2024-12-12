@@ -11034,6 +11034,24 @@ header.base_masthead {
     margin-bottom: 4rem;
   }
 }
+@media (max-width: 767px) {
+  header.masthead {
+    padding-top: 17rem;
+    padding-bottom: 12.5rem;
+  }
+  header.masthead .masthead-subheading {
+    font-size: 1.25rem;
+    font-style: italic;
+    line-height: 2.25rem;
+    margin-bottom: 2rem;
+  }
+  header.masthead .masthead-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 4.5rem;
+    margin-bottom: 4rem;
+  }
+}
 #portfolio .portfolio-item {
   max-width: 26rem;
   margin-left: auto;
