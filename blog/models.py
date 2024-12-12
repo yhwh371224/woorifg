@@ -14,6 +14,7 @@ class Members(models.Model):
     position = models.CharField(max_length=50, blank=True)
     vehicle = models.BooleanField(default=False, blank=True)
     attendence = models.BooleanField(default=False, blank=True)
+    message = models.TextField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:

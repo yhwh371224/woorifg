@@ -47,41 +47,41 @@
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" href="/home/">Home</a>
-                        </li>
+                        </li>                        
                         <!-- 교회소개 드롭다운 메뉴 -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
-                                교회안내
+                                교회소개
                             </a>
                             <ul class="dropdown-menu" >
-                                <li><a class="dropdown-item" href="/home/#about">교회소개</a></li>
+                                <li><a class="dropdown-item" href="#about">교회소개</a></li>
                                 <li><a class="dropdown-item" href="/introduction">목사님소개</a></li>
-                                <li><a class="dropdown-item" href="/workers">섬기는 사람들</a></li>
-                                <li><a class="dropdown-item" href="/location">교회위치 및 연락처</a></li>
-                                <li><a class="dropdown-item" href="/pickup">픽업정보 및 온라인헌금</a></li>
+                                <li><a class="dropdown-item" href="/workers">섬기는 분들</a></li>
+                                <li><a class="dropdown-item" href="/location">교회위치 및 온라인헌금</a></li>                                
                             </ul>
                         </li>
+                        <li class="nav-item"><a class="nav-link" href="/meetings">예배와 모임</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
-                                예배안내
+                                소식 및 정보
                             </a>
-                            <ul class="dropdown-menu" >
-                                <li><a class="dropdown-item" href="/meetings">예배와 모임</a></li>
+                            <ul class="dropdown-menu" >    
+                                <li><a class="dropdown-item" href="/gallery">교회사진첩</a></li>                            
                                 <li><a class="dropdown-item" href="/blog/bulletins">교회주보</a></li>
                                 <li><a class="dropdown-item" href="/worship_music">찬양악보</a></li>
-                                <li><a class="dropdown-item" href="{% url 'basecamp:contact_list' %}" target="_blank">장년부 교인연락처</a></li>
+                                <li><a class="dropdown-item" href="{% url 'basecamp:contact_list' %}" target="_blank">교인연락처</a></li>
+                                <li><a class="dropdown-item" href="/worship_music">공지 및 행사안내</a></li>
                             </ul>
                         </li>     
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
-                                하나님의 말씀
+                                설교 및 칼럼
                             </a>
                             <ul class="dropdown-menu" >
-                                <li><a class="dropdown-item" href="/home/#words">주일설교</a></li>
+                                <li><a class="dropdown-item" href="#words">주일설교</a></li>
                                 <li><a class="dropdown-item" href="/review">목사님 칼럼</a></li>
                             </ul>
-                        </li>                             
-                        <!-- <li class="nav-item"><a class="nav-link" href="/gallery">갤러리</a></li>                         -->
+                        </li>                          
                     </ul>
                 </div>
             </div>
