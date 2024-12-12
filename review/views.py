@@ -13,7 +13,7 @@ from .forms import CommentForm, PostForm
 class PostList(ListView):
     model = Post
     template_name = 'review/post_list.html'
-    paginate_by = 7
+    paginate_by = 4
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(PostList, self).get_context_data(**kwargs)
