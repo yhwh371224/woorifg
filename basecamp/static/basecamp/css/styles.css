@@ -11015,25 +11015,19 @@ header.base_masthead {
   background-color: rgba(0, 0, 255, 0.7) !important; /* 배경색 */
   position: relative;
 }
-header.masthead .notice-box {
+/* header.masthead .notice-box {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 60%;  /* 큰 화면에서 적당한 너비 */
+  width: 60%;  
   background-color: rgba(255, 255, 255, 0.9);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   text-align: center;
-}
-
-header.masthead .notice-box h2,
-header.masthead .notice-box p {
-  font-size: 1.2rem; /* 기본 글씨 크기 */
-}
-
+} */
 @media (max-width: 768px) {
   header.masthead {
     padding-top: 17rem;
