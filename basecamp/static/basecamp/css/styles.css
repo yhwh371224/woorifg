@@ -11015,19 +11015,6 @@ header.base_masthead {
   background-color: rgba(0, 0, 255, 0.7) !important; /* 배경색 */
   position: relative;
 }
-/* header.masthead .notice-box {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;  
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  text-align: center;
-} */
 @media (max-width: 768px) {
   header.masthead {
     padding-top: 17rem;
@@ -11044,20 +11031,6 @@ header.base_masthead {
     font-weight: 700;
     line-height: 4.5rem;
     margin-bottom: 4rem;
-  }
-  .notice-box {
-    width: 90%; /* 더 넓게 설정 */
-    padding: 15px; /* 여백 조정 */
-    font-size: 1.2rem; /* 글씨 크기 확대 */
-  }
-  .notice-box h2 {
-      font-size: 1.5rem; /* 제목 크기 확대 */
-  }
-  .notice-box p {
-      font-size: 1.1rem; /* 본문 크기 확대 */
-  }
-  .notice-box a {
-      font-size: 1.1rem; /* 링크 크기 확대 */
   }
 }
 #portfolio .portfolio-item {
