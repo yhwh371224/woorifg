@@ -4,7 +4,7 @@ venv/
 
 migrations/
 media/
-# _media/
+_media/
 
 temp/
 

@@ -2,6 +2,9 @@ from django.urls import path
 from .views import BulletinListView, BulletinDetailView, MemberListView, MemberDetailView
 from django.contrib.auth import views as auth_views
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 
 urlpatterns = [
@@ -13,3 +16,5 @@ urlpatterns = [
     path('upload/', views.BulletinUploadView.as_view(), name='bulletin_upload'),
     path('merge-pdfs/', views.merge_latest_pdfs, name='merge_pdfs'),
 ]
+
+urlpatterns += static('/media/', document_root=settings.MEDIA_ROOT)
