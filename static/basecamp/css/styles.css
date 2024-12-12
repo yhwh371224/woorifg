@@ -10985,6 +10985,7 @@ header.masthead .masthead-subheading {
 header.masthead .masthead-heading {
   font-size: 2.5rem;
   font-weight: 700;
+  color: #0d6efd !important;
   line-height: 3.25rem;
   margin-bottom: 2rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -11540,4 +11541,16 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 .close-btn:hover {
   color: red;
+}
+@media (max-width: 767.98px) {
+  .notice-box {
+    position: fixed; /* 고정 위치로 설정 */
+    top: 50%; /* 화면의 수직 중앙 */
+    left: 50%; /* 화면의 수평 중앙 */
+    transform: translate(-50%, -50%); /* 정확히 중앙에 맞추기 위해 이동 */
+    width: 90%; /* 너비를 화면에 맞게 조정 */
+    max-width: 300px; /* 최대 너비 설정 */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }

@@ -24,7 +24,7 @@
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #693025;
+  --bs-primary: #21246e;
   --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
@@ -10985,6 +10985,7 @@ header.masthead .masthead-subheading {
 header.masthead .masthead-heading {
   font-size: 2.5rem;
   font-weight: 700;
+  color: #0d6efd !important;
   line-height: 3.25rem;
   margin-bottom: 2rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -11494,7 +11495,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 .notice-box {
   position: fixed;
   top: 150px; /* 위에서 150px 만큼 떨어지게 */
-  left: 50px; /* 왼쪽에서 50px 만큼 떨어지게 */
+  left: 40px; /* 왼쪽에서 50px 만큼 떨어지게 */
   background-color: #d3d3d3 !important; /* 연한 그레이 색상 */
   color: black; /* 글자 색을 검정색으로 설정 */
   padding: 20px; /* 내부 여백 */
@@ -11503,7 +11504,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   max-width: 300px; /* 박스 최대 너비 */
   margin: 20px auto; /* 가운데 정렬 */
   text-align: center; /* 텍스트 가운데 정렬 */
-  opacity: 0.9; /* 90% 투명도 */
+  opacity: 1; /* 90% 투명도 */
   z-index: 9999; /* 다른 요소보다 위에 뜨게 */
 }
 .notice-box h2 {
@@ -11540,4 +11541,16 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 .close-btn:hover {
   color: red;
+}
+@media (max-width: 767.98px) {
+  .notice-box {
+    position: fixed; /* 고정 위치로 설정 */
+    top: 50%; /* 화면의 수직 중앙 */
+    left: 50%; /* 화면의 수평 중앙 */
+    transform: translate(-50%, -50%); /* 정확히 중앙에 맞추기 위해 이동 */
+    width: 90%; /* 너비를 화면에 맞게 조정 */
+    max-width: 300px; /* 최대 너비 설정 */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
