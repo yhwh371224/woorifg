@@ -11022,13 +11022,13 @@ header.base_masthead {
     padding-bottom: 12.5rem;
   }
   header.masthead .masthead-subheading {
-    font-size: 2.25rem;
+    font-size: 1.2rem;
     font-style: italic;
     line-height: 2.25rem;
     margin-bottom: 2rem;
   }
   header.masthead .masthead-heading {
-    font-size: 4.5rem;
+    font-size: 1.5rem;
     font-weight: 700;
     line-height: 4.5rem;
     margin-bottom: 4rem;
@@ -11406,6 +11406,11 @@ section#contact form#contactForm :-ms-input-placeholder {
 /* 더 큰 화면에서 공지사항 박스가 잘 보이도록 */
 @media (min-width: 768px) {
   .notice-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: 80%;
+      transform: translate(-50%, -50%);
       font-size: 18px; /* 글자 크기 조정 */
       padding: 15px;
   }

@@ -10965,7 +10965,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #ff0;
-  background-image: url("../assets/img/suy8.webp");
+  background-image: url("../assets/img/suy8.3d8b133fd05e.webp");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -11007,7 +11007,7 @@ header.base_masthead {
   color: #ff0;
   background-image: 
     linear-gradient(45deg, rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0.4)), /* 그라디언트 배경 */
-    url("../assets/img/meeting1.PNG");  /* 모자이크 이미지 */
+    url("../assets/img/meeting1.d56cc61d281c.PNG");  /* 모자이크 이미지 */
   background-repeat: repeat;  /* 이미지가 반복되도록 설정 */
   background-attachment: scroll;
   background-position: center center;
@@ -11316,7 +11316,7 @@ header.base_masthead {
 
 section#contact {
   background-color: #212529;
-  background-image: url("../assets/img/map-image.png");
+  background-image: url("../assets/img/map-image.f40ed5b1e791.png");
   background-repeat: no-repeat;
   background-position: center;
 }
