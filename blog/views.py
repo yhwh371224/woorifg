@@ -31,13 +31,35 @@ def merge_latest_pdfs(request):
         merged_filename = f"{bulletins[0].date}_merged.pdf"
         merged_file_path = os.path.join(settings.MEDIA_ROOT, 'bulletins', merged_filename)
 
-        with open(merged_file_path, 'wb') as merged_file:
-            merger.write(merged_file)
+        try:
+            with open(merged_file_path, 'wb') as merged_file:
+                merger.write(merged_file)
+        except Exception:
+            return JsonResponse({"error": "병합된 PDF 저장 중 문제가 발생했습니다."}, status=500)
+        finally:
+            merger.close()
+
 
         merged_bulletin = Bulletin.objects.create(
             date=bulletins[0].date,  
             pdf_file=f'bulletins/{merged_filename}' 
         )
+        
+        # 병합 후 파일 삭제 및 객체 삭제
+        for bulletin in bulletins:
+            if bulletin.pdf_file:
+                try:
+                    # 파일이 열린 상태라면 닫기
+                    if hasattr(bulletin.pdf_file, 'close'):
+                        bulletin.pdf_file.close()
+
+                    # 파일 삭제
+                    os.remove(bulletin.pdf_file.path)
+                except Exception as e:
+                    return JsonResponse({"error": f"파일 삭제 실패: {str(e)}"}, status=500)
+
+            # Bulletin 객체 삭제
+            bulletin.delete()
 
         updated_bulletins = Bulletin.objects.all().order_by('-created')  
 
