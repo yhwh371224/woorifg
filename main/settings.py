@@ -216,6 +216,7 @@ HTML_MINIFY = True
 KEEP_COMMENTS_ON_MINIFYING = True
 
 LOGIN_URL = 'account_login'
+LOGOUT_URL = 'account_logout'
 LOGIN_REDIRECT_URL = reverse_lazy('bulletin_upload')
 LOGOUT_REDIRECT_URL = reverse_lazy('basecamp:home')
 

@@ -17,9 +17,13 @@
                     <button type="submit" class="btn btn-success">주보업로드</button>
                     <button id="merge-pdfs-button" class="btn btn-danger">업로드한 주보병합</button>
                 </div>
-            </form>
+            </form>            
+            <div class="d-flex justify-content-between mt-3">
+                <a href="{% url 'account_logout' %}" class="btn btn-secondary">로그아웃</a>
+                <a href="/admin/" class="btn btn-secondary">관리자 페이지</a>
+            </div>
             {% else %}
-                <a href="{% url 'account_login' %}?next={% url 'bulletin_upload' %}" class="btn btn-success">주보업로드</a>
+                <a href="{% url 'account_login' %}?next={% url 'bulletin_list' %}" class="btn btn-success">주보업로드</a>
             {% endif %}
             <!-- 주보 목록 -->
         </div>              
