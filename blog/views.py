@@ -9,8 +9,8 @@ from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
 from django.conf import settings
 
-from .models import Members, Bulletin, Pdf
-from .forms import BulletinForm, PdfForm
+from .models import Members, Bulletin, Pdf, Music
+from .forms import BulletinForm, PdfForm, MusicForm
 
 
 def merge_latest_pdfs(request):
@@ -162,6 +162,49 @@ class PdfUploadView(LoginRequiredMixin, CreateView):
     form_class = PdfForm
     template_name = 'blog/pdf_upload.html'
     success_url = reverse_lazy('pdf_list') 
+
+    def form_valid(self, form):        
+        return super().form_valid(form)
+    
+    def get_login_url(self):
+        return f'{super().get_login_url()}?next={self.request.path}'  
+
+
+# music views.py
+class MusicListView(ListView):
+    model = Music
+    template_name = 'blog/music_list.html'
+    context_object_name = 'musics'
+    queryset = Music.objects.all().order_by('-created')
+    paginate_by = 4 
+    login_url = '/login/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = MusicForm()  # 폼을 컨텍스트에 추가
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = MusicForm(request.POST, request.FILES)  
+        
+        if form.is_valid():
+            form.save()
+            return redirect('music_list')  
+
+        return self.render_to_response(self.get_context_data(form=form))
+    
+
+class MusicDetailView(DetailView):
+    model = Music
+    template_name = 'musics/music_detail.html'
+    context_object_name = 'music'
+
+
+class MusicUploadView(LoginRequiredMixin, CreateView):
+    model = Music
+    form_class = MusicForm
+    template_name = 'blog/music_upload.html'
+    success_url = reverse_lazy('music_list') 
 
     def form_valid(self, form):        
         return super().form_valid(form)

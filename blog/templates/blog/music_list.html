@@ -4,7 +4,7 @@
 <section class="page-section" id="subpages">
     <div class="container">
         <div class="text-center">
-            <h3>공지 및 행사안내</h3>
+            <h3>찬양 악보들</h3>
         </div>
         <div>      
             <!-- 파일 업로드 폼 -->
@@ -14,7 +14,7 @@
                 {% csrf_token %}
                 {{ form.as_p }}  
                 <div class="d-flex justify-content-between">
-                    <button type="submit" class="btn btn-success">PDF파일업로드</button>                    
+                    <button type="submit" class="btn btn-success">찬양 PDF파일업로드</button>                    
                 </div>
             </form>            
             <div class="d-flex justify-content-between mt-3">
@@ -22,26 +22,26 @@
                 <a href="/admin/" class="btn btn-secondary">관리자 페이지</a>
             </div>
             {% else %}
-                <a href="{% url 'account_login' %}?next={% url 'bulletin_list' %}" class="btn btn-success">PDF파일업로드</a>
+                <a href="{% url 'account_login' %}?next={% url 'bulletin_list' %}" class="btn btn-success">찬양 PDF파일업로드</a>
             {% endif %}
             <!-- 주보 목록 -->
         </div>              
 
         
         <div class="bulletin-list mt-4">
-            {% for pdf in pdfs %}
+            {% for music in musics %}
                 <div class="bulletin-item">
                     <div class="bulletin-info">
-                        <p class="bulletin-date">{{ pdf.date|date:"Y년 m월 d일" }}
-                        {% if pdf.pdf_file %}
-                            <a href="{{ pdf.pdf_file.url }}" target="_blank" class="btn-view-bulletin">&nbsp;{{ pdf.title }}</a></p>
+                        <p class="bulletin-date">{{ music.date|date:"Y년 m월 d일" }}
+                        {% if music.pdf_file %}
+                            <a href="{{ music.pdf_file.url }}" target="_blank" class="btn-view-bulletin">&nbsp;{{ music.title }}</a></p>
                         {% else %}
-                            <p class="text-danger">PDF 파일이 없습니다.</p>
+                            <p class="text-danger">찬양 PDF 파일이 없습니다.</p>
                         {% endif %}
                     </div>
                 </div>
             {% empty %}
-                <p>등록된 PDF 파일이 없습니다.</p>
+                <p>등록된 찬양악보가 없습니다.</p>
             {% endfor %}
         </div>     
         <!-- Pagination Controls -->

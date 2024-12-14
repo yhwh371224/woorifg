@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Members, Bulletin, Pdf
+from .models import Members, Bulletin, Pdf, Music
 
 
 class MembersAdmin(admin.ModelAdmin):
@@ -18,6 +18,12 @@ class PdfAdmin(admin.ModelAdmin):
     ordering = ['-created']
 
 
+class MusicAdmin(admin.ModelAdmin):
+    list_display = ('title', 'date', 'pdf_file', 'created')
+    ordering = ['-created']
+
+
 admin.site.register(Members, MembersAdmin)
 admin.site.register(Bulletin, BulletinAdmin)
 admin.site.register(Pdf, PdfAdmin)
+admin.site.register(Music, MusicAdmin)
