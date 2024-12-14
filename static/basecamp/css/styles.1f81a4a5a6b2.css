@@ -10965,7 +10965,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #ff0;
-  background-image: url("../assets/img/suy8.webp");
+  background-image: url("../assets/img/suy8.3d8b133fd05e.webp");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -11008,7 +11008,7 @@ header.base_masthead {
   color: #ff0;
   background-image: 
     linear-gradient(45deg, rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0.4)), /* 그라디언트 배경 */
-    url("../assets/img/meeting1.PNG");  /* 모자이크 이미지 */
+    url("../assets/img/meeting1.d56cc61d281c.PNG");  /* 모자이크 이미지 */
   background-repeat: repeat;  /* 이미지가 반복되도록 설정 */
   background-attachment: scroll;
   background-position: center center;
@@ -11342,7 +11342,7 @@ header.base_masthead {
 
 section#contact {
   background-color: #212529;
-  background-image: url("../assets/img/map-image.png");
+  background-image: url("../assets/img/map-image.f40ed5b1e791.png");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -11493,75 +11493,61 @@ section#contact form#contactForm :-ms-input-placeholder {
   object-fit: cover; /* 이미지를 잘라서 컨테이너에 맞춤 */
   
 }
+
 /* 호버 시 효과 */
 .image-container img:hover {
   transform: scale(2); /* 이미지 크기를 2배로 확대 */
 }
-/* 공지사항 박스를 화면 왼쪽 위에 고정 */
 .notice-box {
-  position: relative; /* 이미지와 텍스트를 겹치게 하기 위해 부모 요소에 상대 위치 설정 */
-  width: 100%;
-  max-width: 300px;
-  background-color: rgba(211, 211, 211, 0.8); /* 연한 그레이 색상, 약간 투명 */
-  color: black; /* 글자 색을 검정색으로 설정 */
-  padding: 20px; /* 내부 여백 */
-  font-size: 16px; /* 글자 크기 */
-  border-radius: 10px; /* 둥근 모서리 */
-  text-align: center; /* 텍스트 가운데 정렬 */
-  opacity: 1; /* 불투명도 */
-  z-index: 9999; /* 다른 요소보다 위에 뜨게 */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+  position: relative;
+  background-color: #f9f9f9; /* 박스 배경색 */
+  border: 2px solid #333; /* 박스 테두리 */
+  border-radius: 10px; /* 모서리를 둥글게 */
+  padding: 0; /* 이미지와 텍스트의 여백 제거 */
+  max-width: 600px;
+  margin: 20px auto;
+  overflow: hidden; /* 텍스트가 박스 밖으로 나가지 않도록 설정 */
+  cursor: pointer; /* 클릭 가능한 UI로 표시 */
+  text-align: center;
 }
+
 .notice-box img {
-  width: 100%; /* 이미지가 박스의 너비를 채우도록 설정 */
-  height: auto; /* 이미지 비율 유지 */
-  object-fit: cover; /* 이미지 비율을 유지하면서 박스를 가득 채움 */
-  border-radius: 8px; /* 이미지 모서리를 둥글게 */
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
+
 .notice-text {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
+  top: 50%; /* 텍스트를 수직 중앙 정렬 */
+  left: 50%; /* 텍스트를 수평 중앙 정렬 */
+  transform: translate(-50%, -50%); /* 중앙 정렬을 위해 보정 */
+  color: white; /* 텍스트 색상 */
   background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
   padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 18px;
+  border-radius: 5px; /* 텍스트 박스 모서리 둥글게 */
+  font-size: 18px; /* 텍스트 크기 */
   font-weight: bold;
-  z-index: 10;
+  text-align: center;
 }
+
+.notice-box:hover .notice-text {
+  background-color: rgba(0, 0, 0, 0.7); /* 마우스 오버 시 더 진한 배경 */
+}
+
 .close-btn {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: transparent;
+  background: none;
   border: none;
   font-size: 20px;
-  color: #000;
   cursor: pointer;
-  font-weight: bold;
-  transition: color 0.3s;
-  z-index: 15;
+  color: white;
+  z-index: 10;
 }
 .close-btn:hover {
-  color: red; /* Hover 시 버튼 색을 빨간색으로 변경 */
-}
-.notice-image {
-  width: 100%; /* 이미지가 화면의 너비를 채우도록 설정 */
-  height: auto; /* 이미지 비율 유지 */
-  object-fit: cover; /* 이미지 비율을 유지하면서 영역을 채우도록 설정 */
-  border-radius: 8px; /* 이미지 모서리를 둥글게 */
-}
-.notice-container {
-  position: fixed; /* 화면 고정 */
-  top: 150px; /* 위에서 150px 떨어지게 */
-  left: 50%; /* 화면 가로 중앙에 위치 */
-  transform: translateX(-50%); /* 중앙 정렬 */
-  z-index: 9999;
-  width: 90%; /* 기본적으로 화면 너비의 90% 사용 */
-  max-width: 600px; /* 최대 너비 설정 (예: 600px로 제한) */
-  text-align: center;
+  color: red;
 }
 @media (max-width: 767.98px) {
   .notice-box {
@@ -11573,41 +11559,5 @@ section#contact form#contactForm :-ms-input-placeholder {
     max-width: 300px; /* 최대 너비 설정 */
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-  }
-}
-/* 모바일 환경을 위한 미디어 쿼리 */
-@media (max-width: 767.98px) {
-  .notice-container {
-    top: 100px; /* 모바일에서 위쪽 여백을 줄임 */
-    width: 95%; /* 모바일에서 너비를 더 좁게 설정 */
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .notice-text {
-    font-size: 16px; /* 모바일에서는 글씨 크기 줄이기 */
-    padding: 8px 16px; /* 모바일에서 패딩 조정 */
-  }
-
-  .close-btn {
-    font-size: 18px; /* 모바일에서 버튼 크기 줄이기 */
-    top: 8px; /* 버튼 위치 상향 */
-    right: 8px; /* 버튼 위치 상향 */
-  }
-}
-@media (max-width: 480px) {
-  .notice-container {
-    top: 80px; /* 모바일에서 위쪽 여백을 더 줄임 */
-  }
-
-  .notice-text {
-    font-size: 14px; /* 더 작은 화면에서는 글씨를 더 줄임 */
-    padding: 6px 12px; /* 더 작은 화면에서 패딩을 줄임 */
-  }
-
-  .close-btn {
-    font-size: 16px; /* 더 작은 화면에서 버튼 크기 줄임 */
-    top: 6px; /* 버튼 위치 상향 */
-    right: 6px; /* 버튼 위치 상향 */
   }
 }
