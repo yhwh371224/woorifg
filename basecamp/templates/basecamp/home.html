@@ -91,13 +91,15 @@
                 <div class="masthead-subheading">I will put my laws in their minds and write them on their hearts. I will be their God, and they will be my people</div>
             </div>
             <!-- Notice Box -->
-            <a href="/media/pdf/장로임직식_안내지.pdf" target="_blank" class="notice-box-link" onclick="this.firstElementChild.style.display='none';">
-                <div class="notice-container" onclick="event.stopPropagation();">
-                    <button class="close-btn" onclick="this.parentElement.style.display='none'; event.stopPropagation();">&times;</button>
-                    <img src="/static/basecamp/assets/img/notice01.webp" alt="공지사항 이미지" class="notice-image">
-                    <div class="notice-text">자세히 보려면 화면을 클릭하세요</div>
-                </div>
+            <a href="/media/pdf/장로임직식_안내지.pdf" target="_blank" class="notice-box-link" 
+                onclick="hideNoticeBox(event, this.href, this.target);">
+                    <div class="notice-container">
+                        <button class="close-btn" onclick="closeNoticeBox(event);">&times;</button>
+                        <img src="/static/basecamp/assets/img/notice01.webp" alt="공지사항 이미지" class="notice-image">
+                        <div class="notice-text">자세히 보려면 화면을 클릭하세요</div>
+                    </div>
             </a>
+         
                 <!-- <h2>공지사항</h2>
                 <p>아래 링크를 클릭하시면 장년부 연락처 보실 수 있습니다:</p>
                 <p>
@@ -341,7 +343,8 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="/static/basecamp/js/scripts.js"></script>
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>    
+        <script src="/static/basecamp/js/suy.js"></script>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>  
         <style>
             /* 링크 및 버튼 색상 변화 */
             .hover-effect {
@@ -353,25 +356,7 @@
                 color: #ffd700 !important/* 마우스를 올렸을 때 색상 */
                 
             }
-        </style>
-        <script>        
-            const images = [
-            "{% static 'basecamp/assets/img/suy8.webp' %}",
-            "{% static 'basecamp/assets/img/suy7.webp' %}",
-            "{% static 'basecamp/assets/img/suy5.webp' %}" 
-            ];
+        </style> 
         
-            let currentIndex = 0; 
-        
-            function changeBackgroundImage() {
-            const header = document.querySelector('header.masthead');          
-            
-            header.style.backgroundImage = `url(${images[currentIndex]})`;          
-            
-            currentIndex = (currentIndex + 1) % images.length;
-            }      
-            
-            setInterval(changeBackgroundImage, 3000);
-        </script>
     </body>      
 </html>
