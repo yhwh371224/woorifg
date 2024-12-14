@@ -36,5 +36,21 @@ class Bulletin(models.Model):
 
     def __str__(self):
         return f"{self.date}"
+    
+
+class Pdf(models.Model): 
+    title = models.CharField(max_length=100, blank=False, null=True)
+    date = models.DateField(blank=True, null=True, verbose_name='ex)2024-12-31 ')  
+    pdf_file = models.FileField(upload_to='pdfs/', null=True, blank=True, verbose_name='PDF 파일 ')    
+    created = models.DateTimeField(auto_now_add=True)  
+
+    class Meta:
+        verbose_name = 'Pdf'
+        verbose_name_plural = 'Pdfs'
+        ordering = ['-created']  
+
+    def __str__(self):
+        return f"{self.date}"
+
 
 

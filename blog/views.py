@@ -9,8 +9,8 @@ from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
 from django.conf import settings
 
-from .models import Members, Bulletin
-from .forms import BulletinForm
+from .models import Members, Bulletin, Pdf
+from .forms import BulletinForm, PdfForm
 
 
 def merge_latest_pdfs(request):
@@ -124,5 +124,48 @@ class BulletinUploadView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
     def get_login_url(self):
-        return f'{super().get_login_url()}?next={self.request.path}'   
+        return f'{super().get_login_url()}?next={self.request.path}'  
+
+
+# pdf views.py
+class PdfListView(ListView):
+    model = Pdf
+    template_name = 'blog/pdf_list.html'
+    context_object_name = 'pdfs'
+    queryset = Pdf.objects.all().order_by('-created')
+    paginate_by = 4 
+    login_url = '/login/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = PdfForm()  # 폼을 컨텍스트에 추가
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = PdfForm(request.POST, request.FILES)  
+        
+        if form.is_valid():
+            form.save()
+            return redirect('pdf_list')  
+
+        return self.render_to_response(self.get_context_data(form=form))
+    
+
+class PdfDetailView(DetailView):
+    model = Pdf
+    template_name = 'pdfs/pdf_detail.html'
+    context_object_name = 'pdf'
+
+
+class PdfUploadView(LoginRequiredMixin, CreateView):
+    model = Pdf
+    form_class = PdfForm
+    template_name = 'blog/pdf_upload.html'
+    success_url = reverse_lazy('pdf_list') 
+
+    def form_valid(self, form):        
+        return super().form_valid(form)
+    
+    def get_login_url(self):
+        return f'{super().get_login_url()}?next={self.request.path}'  
 
