@@ -1,7 +1,7 @@
 User-agent: *
 Disallow: /admin/
 Disallow: /db.sqlite3
-Disallow: /awskeypair.pem
+Disallow: /aws_suy_keypair.pem
 Disallow: /manage.py
 Disallow: /test/
 

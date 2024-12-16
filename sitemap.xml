@@ -1,11 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <url>
-       <loc>https://suychurch.site/home/</loc>
-       <lastmod>2024-06-24T19:13:53+00:00</lastmod>
-       <changefreq>daily</changefreq>
-       <priority>1.0000</priority>
-  </url>
+<url>
+  <loc>https://suychurch.site/home/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/introduction/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/workers/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/location/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/meetings/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/gallery/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/blog/bulletins/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/blog/musics/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/accounts/login/?next=/protected/contact_list</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/blog/pdfs/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/review/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/accounts/login/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/accounts/login/?next=/blog/bulletins/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/media/bulletins/2024-12-08_merged.pdf</loc>
+  <lastmod>2024-12-14T01:34:12+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/media/bulletins/2024-12-01_merged.pdf</loc>
+  <lastmod>2024-12-12T04:59:16+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/media/bulletins/2024-11-24_merged.pdf</loc>
+  <lastmod>2024-12-12T04:58:24+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/media/bulletins/2023-07-16_merged.pdf</loc>
+  <lastmod>2024-12-12T04:57:14+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/blog/bulletins/?page=2</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/media/musics/Give_Thanks_F-lead.pdf</loc>
+  <lastmod>2024-12-14T10:47:19+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/media/musics/what_a_beautiful_name.pdf</loc>
+  <lastmod>2024-12-14T10:46:26+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/media/musics/god-so-loved.pdf</loc>
+  <lastmod>2024-12-14T10:45:41+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/notice/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/media/pdfs/%EC%9E%A5%EB%A1%9C%EC%9E%84%EC%A7%81%EC%8B%9D_%EC%95%88%EB%82%B4%EC%A7%80_VAe9lmz.pdf</loc>
+  <lastmod>2024-12-16T04:03:09+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/review/7/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/review/6/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/review/5/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/review/4/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/review/?page=2</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/media/bulletins/2023-07-09_merged.pdf</loc>
+  <lastmod>2024-12-12T04:55:28+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/blog/bulletins/?page=1</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/review/3/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/review/2/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/review/1/</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://suychurch.site/review/?page=1</loc>
+  <lastmod>2024-12-16T10:40:00+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
 </urlset>
