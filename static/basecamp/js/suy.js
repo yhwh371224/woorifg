@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const baseUrl = "/static/basecamp/assets/img/"; // 기본 경로를 설정
+
     const images = [
-        "{% static 'basecamp/assets/img/suy7.webp' %}",
-        "{% static 'basecamp/assets/img/suy8.webp' %}",
-        "{% static 'basecamp/assets/img/suy5.webp' %}"
-    ];
+        baseUrl + "suy7.webp",
+        baseUrl + "suy8.webp",
+        baseUrl + "suy5.webp"
+    ];    
 
     let currentIndex = 0;
 
