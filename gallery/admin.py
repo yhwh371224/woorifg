@@ -1,16 +1,10 @@
 from django.contrib import admin
-from django.contrib.admin import AdminSite
-from .models import Gallery
+from .models import Gallery, Category
 
 
-class GalleryAdmin(admin.ModelAdmin):
-    list_display = ['title', 'date']
-    search_fields = ['title', 'date']
-    ordering = ['-created']
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name', )}
 
 
-class MyAdminSite(AdminSite):
-    site_header = 'NewCovenant administration'
-
-
-admin.site.register(Gallery, GalleryAdmin)
+admin.site.register(Gallery)
+admin.site.register(Category, CategoryAdmin)

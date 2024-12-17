@@ -1,62 +1,93 @@
 from django.shortcuts import render, redirect
-from django.views import View
-from django.views.generic import ListView, DetailView, UpdateView
+from .models import Gallery, Category
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-from .models import Gallery
-from .forms import GalleryForm
+from django.db.models import Q
 
 
 class GalleryList(ListView):
     model = Gallery
-    template_name = 'gallery/gallery_list.html'
-    paginate_by = 7
+    paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['gallery_count'] = Gallery.objects.all().count()
-        context['user_name'] = self.request.user.username
-        context['search_error'] = self.request.session.get('search_error', None)
+        context = super(GalleryList, self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.all()
+        context['posts_without_category'] = Gallery.objects.filter(category=None).count()
+
         return context
 
 
-class GalleryCreate(LoginRequiredMixin, View):
-    def get(self, request, *args, **kwargs):
-        form = GalleryForm(initial={'name': request.user.username})
-        return render(request, 'gallery/gallery_form.html', {'form': form, 'form_guide': 'Please upload your gallery'})
+class GallerySearch(GalleryList):
+    def get_queryset(self):
+        q = self.kwargs['q']
+        object_list = Gallery.objects.filter(Q(title__contains=q) | Q(content__contains=q))
+        return object_list
 
-    def post(self, request, *args, **kwargs):
-        form = GalleryForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/gallery/')
-        return render(request, 'gallery/gallery_form.html', {'form': form, 'form_guide': 'Please upload your gallery'})
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(GallerySearch, self).get_context_data()
+        context['search_info'] = 'Search: "{}"'.format(self.kwargs['q'])
+        return context
 
 
 class GalleryDetail(DetailView):
     model = Gallery
-    template_name = 'gallery/gallery_detail.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['gallery_count'] = Gallery.objects.all().count()
-        user_name = self.request.user.username
-        context['user_name'] = user_name
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(GalleryDetail, self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.all()
+        context['gallerys_without_category'] = Gallery.objects.filter(category=None).count()
+
         return context
 
 
-class GalleryUpdate(LoginRequiredMixin, UpdateView):
+class GalleryCreate(LoginRequiredMixin, CreateView):
     model = Gallery
-    template_name = 'gallery/gallery_form.html'
-    fields = ['date', 'title']
+    fields = [
+        'title', 'date', 'head_image', 'category'
+    ]
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user_name = self.request.user.username
-        context['user_name'] = user_name
+    def form_valid(self, form):
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            form.instance.author = current_user
+            return super(type(self), self).form_valid(form)
+        else:
+            return redirect('/blog/')
+
+
+class GalleryUpdate(UpdateView):
+    model = Gallery
+    fields = [
+        'title', 'date', 'head_image', 'category'
+    ]
+
+
+class GalleryListByCategory(ListView):
+
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+
+        if slug == '_none':
+            category = None
+        else:
+            category = Category.objects.get(slug=slug)
+
+        return Gallery.objects.filter(category=category).order_by('-created')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(type(self), self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.all()
+        context['gallerys_without_category'] = Gallery.objects.filter(category=None).count()
+
+        slug = self.kwargs['slug']
+
+        if slug == '_none':
+            context['category'] = '미분류'
+        else:
+            category = Category.objects.get(slug=slug)
+            context['category'] = category
+
+        # context['title'] = 'Blog - {}'.format(category.name)
         return context
 
 
-def index(request):
-    Gallerys = Gallery.objects.all()
-    return render(request, 'gallery/index.html', {'Gallerys': Gallerys})

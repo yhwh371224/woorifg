@@ -6,20 +6,23 @@
         <div class="gallery-section" style="padding: 20px;">  
             <br/> 
             <!-- Title -->
-            <h3>{{ object.title }}</h3>
-            <!-- Author -->
-            <p class="lead">
-                by
-                <a href="#">{{ object.author }}</a>
-            </p>
+            <h3>{{ object.title }}</h3>            
             {% if request.user %}
                 <button type="button" class="btn btn-sm btn-success float-right" onclick="location.href='{{ object.get_update_url }}'">EDIT</button>
             {% endif %}
             <hr>
 
             <!-- Date/Time -->
-            <p>{{ object.date }}</p>
-
+            <div class="d-flex justify-content-between">
+                <p class="mb-0">{{ object.date }}</p>
+                {% if object.category %}
+                    <a href="/gallery/category/{{ object.category.slug }}/">
+                        <span class="badge badge-primary">{{ object.category.name }}</span>
+                    </a>                    
+                {% else %}
+                    <span class="badge badge-primary">no category</span>
+                {% endif %}
+            </div>
             <hr>
 
             <!-- Preview Image -->

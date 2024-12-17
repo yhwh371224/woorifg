@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'compressor',
     'corsheaders',
     'markdownx',
+    'crispy_forms',
     'csp',
 ]
 
@@ -241,6 +242,8 @@ EMAIL_BACKEND = config('EMAIL_BACKEND')
 GMAIL_API_SERVICE_ACCOUNT_FILE = config('GMAIL_API_SERVICE_ACCOUNT_FILE')
 
 MARKDOWNX_MEDIA_PATH = datetime.now().strftime('markdownx/%Y/%m/%d/')
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 SESSION_COOKIE_AGE = 3600
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
