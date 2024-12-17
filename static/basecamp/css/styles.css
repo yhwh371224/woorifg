@@ -10970,7 +10970,7 @@ header.masthead {
   background-attachment: scroll;
   background-position: center center;
   background-size: cover; 
-  transition: background-image 2s ease-in-out; /* 부드러운 배경 이미지 전환 */
+  transition: none;
   position: relative;
 }
 header.masthead .masthead-subheading {
