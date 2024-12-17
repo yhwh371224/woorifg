@@ -15,6 +15,8 @@ urlpatterns = [
     path('column/', views.column, name='column'),
     path('location/', views.location, name='location'),
     path('notice/', views.notice, name='notice'),
+    path('privacy/', views.privacy, name='privacy'),
+    path('terms/', views.terms, name='terms'),
     path('protected/contact_list', views.serve_pdf, name='contact_list'), 
 ] 
 

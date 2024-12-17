@@ -43,6 +43,14 @@ def notice(request):
     return render(request, 'basecamp/notice.html')
 
 
+def privacy(request):
+    return render(request, 'basecamp/privacy.html')
+
+
+def terms(request):
+    return render(request, 'basecamp/terms.html')
+
+
 @login_required
 def serve_pdf(request):
     pdf_path = os.path.join(settings.MEDIA_ROOT, 'protected', 'contact_list.pdf')
