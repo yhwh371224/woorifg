@@ -16,15 +16,13 @@ currentIndex = (currentIndex + 1) % images.length;
 
 setInterval(changeBackgroundImage, 3000);
 
-// Bootstrap 5 JavaScript로 설정
-var dropdowns = document.querySelectorAll('.dropdown-toggle');
-
-dropdowns.forEach(function(dropdown) {
-    dropdown.addEventListener('click', function (event) {
-        var menu = this.nextElementSibling;
-        if (window.innerWidth <= 767.95) {
-            event.preventDefault(); // 메뉴가 바로 사라지지 않도록 함
-            menu.classList.toggle('show'); // 메뉴 열기
-        }
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    // 모바일 환경에서만 적용
+    if (window.innerWidth <= 767.95) {
+        document.querySelectorAll('.dropdown-item').forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                e.stopPropagation(); // 메뉴가 닫히지 않도록 방지
+            });
+        });
+    }
 });
