@@ -64,7 +64,7 @@ INSTALLED_APPS = [
 ]
 
 SITE_ID = 1
-SITE_URL = 'https://suy.net.au'
+SITE_URL = 'https://suychurch.site'
 
 MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',     
@@ -168,7 +168,7 @@ SOCIALACCOUNT_PROVIDERS = {
         'APP': {
             'client_id': config('GOOGLE_CLIENT_ID'),
             'secret': config('GOOGLE_CLIENT_SECRET'),
-            'redirect_uri': 'https://suychurch.site/accounts/google/login/callback/'
+            'key': ''
         }
     }
 }
