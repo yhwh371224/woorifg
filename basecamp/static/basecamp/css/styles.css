@@ -10970,7 +10970,8 @@ header.masthead {
   background-attachment: scroll;
   background-position: center center;
   background-size: cover; 
-  transition: none;
+  transition: opacity 1s ease-in-out; /* 부드럽게 전환 */
+  opacity: 1;  /* 처음에는 보이게 설정 */
   position: relative;
 }
 header.masthead .masthead-subheading {
