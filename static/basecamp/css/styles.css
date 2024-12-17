@@ -10970,7 +10970,6 @@ header.masthead {
   background-attachment: scroll;
   background-position: center center;
   background-size: cover; 
-  background-color: rgba(0, 0, 255, 0.7) !important;
   transition: background-image 2s ease-in-out; /* 부드러운 배경 이미지 전환 */
   position: relative;
 }
