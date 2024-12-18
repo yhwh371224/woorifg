@@ -4179,7 +4179,7 @@ textarea.form-control-lg {
   word-wrap: break-word;
   background-color: var(--bs-card-bg);
   background-clip: border-box;
-  border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+  border: none;
   border-radius: var(--bs-card-border-radius);
 }
 .card > hr {
@@ -11611,3 +11611,11 @@ section#contact form#contactForm :-ms-input-placeholder {
     right: 6px; /* 버튼 위치 상향 */
   }
 }
+
+@media (max-width: 767.98px) {
+  .image-container img {
+      width: 100%; /* 화면 크기에 맞춰 이미지 확장 */
+      height: auto; /* 비율 유지 */
+  }
+}
+
