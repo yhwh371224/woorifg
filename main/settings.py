@@ -216,6 +216,8 @@ KEEP_COMMENTS_ON_MINIFYING = True
 
 LOGIN_URL = 'account_login'
 LOGOUT_URL = 'account_logout'
+LOGIN_REDIRECT_URL = '/review/'
+LOGOUT_REDIRECT_URL = '/home/'
 
 CORS_ALLOWED_ORIGINS = [
     "https://suy.net.au",
