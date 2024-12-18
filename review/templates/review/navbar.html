@@ -15,7 +15,20 @@
                 <!-- 교회소개 드롭다운 메뉴 -->
                 <li class="nav-item">
                     <a class="nav-link" href="/home/">Home</a>
-                </li>                
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                        소식 및 정보
+                    </a>
+                    <ul class="dropdown-menu" >    
+                        <li><a class="dropdown-item" href="/gallery">교회사진첩</a></li>                            
+                        <li><a class="dropdown-item" href="/blog/bulletins">교회주보</a></li>
+                        <li><a class="dropdown-item" href="/blog/musics">찬양악보</a></li>
+                        <li><a class="dropdown-item" href="{% url 'basecamp:contact_list' %}" target="_blank">교인연락처</a></li>
+                        <li><a class="dropdown-item" href="/blog/pdfs">공지 및 행사안내</a></li>
+                    </ul>
+                </li>     
+                <li class="nav-item"><a class="nav-link text-info" href="/gallery/">사진첩</a></li>                 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
                         설교 및 칼럼
