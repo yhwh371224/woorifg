@@ -4,7 +4,7 @@
 <section class="page-section" id="subpages">
     <div class="container">
 
-        <!-- <div>      
+        <div>      
             {% if user.is_authenticated %}
             <div>
             <form method="post" enctype="multipart/form-data">
@@ -21,7 +21,7 @@
             {% else %}
                 <a href="{% url 'account_login' %}?next={% url 'gallery_list' %}" class="btn btn-success">사진업로드</a>
             {% endif %}
-        </div>        -->
+        </div>       
 
         <div class="row align-items-center mb-4">
             <!-- 드롭다운 카테고리 및 검색 정보 -->
