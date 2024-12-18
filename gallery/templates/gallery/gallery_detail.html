@@ -15,14 +15,8 @@
             <!-- Date/Time -->
             <div class="d-flex justify-content-between">
                 <p class="mb-0">{{ object.date }}</p>
-                {% if object.category %}
-                    <a href="/gallery/category/{{ object.category.slug }}/">
-                        <span class="badge badge-primary">{{ object.category.name }}</span>
-                    </a>                    
-                {% else %}
-                    <span class="badge badge-primary">no category</span>
-                {% endif %}
             </div>
+
             <hr>
 
             <!-- Preview Image -->
@@ -32,4 +26,5 @@
         </div>
     </div>
 </section>
+
 {% endblock %}

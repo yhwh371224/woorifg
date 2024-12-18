@@ -4,16 +4,7 @@
 <section class="page-section" id="subpages">
     <div class="container">
         <div class="row align-items-center mb-4">
-            <!-- 사진올리기 버튼 -->
-            <div class="col-md-4 text-center">
-                {% if user.is_authenticated %}
-                    <a href="/gallery/create/" class="btn btn-success btn-sm px-4 py-2">사진올리기</a>
-                {% endif %}
-            </div>
-            <div class="col-md-4 text-center">
-                <h2 class="font-weight-bold" style="font-size: 1.7rem;">새언약교회 사진첩</h2>
-            </div>
-        
+
             <!-- 드롭다운 카테고리 및 검색 정보 -->
             <div class="col-md-4 text-center">
                 <div class="dropdown d-inline-block">
@@ -32,12 +23,27 @@
                         {% endfor %}
                     </ul>
                 </div>
-        
                 <!-- 선택된 카테고리 또는 검색 정보 표시 -->
-                {% if search_info %}
-                    <small class="text-muted">: {{ search_info }} ({{ object_list.count }})</small>
+                {% if category %}
+                    <small >&nbsp;&nbsp;{{ category.name }}</small>
+                {% endif %}
+            </div>            
+
+            <div class="col-md-4 text-center">
+                {% if user.is_authenticated %}
+                    <a href="/gallery/create/" class="btn btn-success btn-sm px-4 py-2">사진올리기</a>
                 {% endif %}
             </div>
+            
+            <div class="col-md-4 text-center">
+                <div class="input-group">
+                    <input type="text" id="gallery-search-input" onkeyup="wait_for_enterkey(event)" class="form-control" placeholder="Search for..."/>
+                    <span class="input-group-btn">
+                            <button class="btn btn-success" type="button" onclick="search_post();">Go!</button>
+                        </span>
+                </div>
+            </div>
+                
         </div>
         
         <div class="row text-center" id="photo-grid" style="margin-top: 80px;">                
@@ -47,21 +53,11 @@
                     <div class="card" id="{{ p.pk }}"> 
                         <div class="image-container">
                             {% if p.head_image %}                                
-                            <a href="{{ p.get_absolute_url }}" class="btn btn-primary" id="read-more-post-{{ p.pk }}">
+                            <a href="{{ p.get_absolute_url }}"  id="read-more-post-{{ p.pk }}">
                                 <img class="img-fluid rounded enlarged-img card-img-top" src="{{ p.head_image.url }}" alt="Card image cap" >
                             </a>                                
                             {% else %}                                
                                 <img class="img-fluid rounded enlarged-img card-img-top" src="https://picsum.photos/700/300/?random" alt="Card image cap" >                                
-                            {% endif %}
-                        </div>
-                        <div class="card-body">
-                            <p class="card-title" style="font-size: 0.9rem;">{{ p.title | striptags | truncatewords_html:8 }}</p>
-                            {% if p.category %}
-                                <a href="/gallery/category/{{ p.category.slug }}/">
-                                    <span class="badge badge-primary float-right">{{ p.category.name }}</span>
-                                </a>                                
-                            {% else %}
-                                <span class="badge badge-primary float-right">no category</span>
                             {% endif %}
                         </div>
                     </div>
@@ -105,6 +101,21 @@
         }
     }
 </script>
+<script>
+    function search_post() {
+    var search_value = document.getElementById('gallery-search-input').value.trim();
+    if (search_value) {
+        location.href = "/gallery/search/" + encodeURIComponent(search_value) + "/";
+    } else {
+        alert("Please enter a search term.");
+    }
+}
 
+    function wait_for_enterkey(event){
+        if (event.keyCode == 13){
+            search_post();
+        }
+    }
+</script>
 
 {% endblock %}

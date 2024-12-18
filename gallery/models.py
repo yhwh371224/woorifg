@@ -41,22 +41,3 @@ class Gallery(models.Model):
 
     def get_markdown_content(self):
         return markdown(self.content)
-
-
-# class Comment(models.Model):
-#     post = models.ForeignKey(Gallery, on_delete=models.CASCADE)
-#     text = MarkdownxField()
-
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     modified_at = models.DateTimeField(auto_now=True)
-
-#     def get_markdown_content(self):
-#         return markdown(self.text)
-
-#     def get_absolute_url(self):
-#         return self.post.get_absolute_url() + '#comment-id-{}'.format(self.pk)
-
-
-
-
-

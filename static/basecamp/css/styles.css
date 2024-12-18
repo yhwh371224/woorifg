@@ -11493,9 +11493,9 @@ section#contact form#contactForm :-ms-input-placeholder {
   object-fit: cover; /* 이미지를 잘라서 컨테이너에 맞춤 */
   
 }
-/* 호버 시 효과 */
 .image-container img:hover {
-  transform: scale(2); /* 이미지 크기를 2배로 확대 */
+  filter: brightness(50%); /* 밝기를 50%로 줄임 */
+  transition: filter 0.3s ease; /* 부드러운 전환 효과 */
 }
 /* 공지사항 박스를 화면 왼쪽 위에 고정 */
 .notice-box {

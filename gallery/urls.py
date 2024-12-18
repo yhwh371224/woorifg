@@ -6,7 +6,7 @@ from django.conf import settings
 app_name = 'gallery'
 
 urlpatterns = [
-    path('search/<str:q>/', views.GallerySearch.as_view()),
+    path('search/<str:q>/', views.GallerySearch.as_view(), name='gallery_search'),
     path('category/<str:slug>/', views.GalleryListByCategory.as_view(), name='gallery_list_by_category'),    
     path('<int:pk>/update/', views.GalleryUpdate.as_view()),
     path('<int:pk>/', views.GalleryDetail.as_view()),

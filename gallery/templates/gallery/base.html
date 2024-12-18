@@ -48,10 +48,10 @@
     <body id="page-top">
         {% include 'gallery/navbar.html' %}
         
+            
+                {% block content %}
+                {% endblock %}
         
-        {% block content %}
-        {% endblock %}
-
         <!-- Footer-->
         <footer class="footer" style="background-color: #5a6268; padding-top: 4rem; padding-bottom: 4rem;" id="contact">
             <div class="container" style="padding-top: 0.5rem; padding-bottom: 1rem;">                
@@ -118,20 +118,5 @@
                 
             }
         </style>
-        <script>
-            function search_post() {
-                var search_value = document.getElementById('search-input').value;    
-                if (search_value.trim() === "") {
-                    alert("Please enter a valid search term.");
-                } else {
-                    location.href = "/review/search/" + encodeURIComponent(search_value) + "/";
-                }
-            }    
-            function wait_for_enterkey() {
-                if (window.event.keyCode == 13) {
-                    search_post();
-                }
-            }
-        </script>
     </body>      
 </html>

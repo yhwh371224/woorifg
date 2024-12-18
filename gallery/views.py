@@ -3,6 +3,9 @@ from .models import Gallery, Category
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.http import Http404
+from django.core.exceptions import FieldError
+
 
 
 class GalleryList(ListView):
@@ -20,12 +23,19 @@ class GalleryList(ListView):
 class GallerySearch(GalleryList):
     def get_queryset(self):
         q = self.kwargs['q']
-        object_list = Gallery.objects.filter(Q(title__contains=q) | Q(content__contains=q))
+        try:
+            object_list = Gallery.objects.filter(
+                Q(title__icontains=q) | 
+                Q(date__icontains=q) |
+                Q(category__name__icontains=q)  
+            )
+        except FieldError:
+            raise Http404(f"No results found for '{q}'")
         return object_list
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(GallerySearch, self).get_context_data()
-        context['search_info'] = 'Search: "{}"'.format(self.kwargs['q'])
+        context = super().get_context_data(**kwargs)
+        context['search_info'] = f'Search: "{self.kwargs["q"]}"'
         return context
 
 
