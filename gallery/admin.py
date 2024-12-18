@@ -7,7 +7,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class GalleryAdmin(admin.ModelAdmin):
-    list_display = ('date', 'pdf_file', 'created')
+    list_display = ('date', 'title', 'head_image', 'created')
     ordering = ['-created']
 
 
