@@ -11484,8 +11484,6 @@ section#contact form#contactForm :-ms-input-placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0; /* 불필요한 패딩 제거 */
-  margin: 0; /* 불필요한 마진 제거 */
 }
 /* 이미지 스타일 */
 .image-container img {
