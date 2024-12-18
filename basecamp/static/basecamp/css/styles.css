@@ -11242,7 +11242,7 @@ header.base_masthead {
 .timeline .timeline-body > p {
   margin-bottom: 0;
 }
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   .timeline-inverted .timeline-image h4 {
     font-size: 6px; /* 모바일 화면에서 폰트 크기 조정 */
     line-height: 12px; /* 모바일에서 라인 높이 조정 */
@@ -11618,8 +11618,8 @@ section#contact form#contactForm :-ms-input-placeholder {
   }
 
   #photo-grid .col-md-3 {
-      flex: 0 0 100%; /* 한 줄에 하나씩 배치 */
-      max-width: 100%;
+      flex: 0 0 100% !important; /* 한 줄에 하나씩 배치 */
+      max-width: 100% !important;
   }
 
   #photo-grid .image-container {
