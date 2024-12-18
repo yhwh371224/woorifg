@@ -3,6 +3,7 @@ from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Post, Comment
@@ -67,8 +68,11 @@ class PostCreate(LoginRequiredMixin, CreateView):
         return redirect('review:post_detail', pk=post.pk)
     
     def get_success_url(self):
-        return '/review/create/'
+        return reverse_lazy('review:post_detail', kwargs={'pk': self.object.pk})
 
+    def get_login_url(self):
+        return '/review/create/'  # 로그인 후 폼 페이지로 리다이렉트
+    
 
 class PostUpdate(UpdateView):
     model = Post

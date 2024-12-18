@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Gallery, Category
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from django.db.models import Q
 from django.http import Http404
 from django.core.exceptions import FieldError
@@ -65,7 +66,10 @@ class GalleryCreate(LoginRequiredMixin, CreateView):
             return redirect('/gallery/')
         
     def get_success_url(self):
-        return '/gallery/create/'
+        return reverse_lazy('gallery:gallery_detail', kwargs={'pk': self.object.pk})
+
+    def get_login_url(self):
+        return '/gallery/create/'  # 로그인 후 폼 페이지로 리다이렉트
 
 
 class GalleryUpdate(UpdateView):
