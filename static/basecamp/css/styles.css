@@ -11465,7 +11465,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 기본: 한 줄에 4개 */
   gap: 15px; /* 이미지 간 간격 */
-  justify-content: center; /* 가운데 정렬 */
+  justify-items: center;
   align-items: center; /* 세로축 정렬 */
   max-width: 100%; /* 전체 너비 제한 */
 }
@@ -11509,6 +11509,10 @@ section#contact form#contactForm :-ms-input-placeholder {
   }
   .image-container {
     height: 150px; /* 높이를 줄임 */
+    margin-left: auto; /* 자동으로 왼쪽 여백 조정 */
+    margin-right: auto; /* 자동으로 오른쪽 여백 조정 */
+    padding-left: 5px; /* 약간의 왼쪽 패딩 추가 */
+    padding-right: 5px; /* 약간의 오른쪽 패딩 추가 */
   }
 
   .image-container img {
