@@ -11479,7 +11479,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 /* 각 이미지 컨테이너 */
 .image-container {
   width: 100%;
-  height: 190px; /* 원하는 높이로 설정 */
+  height: 200px; /* 원하는 높이로 설정 */
   overflow: hidden; /* 초과 이미지를 숨김 */
   display: flex;
   justify-content: center;
@@ -11496,12 +11496,18 @@ section#contact form#contactForm :-ms-input-placeholder {
   filter: brightness(0.7); /* 밝기를 70%로 조정 */
 }
 /* 모바일 레이아웃 */
+@media (max-width: 1024px) {
+  #photo-grid {
+      grid-template-columns: repeat(2, 1fr); /* 화면 크기가 작아지면 2개씩 배치 */
+  }
+}
+/* 모바일 레이아웃 */
 @media (max-width: 767.98px) {
   #photo-grid {
-    grid-template-columns: repeat(2, 1fr); /* 한 줄에 2개 */
+    grid-template-columns: repeat(1, 1fr); /* 한 줄에 2개 */
   }
   .image-container {
-    height: 150px; /* 높이를 줄임 */
+    height: 140px; /* 높이를 줄임 */
   }
 
   .image-container img {
