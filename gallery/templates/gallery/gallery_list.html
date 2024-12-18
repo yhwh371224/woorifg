@@ -84,19 +84,24 @@
         </div>           
     </div>
 </section>
+<style>
+    @media (max-width: 768px) {
+        #photo-grid .col-md-3 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
 
-<!-- JavaScript -->
-<script>
-    function toggleDropdown() {
-        var menu = document.getElementById("categoryDropdownMenu");
-        // 드롭다운 메뉴 표시/숨김 토글
-        if (menu.style.display === "none" || menu.style.display === "") {
-            menu.style.display = "block";
-        } else {
-            menu.style.display = "none";
+        #photo-grid .image-container {
+            margin-bottom: 16px; /* 카드 간 간격 */
+        }
+
+        #photo-grid .card {
+            width: 100%; /* 카드가 화면 너비에 맞도록 조정 */
         }
     }
-</script>
+</style>
+
+<!-- JavaScript -->
 <script>
     function search_post() {
     var search_value = document.getElementById('gallery-search-input').value.trim();

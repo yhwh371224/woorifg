@@ -11611,11 +11611,25 @@ section#contact form#contactForm :-ms-input-placeholder {
     right: 6px; /* 버튼 위치 상향 */
   }
 }
-
 @media (max-width: 767.98px) {
   .image-container img {
       width: 100%; /* 화면 크기에 맞춰 이미지 확장 */
       height: auto; /* 비율 유지 */
   }
+
+  #photo-grid .col-md-3 {
+      flex: 0 0 100%; /* 한 줄에 하나씩 배치 */
+      max-width: 100%;
+  }
+
+  #photo-grid .image-container {
+      margin-bottom: 16px; /* 카드 간 간격 */
+  }
+
+  #photo-grid .card {
+      width: 100%; /* 카드가 화면 너비에 맞도록 조정 */
+  }
 }
+
+
 
