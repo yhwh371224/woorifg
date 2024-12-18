@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="ko">
+<html lang="en">
     <head>
         <meta charset="utf-8" />       
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />        
@@ -282,22 +282,30 @@
             <div class="container">
                 <div class="row text-center" id="photo-grid">                    
                     <div class="col-md-3 col-sm-6 mb-4 image-container">
-                        <img src="{% static 'basecamp/assets/img/meeting.PNG' %}" alt="" class="img-fluid rounded enlarged-img">
+                        <a href="/gallery/">
+                            <img src="{% static 'basecamp/assets/img/장로임직1.webp' %}" alt="">
+                        </a>
                     </div>
                     <div class="col-md-3 col-sm-6 mb-4 image-container">
-                        <img src="{% static 'basecamp/assets/img/meeting.PNG' %}" alt="" class="img-fluid rounded enlarged-img">
+                        <a href="/gallery/">
+                            <img src="{% static 'basecamp/assets/img/장로임직2.webp' %}" alt="">
+                        </a>
                     </div>
                     <div class="col-md-3 col-sm-6 mb-4 image-container">
-                        <img src="{% static 'basecamp/assets/img/meeting.PNG' %}" alt="" class="img-fluid rounded enlarged-img">
+                        <a href="/gallery/">
+                            <img src="{% static 'basecamp/assets/img/장로임직3.webp' %}" alt="">
+                        </a>
                     </div>
                     <div class="col-md-3 col-sm-6 mb-4 image-container">
-                        <img src="{% static 'basecamp/assets/img/meeting.PNG' %}" alt="" class="img-fluid rounded enlarged-img">
+                        <a href="/gallery/">
+                            <img src="{% static 'basecamp/assets/img/장로임직4.webp' %}" alt="">
+                        </a>
                     </div>
                 </div>
                 <br><br>
                 <div class="row">
                     <div class="col-lg-8 mx-auto text-center">
-                        <a href="/gallery/" class="btn btn-primary btn-lg">갤러리 보기</a>
+                        <a href="/gallery/" class="btn btn-secondary btn-lg">More photos</a>
                     </div>
                 </div>
             </div>
@@ -357,18 +365,6 @@
         <script src="/static/basecamp/js/scripts.js"></script>
         <script src="/static/basecamp/js/suy.js"></script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>  
-        <style>
-            /* 링크 및 버튼 색상 변화 */
-            .hover-effect {
-                color: white; /* 기본 색상 */
-                transition: color 0.3s, background-color 0.3s; /* 부드러운 전환 효과 */
-            }
-        
-            .hover-effect:hover {
-                color: #ffd700 !important/* 마우스를 올렸을 때 색상 */
-                
-            }
-        </style> 
         
     </body>      
 </html>

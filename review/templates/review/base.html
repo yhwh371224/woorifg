@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="ko">
+<html lang="en">
     <head>
         <meta charset="utf-8" />       
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />        
@@ -97,23 +97,18 @@
         </footer>
 
         <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="/static/basecamp/js/scripts.js"></script>
+        <script src="/static/basecamp/js/suy.js"></script>
+
+        <!-- Bootstrap core JS-->
         <script src="{% static 'review/js/jquery.min.js' %}"></script>
         <script src="{% static 'review/js/bootstrap.min.js' %}"></script>
         <!-- Core theme JS-->
         <script src="/static/basecamp/js/scripts.js"></script>
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>    
-        <style>
-            /* 링크 및 버튼 색상 변화 */
-            .hover-effect {
-                color: white; /* 기본 색상 */
-                transition: color 0.3s, background-color 0.3s; /* 부드러운 전환 효과 */
-            }
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         
-            .hover-effect:hover {
-                color: #ffd700 !important/* 마우스를 올렸을 때 색상 */
-                
-            }
-        </style>
         <script>
             function search_post() {
                 var search_value = document.getElementById('review-search-input').value;    

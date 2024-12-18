@@ -36,3 +36,4 @@ document.addEventListener("DOMContentLoaded", function() {
     // 3초마다 배경 이미지 변경
     setInterval(changeBackgroundImage, 3000);
 });
+
