@@ -51,6 +51,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'review/post_form.html'
     form_class = PostForm
+    success_url = reverse_lazy('post_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -66,12 +67,9 @@ class PostCreate(LoginRequiredMixin, CreateView):
             post.date = datetime.date.today()
         post.save()
         return redirect('review:post_detail', pk=post.pk)
-    
-    def get_success_url(self):
-        return reverse_lazy('review:post_detail', kwargs={'pk': self.object.pk})
 
     def get_login_url(self):
-        return '/review/create/'  # 로그인 후 폼 페이지로 리다이렉트
+        return f'{super().get_login_url()}?next={self.request.path}' 
     
 
 class PostUpdate(UpdateView):

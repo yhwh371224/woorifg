@@ -69,7 +69,7 @@ class GalleryCreate(LoginRequiredMixin, CreateView):
         return reverse_lazy('gallery:gallery_detail', kwargs={'pk': self.object.pk})
 
     def get_login_url(self):
-        return '/gallery/create/'  # 로그인 후 폼 페이지로 리다이렉트
+        return f'{super().get_login_url()}?next={self.request.path}' 
 
 
 class GalleryUpdate(UpdateView):
