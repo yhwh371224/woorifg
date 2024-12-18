@@ -11,7 +11,7 @@ from django.core.exceptions import FieldError
 
 class GalleryList(ListView):
     model = Gallery
-    paginate_by = 8
+    paginate_by = 12
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(GalleryList, self).get_context_data(**kwargs)
