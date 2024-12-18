@@ -15,7 +15,6 @@ from .views import (
 from . import views
 
 
-
 urlpatterns = [
     path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
     path('bulletins/', BulletinListView.as_view(), name='bulletin_list'),

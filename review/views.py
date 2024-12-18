@@ -4,7 +4,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
 
 from .models import Post, Comment
 from .forms import CommentForm, PostForm
@@ -66,6 +65,9 @@ class PostCreate(LoginRequiredMixin, CreateView):
             post.date = datetime.date.today()
         post.save()
         return redirect('review:post_detail', pk=post.pk)
+    
+    def get_success_url(self):
+        return '/review/create/'
 
 
 class PostUpdate(UpdateView):

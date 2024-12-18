@@ -1,9 +1,7 @@
-import logging
 import os
 
 from decouple import config
-from datetime import datetime, timedelta 
-from django.urls import reverse_lazy
+from datetime import datetime
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -218,8 +216,6 @@ KEEP_COMMENTS_ON_MINIFYING = True
 
 LOGIN_URL = 'account_login'
 LOGOUT_URL = 'account_logout'
-LOGIN_REDIRECT_URL = reverse_lazy('bulletin_upload')
-LOGOUT_REDIRECT_URL = reverse_lazy('basecamp:home')
 
 CORS_ALLOWED_ORIGINS = [
     "https://suy.net.au",

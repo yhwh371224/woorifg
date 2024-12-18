@@ -63,6 +63,9 @@ class GalleryCreate(LoginRequiredMixin, CreateView):
             return super(type(self), self).form_valid(form)
         else:
             return redirect('/gallery/')
+        
+    def get_success_url(self):
+        return '/gallery/create/'
 
 
 class GalleryUpdate(UpdateView):
