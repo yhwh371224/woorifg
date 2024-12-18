@@ -62,7 +62,7 @@ class GalleryCreate(LoginRequiredMixin, CreateView):
             form.instance.author = current_user
             return super(type(self), self).form_valid(form)
         else:
-            return redirect('/blog/')
+            return redirect('/gallery/')
 
 
 class GalleryUpdate(UpdateView):
