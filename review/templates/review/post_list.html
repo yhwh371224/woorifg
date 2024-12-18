@@ -6,6 +6,11 @@
         <div class="text-center">
             <h3>설교문 및 칼럼</h3>
         </div>
+        {% if user.is_authenticated %}
+            <div class="d-flex justify-content-end mb-3">
+                <a href="{% url 'review:review_create' %}" class="btn btn-success">글쓰기</a>
+            </div>
+        {% endif %}
         <div class="row">
             <div class="col-md-12" id="main-div">
                 <br/>                
