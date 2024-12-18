@@ -3,8 +3,27 @@
 {% block content %}
 <section class="page-section" id="subpages">
     <div class="container">
-        <div class="row align-items-center mb-4">
 
+        <!-- <div>      
+            {% if user.is_authenticated %}
+            <div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}  
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">사진업로드</button>                    
+                </div>
+            </form>            
+            <div class="d-flex justify-content-between mt-3">
+                <a href="{% url 'account_logout' %}" class="btn btn-secondary">로그아웃</a>
+                <a href="/admin/" class="btn btn-secondary">관리자 페이지</a>
+            </div>
+            {% else %}
+                <a href="{% url 'account_login' %}?next={% url 'gallery_list' %}" class="btn btn-success">사진업로드</a>
+            {% endif %}
+        </div>        -->
+
+        <div class="row align-items-center mb-4">
             <!-- 드롭다운 카테고리 및 검색 정보 -->
             <div class="col-md-4 text-center">
                 <div class="dropdown d-inline-block">

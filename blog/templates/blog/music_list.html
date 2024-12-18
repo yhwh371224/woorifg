@@ -22,7 +22,7 @@
                 <a href="/admin/" class="btn btn-secondary">관리자 페이지</a>
             </div>
             {% else %}
-                <a href="{% url 'account_login' %}?next={% url 'bulletin_list' %}" class="btn btn-success">찬양 PDF파일업로드</a>
+                <a href="{% url 'account_login' %}?next={% url 'music_list' %}" class="btn btn-success">찬양 PDF파일업로드</a>
             {% endif %}
             <!-- 주보 목록 -->
         </div>              

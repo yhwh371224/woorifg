@@ -6,11 +6,26 @@
         <div class="text-center">
             <h3>설교문 및 칼럼</h3>
         </div>
-        {% if user.is_authenticated %}
-            <div class="d-flex justify-content-end mb-3">
-                <a href="{% url 'review:review_create' %}" class="btn btn-success">글쓰기</a>
+        <div>      
+            <!-- 파일 업로드 폼 -->
+            {% if user.is_authenticated %}
+            <div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}  
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="btn btn-success">쓴글 올리기</button>                    
+                </div>
+            </form>            
+            <div class="d-flex justify-content-between mt-3">
+                <a href="{% url 'account_logout' %}" class="btn btn-secondary">로그아웃</a>
+                <a href="/admin/" class="btn btn-secondary">관리자 페이지</a>
             </div>
-        {% endif %}
+            {% else %}
+                <a href="{% url 'account_login' %}?next={% url 'post_list' %}" class="btn btn-success">로긴</a>
+            {% endif %}
+            <!-- 주보 목록 -->
+        </div>          
         <div class="row">
             <div class="col-md-12" id="main-div">
                 <br/>                
