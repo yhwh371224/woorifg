@@ -13,7 +13,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return '/post/category/{}/'.format(self.slug)
+        return '/review/category/{}/'.format(self.slug)
 
     class Meta:
         verbose_name_plural = 'categories'
