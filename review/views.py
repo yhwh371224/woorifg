@@ -69,7 +69,8 @@ class PostCreate(LoginRequiredMixin, CreateView):
         return redirect('review:post_detail', pk=post.pk)
 
     def get_login_url(self):
-        return f'{super().get_login_url()}?next={self.request.path}' 
+        login_url = super().get_login_url() or reverse_lazy('account_login')
+        return f'{login_url}?next={self.request.path}'
     
 
 class PostUpdate(UpdateView):

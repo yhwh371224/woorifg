@@ -76,10 +76,10 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <a role="button" class="btn btn-outline-danger" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i>  Log in with Google</a>
+                        <a role="button" class="btn btn-outline-danger" href="{% provider_login_url 'google' %}?next={{ request.path }}"><i class="fab fa-google"></i>  Log in with Google</a>
                     </div>
                     <div class="col-md-6">
-                        <a role="button" class="btn btn-outline-info" href="{% url 'account_login' %}"><i class="fas fa-envelope"></i>  Log in with Email</a>
+                        <a role="button" class="btn btn-outline-info" href="{% url 'account_login' %}?next={{ request.path }}"><i class="fas fa-envelope"></i>  Log in with Email</a>
                     </div>
                 </div>
             </div>

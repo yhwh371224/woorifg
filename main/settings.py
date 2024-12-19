@@ -216,7 +216,7 @@ KEEP_COMMENTS_ON_MINIFYING = True
 
 LOGIN_URL = 'account_login'
 LOGOUT_URL = 'account_logout'
-LOGIN_REDIRECT_URL = '/review/'
+LOGIN_REDIRECT_URL = '/home/'
 LOGOUT_REDIRECT_URL = '/home/'
 
 CORS_ALLOWED_ORIGINS = [
