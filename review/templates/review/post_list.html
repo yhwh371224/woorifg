@@ -3,14 +3,48 @@
 {% block content %}
 <section class="page-section" id="subpages">
     <div class="container">
-        <div class="text-center">
-            <h3>설교문 및 칼럼</h3>
-        </div>
-        {% if user.is_authenticated %}
-            <div class="d-flex justify-content-end mb-3">
-                <a href="{% url 'review:review_create' %}" class="btn btn-success">글쓰기</a>
+        <div class="row">
+            <!-- 상단 버튼 섹션 -->
+            <div class="row align-items-center mb-4">
+                <!-- 드롭다운 카테고리 및 검색 정보 -->
+                <div class="col-md-4">
+                    <div class="dropdown d-inline-block">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="categoryDropdown" onclick="toggleDropdown()">
+                            글 목록
+                        </button>
+                        <ul id="categoryDropdownMenu" class="dropdown-menu" style="display: none;">
+                            {% for category in category_list %}
+                                <li>
+                                    <a class="dropdown-item" href="/post/category/{{ category.slug }}/">
+                                        {{ category.name }}
+                                    </a>
+                                </li>
+                            {% empty %}
+                                <li class="dropdown-item">No categories available</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% if category %}
+                        <small class="d-block mt-2">{{ category.name }}</small>
+                    {% endif %}
+                </div>            
+
+                <div class="col-md-4 text-center">
+                    {% if user.is_authenticated %}
+                        <a href="/post/create/" class="btn btn-success btn-sm px-4 py-2">사진올리기</a>
+                    {% endif %}
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input type="text" id="post-search-input" onkeyup="wait_for_enterkey(event)" class="form-control" placeholder="Search for..."/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="button" onclick="search_post();">Go!</button>
+                        </span>
+                    </div>
+                </div>
             </div>
-        {% endif %}
+        </div>
         <div class="row">
             <div class="col-md-12" id="main-div">
                 <br/>                
@@ -32,31 +66,54 @@
                             </div>                            
                         </div>
                     {% endfor %}
-
-                    {% if is_paginated %}
-                        <ul class="pagination justify-content-center mb-4">
-                            <span class="page-links">
-                                {% if page_obj.has_previous %}
-                                    <a href="?page=1">[최근페이지]&nbsp;&nbsp;</a>
-                                    <a href="?page={{ page_obj.previous_page_number }}">next&nbsp;&nbsp;</a>
-                                {% endif %}
-                                
-                                <span class="current-page">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-                                
-                                {% if page_obj.has_next %}
-                                    <a href="?page={{ page_obj.next_page_number }}">&nbsp;&nbsp;previous</a>
-                                    <a href="?page={{ page_obj.paginator.num_pages }}">&nbsp;&nbsp;[가장오래된페이지]</a>
-                                {% endif %}
-                            </span>
-                        </ul>
-                    {% endif %}
                 {% else %}
-                    <h5>No Post</h5>
+                    <h5 class="text-center w-100">No Photos</h5>
                 {% endif %}
             </div>
         </div>
+        <!-- Pagination Controls -->
+        <div class="pagination mt-4 text-center" style="font-size: small;">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">[처음페이지]&nbsp;&nbsp;</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">next&nbsp;&nbsp;</a>
+                {% endif %}
+                <span class="current-page">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">&nbsp;&nbsp;previous</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">&nbsp;&nbsp;[끝페이지]</a>
+                {% endif %}
+            </span>
+        </div>        
     </div>
 </section>
+<!-- JavaScript -->
+<script>
+    function toggleDropdown() {
+        var menu = document.getElementById("categoryDropdownMenu");
+        // 드롭다운 메뉴 표시/숨김 토글
+        if (menu.style.display === "none" || menu.style.display === "") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    }
+</script>
+<script>
+    function search_post() {
+        var search_value = document.getElementById('post-search-input').value.trim();
+        if (search_value) {
+            location.href = "/post/search/" + encodeURIComponent(search_value) + "/";
+        } else {
+            alert("검색하고자 하는 단어를 넣으세요");
+        }
+    }
 
+    function wait_for_enterkey(event) {
+        if (event.keyCode == 13) {
+            search_post();
+        }
+    }
+</script>
 
 {% endblock %}

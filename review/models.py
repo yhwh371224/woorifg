@@ -44,4 +44,19 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return self.post.get_absolute_url() + '#comment-id-{}'.format(self.pk)
+    
+
+class Category(models.Model):
+    name = models.CharField(max_length=25, unique=True)
+    description = models.TextField(blank=True)
+    slug = models.SlugField(unique=True, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return '/review/category/{}/'.format(self.slug)
+
+    class Meta:
+        verbose_name_plural = 'categories'
 

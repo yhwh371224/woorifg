@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin import AdminSite
-from .models import Post, Comment
+from .models import Post, Comment, Category
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -15,9 +15,14 @@ class CommentAdmin(admin.ModelAdmin):
     ordering = ['-created_at']
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name', )}
+
+
 class MyAdminSite(AdminSite):
     site_header = 'NewCovenant administration'
 
 
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Post, PostAdmin)
+admin.site.register(Category, CategoryAdmin)

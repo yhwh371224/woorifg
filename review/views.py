@@ -2,11 +2,14 @@ import datetime
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
+from django.db.models import Q
 from django.views import View
+from django.http import Http404
+from django.core.exceptions import FieldError
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from .models import Post, Comment
+from .models import Post, Comment, Category
 from .forms import CommentForm, PostForm
 
 
@@ -186,3 +189,50 @@ class CommentDelete(DeleteView):
     def get_success_url(self):
         post = self.get_object().post
         return post.get_absolute_url() + '#comment-list'
+    
+
+class PostSearch(PostList):
+    def get_queryset(self):
+        q = self.kwargs['q']
+        try:
+            object_list = Post.objects.filter(
+                Q(title__icontains=q) | 
+                Q(date__icontains=q) |
+                Q(category__name__icontains=q)  
+            )
+        except FieldError:
+            raise Http404(f"No results found for '{q}'")
+        return object_list
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_info'] = f'Search: "{self.kwargs["q"]}"'
+        return context
+    
+
+class PostListByCategory(ListView):
+
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+
+        if slug == '_none':
+            category = None
+        else:
+            category = Category.objects.get(slug=slug)
+
+        return Post.objects.filter(category=category).order_by('-created')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(type(self), self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.all()
+        context['posts_without_category'] = Post.objects.filter(category=None).count()
+
+        slug = self.kwargs['slug']
+
+        if slug == '_none':
+            context['category'] = '미분류'
+        else:
+            category = Category.objects.get(slug=slug)
+            context['category'] = category
+
+        return context
