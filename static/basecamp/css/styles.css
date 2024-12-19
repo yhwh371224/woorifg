@@ -11725,6 +11725,15 @@ section#contact form#contactForm :-ms-input-placeholder {
   color: #ffd700 !important/* 마우스를 올렸을 때 색상 */
   
 }
+@media (max-width: 767.98px) {
+  .btn {
+      margin-bottom: 10px; /* 버튼 간 간격 */
+  }
+
+  .input-group {
+      margin-bottom: 10px; /* 검색창 간격 */
+  }
+}
 
 
 
