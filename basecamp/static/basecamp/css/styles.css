@@ -11726,6 +11726,10 @@ section#contact form#contactForm :-ms-input-placeholder {
   
 }
 @media (max-width: 767.98px) {
+  .row > .col-md-4:first-child {
+    text-align: center; /* 텍스트 중앙 정렬 */
+    margin-bottom: 10px; /* 여백 추가 */
+}
   .btn {
       margin-bottom: 10px; /* 버튼 간 간격 */
   }
@@ -11734,6 +11738,5 @@ section#contact form#contactForm :-ms-input-placeholder {
       margin-bottom: 10px; /* 검색창 간격 */
   }
 }
-
 
 
