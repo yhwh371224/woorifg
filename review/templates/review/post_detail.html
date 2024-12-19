@@ -9,6 +9,7 @@
         <div><br>
             <span style="color: #3E2723; font-weight: bold;">{{ object.title }}</span>            
             <span style="margin-left: 10px; ">posted on {{ object.date }}</span>
+            <span style="margin-left: 10px; ">in {{ category.name }}</span>
         </div>
         
         {% if user_name == object.name %}
