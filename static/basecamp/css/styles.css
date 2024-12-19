@@ -10961,18 +10961,19 @@ p {
   }
 }
 header.masthead {
+  position: relative;
+  width: 100%;
+  height: 75vh;
   padding-top: 10.5rem;
   padding-bottom: 6rem;
   text-align: center;
   color: #ff0;
-  background-image: url("../assets/img/suy7.webp");
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center center;
-  background-size: cover; 
-  transition: opacity 1s ease-in-out; /* 부드럽게 전환 */
-  opacity: 1;  /* 처음에는 보이게 설정 */
-  position: relative;
+  background-color: #000; /* 기본 배경색 */
+  transition: background-image 1s ease-in-out; /* 배경 전환 애니메이션 */
+  overflow: hidden;
 }
 header.masthead .masthead-subheading {
   font-size: 1.2rem;
@@ -10990,38 +10991,7 @@ header.masthead .masthead-heading {
   margin-bottom: 2rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-header.masthead::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1; /* 배경 이미지가 전면에 오도록 */
-  transition: opacity 1s ease-in-out; /* 부드럽게 변경되는 오버랩 */
-  opacity: 0;
-}
-header.base_masthead {
-  padding-top: 10.5rem;
-  padding-bottom: 6rem;
-  text-align: center;
-  color: #ff0;
-  background-image: 
-    linear-gradient(45deg, rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0.4)), /* 그라디언트 배경 */
-    url("../assets/img/meeting1.PNG");  /* 모자이크 이미지 */
-  background-repeat: repeat;  /* 이미지가 반복되도록 설정 */
-  background-attachment: scroll;
-  background-position: center center;
-  background-size: 100px 100px;  /* 배경 이미지의 크기 */
-  background-color: rgba(0, 0, 255, 0.7) !important; /* 배경색 */
-  position: relative;
-}
-
 @media (min-width: 768px) {
-  header.masthead {
-    padding-top: 17rem;
-    padding-bottom: 12.5rem;
-  }
   header.masthead .masthead-subheading {
     font-size: 1.75rem;
     font-style: italic;
@@ -11035,10 +11005,13 @@ header.base_masthead {
     margin-bottom: 4rem;
   }
 }
-@media (max-width: 767px) {
+@media (max-width: 767.98px) {
   header.masthead {
-    padding-top: 17rem;
-    padding-bottom: 12.5rem;
+    padding-top: 10rem;
+    padding-bottom: 6rem;
+    height: 60vh; /* 모바일 화면에서는 배경 이미지 높이를 60%로 설정 */
+    background-size: cover; /* 배경 이미지가 화면을 덮도록 */
+    background-position: center top; /* 배경 이미지를 상단에 맞추어 표시 */
   }
   header.masthead .masthead-subheading {
     font-size: 1.25rem;
@@ -11049,8 +11022,8 @@ header.base_masthead {
   header.masthead .masthead-heading {
     font-size: 1.75rem;
     font-weight: 700;
-    line-height: 4.5rem;
-    margin-bottom: 4rem;
+    line-height: 2.5rem;
+    margin-bottom: 3rem;
   }
 }
 #portfolio .portfolio-item {
@@ -11572,7 +11545,7 @@ section#contact form#contactForm :-ms-input-placeholder {
     display: flex; /* Flexbox로 설정 */
     justify-content: center; /* 수평으로 가운데 정렬 */
     align-items: center; /* 수직으로 가운데 정렬 */
-    padding-left:20px; /* 약간의 왼쪽 패딩 추가 */
+    padding-left: 20px; /* 약간의 왼쪽 패딩 추가 */
     padding-right: 5px; /* 약간의 오른쪽 패딩 추가 */
   }
 
@@ -11738,6 +11711,3 @@ section#contact form#contactForm :-ms-input-placeholder {
       margin-bottom: 10px; /* 검색창 간격 */
   }
 }
-
-
-
