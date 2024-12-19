@@ -4,6 +4,20 @@ from markdownx.models import MarkdownxField
 from markdownx.utils import markdown
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=25, unique=True)
+    description = models.TextField(blank=True)
+    slug = models.SlugField(unique=True, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return '/post/category/{}/'.format(self.slug)
+
+    class Meta:
+        verbose_name_plural = 'categories'
+
 
 class Post(models.Model):
     content = MarkdownxField()
@@ -12,6 +26,7 @@ class Post(models.Model):
     date = models.DateField(blank=True, null=True, default=datetime.date.today)
     created = models.DateTimeField(auto_now_add=True)
     author = models.CharField(max_length=100, blank=True, null=True)
+    category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ['-created']
@@ -45,18 +60,3 @@ class Comment(models.Model):
     def get_absolute_url(self):
         return self.post.get_absolute_url() + '#comment-id-{}'.format(self.pk)
     
-
-class Category(models.Model):
-    name = models.CharField(max_length=25, unique=True)
-    description = models.TextField(blank=True)
-    slug = models.SlugField(unique=True, allow_unicode=True)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return '/review/category/{}/'.format(self.slug)
-
-    class Meta:
-        verbose_name_plural = 'categories'
-
