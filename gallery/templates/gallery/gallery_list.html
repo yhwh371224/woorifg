@@ -86,8 +86,18 @@
         </div>
     </div>
 </section>
-
 <!-- JavaScript -->
+<script>
+    function toggleDropdown() {
+        var menu = document.getElementById("categoryDropdownMenu");
+        // 드롭다운 메뉴 표시/숨김 토글
+        if (menu.style.display === "none" || menu.style.display === "") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    }
+</script>
 <script>
     function search_post() {
         var search_value = document.getElementById('gallery-search-input').value.trim();
