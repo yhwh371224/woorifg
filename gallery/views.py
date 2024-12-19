@@ -61,15 +61,16 @@ class GalleryCreate(LoginRequiredMixin, CreateView):
         current_user = self.request.user
         if current_user.is_authenticated:
             form.instance.author = current_user
-            return super(type(self), self).form_valid(form)
+            return super().form_valid(form)
         else:
-            return redirect('/gallery/')
+            return redirect(self.get_login_url())
         
     def get_success_url(self):
         return reverse_lazy('gallery:gallery_detail', kwargs={'pk': self.object.pk})
 
     def get_login_url(self):
-        return f'{super().get_login_url()}?next={self.request.path}' 
+        login_url = super().get_login_url() or reverse_lazy('account_login')
+        return f'{login_url}?next={self.request.path}'
 
 
 class GalleryUpdate(UpdateView):
