@@ -10971,9 +10971,9 @@ header.masthead {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #000; /* 기본 배경색 */
   transition: background-image 1s ease-in-out; /* 배경 전환 애니메이션 */
   overflow: hidden;
+  background-color: transparent; /* 기본 배경색을 투명으로 설정하여 이미지가 바로 보이도록 */
 }
 header.masthead .masthead-subheading {
   font-size: 1.2rem;
@@ -11009,7 +11009,7 @@ header.masthead .masthead-heading {
   header.masthead {
     padding-top: 10rem;
     padding-bottom: 6rem;
-    height: 60vh; /* 모바일 화면에서는 배경 이미지 높이를 60%로 설정 */
+    height: 70vh; /* 모바일 화면에서는 배경 이미지 높이를 60%로 설정 */
     background-size: cover; /* 배경 이미지가 화면을 덮도록 */
     background-position: center top; /* 배경 이미지를 상단에 맞추어 표시 */
   }
