@@ -45,18 +45,18 @@
                 
         </div>
         
-        <div class="row text-center" id="photo-grid" style="margin-top: 80px;">                
+        <div class="row text-center" id="gallery-photo-grid" style="margin-top: 80px;">                
         {% if object_list %}
             {% for p in object_list %}
-                <div class="col-md-3 col-sm-6 mb-4 image-container">
+                <div class="col-md-3 col-sm-6 mb-4 gallery-image-container">
                     <div class="card" id="{{ p.pk }}"> 
-                        <div class="image-container">
+                        <div class="gallery-image-container">
                             {% if p.head_image %}                                
                             <a href="{{ p.get_absolute_url }}"  id="read-more-post-{{ p.pk }}">
-                                <img class="img-fluid rounded enlarged-img card-img-top" src="{{ p.head_image.url }}" alt="Card image cap" >
+                                <img class="img-fluid rounded card-img-top" src="{{ p.head_image.url }}" alt="Card image cap" >
                             </a>                                
                             {% else %}                                
-                                <img class="img-fluid rounded enlarged-img card-img-top" src="https://picsum.photos/700/300/?random" alt="Card image cap" >                                
+                                <img class="img-fluid rounded card-img-top" src="https://picsum.photos/700/300/?random" alt="Card image cap" >                                
                             {% endif %}
                         </div>
                     </div>
