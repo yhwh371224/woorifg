@@ -11009,14 +11009,14 @@ header.masthead .masthead-heading {
   header.masthead {
     padding-top: 10rem;
     padding-bottom: 6rem;
-    height: 70vh; /* 모바일 화면에서는 배경 이미지 높이를 60%로 설정 */
-    background-size: cover; /* 배경 이미지가 화면을 덮도록 */
-    background-position: center top; /* 배경 이미지를 상단에 맞추어 표시 */
+    height: 75vh; 
+    background-size: cover; 
+    background-position: center top; 
   }
   header.masthead .masthead-subheading {
-    font-size: 1.25rem;
+    font-size: 1.0rem;
     font-style: italic;
-    line-height: 2.25rem;
+    line-height: 1.5rem;
     margin-bottom: 2rem;
   }
   header.masthead .masthead-heading {
