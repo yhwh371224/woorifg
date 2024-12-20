@@ -194,28 +194,16 @@ class PdfSearch(PdfListView):
         return context
 
 
-# music views.py
-class MusicListView(ListView):
+class MusicList(ListView):
     model = Music
-    template_name = 'blog/music_list.html'
-    context_object_name = 'musics'
-    queryset = Music.objects.all().order_by('-created')
-    paginate_by = 4 
-    login_url = '/login/'
+    paginate_by = 12
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(MusicList, self).get_context_data(**kwargs)
         context['category_list'] = Category.objects.all()
         context['posts_without_category'] = Music.objects.filter(category=None).count()
-        context['form'] = MusicForm()  # 폼을 컨텍스트에 추가
-        return context
 
-    def post(self, request, *args, **kwargs):
-        form = MusicForm(request.POST, request.FILES)          
-        if form.is_valid():
-            form.save()
-            return redirect('music_list')  
-        return self.render_to_response(self.get_context_data(form=form))
+        return context
     
 
 class MusicDetailView(DetailView):
@@ -271,7 +259,7 @@ class MusicListByCategory(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(type(self), self).get_context_data(**kwargs)
         context['category_list'] = Category.objects.all()
-        context['posts_without_category'] = Music.objects.filter(category=None).count()
+        context['musics_without_category'] = Music.objects.filter(category=None).count()
 
         slug = self.kwargs['slug']
 
