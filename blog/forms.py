@@ -1,5 +1,5 @@
 from django import forms
-from .models import Bulletin, Pdf, Music
+from .models import Bulletin, Pdf, Music, Category
 
 
 class BulletinForm(forms.ModelForm):
@@ -18,4 +18,7 @@ class MusicForm(forms.ModelForm):
     class Meta:
         model = Music
         fields = ['title', 'date', 'pdf_file', 'category']
+        widgets = {
+            'category': forms.Select(choices=Category.objects.all()) 
+        }
 

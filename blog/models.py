@@ -72,7 +72,7 @@ class Music(models.Model):
     title = models.CharField(max_length=100, blank=False, null=True)
     date = models.DateField(blank=True, null=True, verbose_name='ex)2024-12-31 ')  
     pdf_file = models.FileField(upload_to='musics/', null=True, blank=True, verbose_name='찬양 PDF 파일 ') 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)   
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True, verbose_name='찬양목록선택')   
     created = models.DateTimeField(auto_now_add=True)  
 
     class Meta:

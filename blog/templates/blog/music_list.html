@@ -12,7 +12,10 @@
             <div>
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}  
+                {{ form.title }}
+                {{ form.date }}
+                {{ form.pdf_file }}
+                {{ form.category }}   
                 <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-success">찬양 PDF파일업로드</button>                    
                 </div>
