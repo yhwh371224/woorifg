@@ -38,7 +38,7 @@
                         <ul id="MusiccategoryDropdownMenu" class="dropdown-menu" style="display: none;">
                             {% for category in category_list %}
                                 <li>
-                                    <a class="dropdown-item" href="/music/category/{{ category.slug }}/">
+                                    <a class="dropdown-item" href="{% url 'music_list_by_category' slug=category.slug %}">
                                         {{ category.name }}
                                     </a>
                                 </li>

@@ -205,6 +205,7 @@ class MusicListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = PdfForm()  # 폼을 컨텍스트에 추가
+        context['category_list'] = Category.objects.all() 
         return context
 
     def post(self, request, *args, **kwargs):
@@ -212,7 +213,7 @@ class MusicListView(ListView):
         
         if form.is_valid():
             form.save()
-            return redirect('pdf_list')  
+            return redirect('music_list')  
 
         return self.render_to_response(self.get_context_data(form=form))
     
