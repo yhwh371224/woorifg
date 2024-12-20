@@ -8,6 +8,7 @@ from .views import (
     MemberDetailView, 
     PdfListView, 
     PdfDetailView, 
+    MusicListView, 
     MusicDetailView
 )
 from . import views
@@ -20,6 +21,7 @@ urlpatterns = [
     path('bulletins/<int:pk>/', BulletinDetailView.as_view(), name='bulletin_detail'),
     path('pdfs/', PdfListView.as_view(), name='pdf_list'),
     path('pdfs/<int:pk>/', PdfDetailView.as_view(), name='pdf_detail'),
+    path('musics/', MusicListView.as_view(), name='music_list'),
     path('musics/<int:pk>/', MusicDetailView.as_view(), name='music_detail'),
     path('members/', MemberListView.as_view(), name='member_list'),
     path('members/<int:pk>/', MemberDetailView.as_view(), name='member_detail'),
@@ -27,7 +29,7 @@ urlpatterns = [
     path('pdf_upload/', views.PdfUploadView.as_view(), name='pdf_upload'),
     path('music_upload/', views.MusicUploadView.as_view(), name='music_upload'),
     path('merge-pdfs/', views.merge_latest_pdfs, name='merge_pdfs'),
-    path('', views.MusicListView.as_view(), name='music_list')
+
 ]
 
 urlpatterns += static('/media/', document_root=settings.MEDIA_ROOT)
