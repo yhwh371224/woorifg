@@ -19,6 +19,6 @@ class MusicForm(forms.ModelForm):
         model = Music
         fields = ['title', 'date', 'pdf_file', 'category']
         widgets = {
-            'category': forms.Select(choices=Category.objects.all()) 
+            'category': forms.Select()  
         }
-
+        
