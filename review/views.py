@@ -22,7 +22,7 @@ class PostList(ListView):
         context = super(PostList, self).get_context_data(**kwargs)
         context['post_count'] = Post.objects.all().count()
         context['category_list'] = Category.objects.all()
-        context['posts_without_category'] = Category.objects.filter(category=None).count()
+        context['posts_without_category'] = Post.objects.filter(category=None).count()
 
         user_name = None
         if self.request.user.is_authenticated:
