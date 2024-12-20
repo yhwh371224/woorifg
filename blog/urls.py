@@ -29,6 +29,7 @@ urlpatterns = [
     path('pdf_upload/', views.PdfUploadView.as_view(), name='pdf_upload'),
     path('music_upload/', views.MusicUploadView.as_view(), name='music_upload'),
     path('merge-pdfs/', views.merge_latest_pdfs, name='merge_pdfs'),
+    path('', views.MusicListView.as_view(), name='music_list')
 ]
 
 urlpatterns += static('/media/', document_root=settings.MEDIA_ROOT)
