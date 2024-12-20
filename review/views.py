@@ -21,6 +21,8 @@ class PostList(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(PostList, self).get_context_data(**kwargs)
         context['post_count'] = Post.objects.all().count()
+        context['category_list'] = Category.objects.all()
+        context['posts_without_category'] = Category.objects.filter(category=None).count()
 
         user_name = None
         if self.request.user.is_authenticated:
@@ -226,7 +228,7 @@ class PostListByCategory(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(type(self), self).get_context_data(**kwargs)
         context['category_list'] = Category.objects.all()
-        context['reviews_without_category'] = Post.objects.filter(category=None).count()
+        context['posts_without_category'] = Post.objects.filter(category=None).count()
 
         slug = self.kwargs['slug']
 
