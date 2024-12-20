@@ -12,7 +12,7 @@
                         <button class="btn btn-success dropdown-toggle" type="button" id="categoryDropdown" onclick="toggleDropdown()">
                             글 목록
                         </button>
-                        <ul id="categoryDropdownMenu" class="dropdown-menu" style="display: none;">
+                        <ul id="ReviewcategoryDropdownMenu" class="dropdown-menu" style="display: none;">
                             {% for category in category_list %}
                                 <li>
                                     <a class="dropdown-item" href="/review/category/{{ category.slug }}/">
@@ -90,7 +90,7 @@
 <!-- JavaScript -->
 <script>
     function toggleDropdown() {
-        var menu = document.getElementById("categoryDropdownMenu");
+        var menu = document.getElementById("ReviewcategoryDropdownMenu");
         // 드롭다운 메뉴 표시/숨김 토글
         if (menu.style.display === "none" || menu.style.display === "") {
             menu.style.display = "block";
@@ -103,7 +103,7 @@
     function search_post() {
         var search_value = document.getElementById('post-search-input').value.trim();
         if (search_value) {
-            location.href = "/post/search/" + encodeURIComponent(search_value) + "/";
+            location.href = "/review/search/" + encodeURIComponent(search_value) + "/";
         } else {
             alert("검색하고자 하는 단어를 넣으세요");
         }

@@ -197,7 +197,8 @@ class PostSearch(PostList):
         try:
             object_list = Post.objects.filter(
                 Q(title__icontains=q) | 
-                Q(date__icontains=q) |
+                Q(content__icontains=q) | 
+                Q(date__exact=q) |
                 Q(category__name__icontains=q)  
             )
         except FieldError:
@@ -225,7 +226,7 @@ class PostListByCategory(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(type(self), self).get_context_data(**kwargs)
         context['category_list'] = Category.objects.all()
-        context['posts_without_category'] = Post.objects.filter(category=None).count()
+        context['reviews_without_category'] = Post.objects.filter(category=None).count()
 
         slug = self.kwargs['slug']
 
