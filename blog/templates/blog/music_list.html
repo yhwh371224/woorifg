@@ -53,9 +53,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="input-group">
-                        <input type="text" id="music-search-input" onkeyup="wait_for_enterkey(event)" class="form-control" placeholder="Search for..."/>
+                        <input type="text" id="music-search-input" onkeyup="music_wait_for_enterkey(event)" class="form-control" placeholder="Search for..."/>
                         <span class="input-group-btn">
-                            <button class="btn btn-success" type="button" onclick="search_post();">Go!</button>
+                            <button class="btn btn-success" type="button" onclick="music_search_post();">Go!</button>
                         </span>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
     }
 </script>
 <script>
-    function search_post() {
+    function music_search_post() {
         var search_value = document.getElementById('music-search-input').value.trim();
         if (search_value) {
             location.href = "/music/search/" + encodeURIComponent(search_value) + "/";
@@ -122,7 +122,7 @@
         }
     }
 
-    function wait_for_enterkey(event) {
+    function music_wait_for_enterkey(event) {
         if (event.keyCode == 13) {
             search_post();
         }

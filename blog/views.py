@@ -244,7 +244,6 @@ class MusicSearch(MusicListView):
         try:
             object_list = Music.objects.filter(
                 Q(title__icontains=q) | 
-                Q(date__exact=q) |
                 Q(category__name__icontains=q)  
             )
         except FieldError:

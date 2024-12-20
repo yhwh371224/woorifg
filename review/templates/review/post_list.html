@@ -37,9 +37,9 @@
                 
                 <div class="col-md-4">
                     <div class="input-group">
-                        <input type="text" id="post-search-input" onkeyup="wait_for_enterkey(event)" class="form-control" placeholder="Search for..."/>
+                        <input type="text" id="post-search-input" onkeyup="review_wait_for_enterkey(event)" class="form-control" placeholder="Search for..."/>
                         <span class="input-group-btn">
-                            <button class="btn btn-success" type="button" onclick="search_post();">Go!</button>
+                            <button class="btn btn-success" type="button" onclick="review_search_post();">Go!</button>
                         </span>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
     }
 </script>
 <script>
-    function search_post() {
+    function review_search_post() {
         var search_value = document.getElementById('post-search-input').value.trim();
         if (search_value) {
             location.href = "/review/search/" + encodeURIComponent(search_value) + "/";
@@ -109,7 +109,7 @@
         }
     }
 
-    function wait_for_enterkey(event) {
+    function review_wait_for_enterkey(event) {
         if (event.keyCode == 13) {
             search_post();
         }
