@@ -27,7 +27,6 @@ class GallerySearch(GalleryList):
         try:
             object_list = Gallery.objects.filter(
                 Q(title__icontains=q) | 
-                Q(date__icontains=q) |
                 Q(category__name__icontains=q)  
             )
         except FieldError:

@@ -200,7 +200,6 @@ class PostSearch(PostList):
             object_list = Post.objects.filter(
                 Q(title__icontains=q) | 
                 Q(content__icontains=q) | 
-                Q(date__exact=q) |
                 Q(category__name__icontains=q)  
             )
         except FieldError:
