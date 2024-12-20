@@ -271,7 +271,7 @@ class MusicListByCategory(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(type(self), self).get_context_data(**kwargs)
         context['category_list'] = Category.objects.all()
-        context['musics_without_category'] = Music.objects.filter(category=None).count()
+        context['posts_without_category'] = Music.objects.filter(category=None).count()
 
         slug = self.kwargs['slug']
 

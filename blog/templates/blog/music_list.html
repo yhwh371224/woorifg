@@ -35,7 +35,7 @@
                         <button class="btn btn-success dropdown-toggle" type="button" id="categoryDropdown" onclick="toggleDropdown()">
                             찬양악보목록
                         </button>
-                        <ul id="categoryDropdownMenu" class="dropdown-menu" style="display: none;">
+                        <ul id="MusiccategoryDropdownMenu" class="dropdown-menu" style="display: none;">
                             {% for category in category_list %}
                                 <li>
                                     <a class="dropdown-item" href="/music/category/{{ category.slug }}/">
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             {% empty %}
-                <p>등록된 찬양악보가 없습니다.</p>
+                <p>찬양악보가 없습니다.</p>
             {% endfor %}
         {% else %}
             <h5 class="text-center w-100">찬양 악보가 없습니다</h5>
@@ -103,7 +103,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
     function toggleDropdown() {
-        var menu = document.getElementById("categoryDropdownMenu");
+        var menu = document.getElementById("MusiccategoryDropdownMenu");
         // 드롭다운 메뉴 표시/숨김 토글
         if (menu.style.display === "none" || menu.style.display === "") {
             menu.style.display = "block";
@@ -118,7 +118,7 @@
         if (search_value) {
             location.href = "/music/search/" + encodeURIComponent(search_value) + "/";
         } else {
-            alert("검색하고자 하는 단어를 넣으세요");
+            alert("검색단어를 넣으세요");
         }
     }
 
