@@ -63,6 +63,7 @@
         </div>
         
         <div class="bulletin-list mt-4">
+        {% if object_list %}
             {% for music in musics %}
                 <div class="bulletin-item">
                     <div class="bulletin-info">
@@ -77,6 +78,9 @@
             {% empty %}
                 <p>등록된 찬양악보가 없습니다.</p>
             {% endfor %}
+        {% else %}
+            <h5 class="text-center w-100">찬양 악보가 없습니다</h5>
+        {% endif %}
         </div>     
         <!-- Pagination Controls -->
         <div class="pagination mt-4 text-center" style="font-size: small;">
