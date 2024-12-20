@@ -36,7 +36,7 @@ class Bulletin(models.Model):
 
     def __str__(self):
         return f"{self.date}"
-    
+ 
 
 class Pdf(models.Model): 
     title = models.CharField(max_length=100, blank=False, null=True)
@@ -53,10 +53,26 @@ class Pdf(models.Model):
         return f"{self.date}"
     
 
+class Category(models.Model):
+    name = models.CharField(max_length=25, unique=True)
+    description = models.TextField(blank=True)
+    slug = models.SlugField(unique=True, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return '/music/category/{}/'.format(self.slug)
+
+    class Meta:
+        verbose_name_plural = 'categories'
+    
+
 class Music(models.Model): 
     title = models.CharField(max_length=100, blank=False, null=True)
     date = models.DateField(blank=True, null=True, verbose_name='ex)2024-12-31 ')  
-    pdf_file = models.FileField(upload_to='musics/', null=True, blank=True, verbose_name='찬양 PDF 파일 ')    
+    pdf_file = models.FileField(upload_to='musics/', null=True, blank=True, verbose_name='찬양 PDF 파일 ') 
+    category = models.ForeignKey(Category, blank=True, null=True, on_delete=models.SET_NULL)   
     created = models.DateTimeField(auto_now_add=True)  
 
     class Meta:

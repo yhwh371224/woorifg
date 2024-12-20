@@ -25,8 +25,42 @@
                 <a href="{% url 'account_login' %}?next={% url 'music_list' %}" class="btn btn-success">찬양 PDF파일업로드</a>
             {% endif %}
             <!-- 주보 목록 -->
-        </div>              
-
+        </div>
+        <br>
+        
+        <div class="row">
+            <div class="row align-items-center mb-4">
+                <div class="col-md-4">
+                    <div class="dropdown d-inline-block">
+                        <button class="btn btn-success dropdown-toggle" type="button" id="categoryDropdown" onclick="toggleDropdown()">
+                            찬양악보목록
+                        </button>
+                        <ul id="categoryDropdownMenu" class="dropdown-menu" style="display: none;">
+                            {% for category in category_list %}
+                                <li>
+                                    <a class="dropdown-item" href="/music/category/{{ category.slug }}/">
+                                        {{ category.name }}
+                                    </a>
+                                </li>
+                            {% empty %}
+                                <li class="dropdown-item">No categories available</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% if category %}
+                        <small class="d-block mt-2">{{ category.name }}</small>
+                    {% endif %}
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input type="text" id="music-search-input" onkeyup="wait_for_enterkey(event)" class="form-control" placeholder="Search for..."/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="button" onclick="search_post();">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <div class="bulletin-list mt-4">
             {% for music in musics %}
@@ -63,5 +97,32 @@
     </div>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function toggleDropdown() {
+        var menu = document.getElementById("categoryDropdownMenu");
+        // 드롭다운 메뉴 표시/숨김 토글
+        if (menu.style.display === "none" || menu.style.display === "") {
+            menu.style.display = "block";
+        } else {
+            menu.style.display = "none";
+        }
+    }
+</script>
+<script>
+    function search_post() {
+        var search_value = document.getElementById('music-search-input').value.trim();
+        if (search_value) {
+            location.href = "/music/search/" + encodeURIComponent(search_value) + "/";
+        } else {
+            alert("검색하고자 하는 단어를 넣으세요");
+        }
+    }
+
+    function wait_for_enterkey(event) {
+        if (event.keyCode == 13) {
+            search_post();
+        }
+    }
+</script>
 {% endblock %}
 

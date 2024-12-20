@@ -8,8 +8,12 @@ from django.shortcuts import redirect, render
 from django.views.generic import ListView, DetailView
 from django.urls import reverse_lazy
 from django.conf import settings
+from django.http import Http404
+from django.core.exceptions import FieldError
+from django.db.models import Q
 
-from .models import Members, Bulletin, Pdf, Music
+
+from .models import Members, Bulletin, Pdf, Music, Category
 from .forms import BulletinForm, PdfForm, MusicForm
 
 
@@ -170,6 +174,25 @@ class PdfUploadView(LoginRequiredMixin, CreateView):
     def get_login_url(self):
         login_url = super().get_login_url() or reverse_lazy('account_login')
         return f'{login_url}?next={self.request.path}'
+    
+
+class PdfSearch(PdfListView):
+    def get_queryset(self):
+        q = self.kwargs['q']
+        try:
+            object_list = Music.objects.filter(
+                Q(title__icontains=q) | 
+                Q(date__icontains=q)   
+            )
+        except FieldError:
+            raise Http404(f"No results found for '{q}'")
+        return object_list
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_info'] = f'Search: "{self.kwargs["q"]}"'
+        return context
+
 
 # music views.py
 class MusicListView(ListView):
@@ -182,16 +205,16 @@ class MusicListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['category_list'] = Category.objects.all()
+        context['posts_without_category'] = Music.objects.filter(category=None).count()
         context['form'] = MusicForm()  # 폼을 컨텍스트에 추가
         return context
 
     def post(self, request, *args, **kwargs):
-        form = MusicForm(request.POST, request.FILES)  
-        
+        form = MusicForm(request.POST, request.FILES)          
         if form.is_valid():
             form.save()
             return redirect('music_list')  
-
         return self.render_to_response(self.get_context_data(form=form))
     
 
@@ -213,4 +236,50 @@ class MusicUploadView(LoginRequiredMixin, CreateView):
     def get_login_url(self):
         login_url = super().get_login_url() or reverse_lazy('account_login')
         return f'{login_url}?next={self.request.path}'
+    
 
+class MusicSearch(MusicListView):
+    def get_queryset(self):
+        q = self.kwargs['q']
+        try:
+            object_list = Music.objects.filter(
+                Q(title__icontains=q) | 
+                Q(date__icontains=q) |
+                Q(category__name__icontains=q)  
+            )
+        except FieldError:
+            raise Http404(f"No results found for '{q}'")
+        return object_list
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search_info'] = f'Search: "{self.kwargs["q"]}"'
+        return context
+
+
+class MusicListByCategory(ListView):
+
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+
+        if slug == '_none':
+            category = None
+        else:
+            category = Category.objects.get(slug=slug)
+
+        return Music.objects.filter(category=category).order_by('-created')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(type(self), self).get_context_data(**kwargs)
+        context['category_list'] = Category.objects.all()
+        context['musics_without_category'] = Music.objects.filter(category=None).count()
+
+        slug = self.kwargs['slug']
+
+        if slug == '_none':
+            context['category'] = '미분류'
+        else:
+            category = Category.objects.get(slug=slug)
+            context['category'] = category
+
+        return context

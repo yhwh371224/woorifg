@@ -17,5 +17,5 @@ class PdfForm(forms.ModelForm):
 class MusicForm(forms.ModelForm):
     class Meta:
         model = Music
-        fields = ['title', 'date', 'pdf_file']
+        fields = ['title', 'date', 'pdf_file', 'category']
 

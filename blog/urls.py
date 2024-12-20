@@ -15,6 +15,8 @@ from . import views
 
 
 urlpatterns = [
+    path('search/<str:q>/', views.MusicSearch.as_view(), name='music_search'),
+    path('category/<str:slug>/', views.MusicListByCategory.as_view(), name='music_list_by_category'),
     path('bulletins/', BulletinListView.as_view(), name='bulletin_list'),
     path('bulletins/<int:pk>/', BulletinDetailView.as_view(), name='bulletin_detail'),
     path('pdfs/', PdfListView.as_view(), name='pdf_list'),

@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Members, Bulletin, Pdf, Music
+from .models import Members, Bulletin, Pdf, Music, Category
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name', )}
 
 
 class MembersAdmin(admin.ModelAdmin):
@@ -27,3 +31,4 @@ admin.site.register(Members, MembersAdmin)
 admin.site.register(Bulletin, BulletinAdmin)
 admin.site.register(Pdf, PdfAdmin)
 admin.site.register(Music, MusicAdmin)
+admin.site.register(Category, CategoryAdmin)
