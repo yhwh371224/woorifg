@@ -21,8 +21,8 @@ class Members(models.Model):
         ordering = ['-created'] 
 
     def __str__(self):
-        return f"{self.korean_name} ({self.english_name})"
-    
+        return f"{self.korean_name} ({self.english_name})"  
+ 
 
 class Bulletin(models.Model): 
     date = models.DateField(blank=True, null=True, verbose_name='ex)2024-12-31 ')  
@@ -82,7 +82,6 @@ class Music(models.Model):
 
     def __str__(self):
         return f"{self.date}"
-
 
 
 

@@ -94,7 +94,7 @@ class BulletinListView(ListView):
     template_name = 'blog/bulletin_list.html'
     context_object_name = 'bulletins'
     queryset = Bulletin.objects.all().order_by('-created')
-    paginate_by = 4 
+    paginate_by = 12 
     login_url = '/login/'
 
     def get_context_data(self, **kwargs):
@@ -107,7 +107,7 @@ class BulletinListView(ListView):
         
         if form.is_valid():
             form.save()
-            return redirect('bulletin_list')  
+            return redirect('blog:bulletin_list')  
 
         return self.render_to_response(self.get_context_data(form=form))
     
@@ -138,7 +138,7 @@ class PdfListView(ListView):
     template_name = 'blog/pdf_list.html'
     context_object_name = 'pdfs'
     queryset = Pdf.objects.all().order_by('-created')
-    paginate_by = 4 
+    paginate_by = 12 
     login_url = '/login/'
 
     def get_context_data(self, **kwargs):
@@ -151,7 +151,7 @@ class PdfListView(ListView):
         
         if form.is_valid():
             form.save()
-            return redirect('pdf_list')  
+            return redirect('blog:pdf_list')  
 
         return self.render_to_response(self.get_context_data(form=form))
     
@@ -176,22 +176,23 @@ class PdfUploadView(LoginRequiredMixin, CreateView):
         return f'{login_url}?next={self.request.path}'
     
 
-class PdfSearch(PdfListView):
-    def get_queryset(self):
-        q = self.kwargs['q']
-        try:
-            object_list = Music.objects.filter(
-                Q(title__icontains=q) | 
-                Q(date__icontains=q)   
-            )
-        except FieldError:
-            raise Http404(f"No results found for '{q}'")
-        return object_list
+# class PdfSearch(PdfListView):
+#     model = Pdf
+#     def get_queryset(self):
+#         q = self.kwargs['q']
+#         try:
+#             object_list = Pdf.objects.filter(
+#                 Q(title__icontains=q) | 
+#                 Q(date__icontains=q)   
+#             )
+#         except FieldError:
+#             raise Http404(f"No results found for '{q}'")
+#         return object_list
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['search_info'] = f'Search: "{self.kwargs["q"]}"'
-        return context
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['search_info'] = f'Search: "{self.kwargs["q"]}"'
+#         return context
 
 
 class MusicListView(ListView):
@@ -199,7 +200,7 @@ class MusicListView(ListView):
     template_name = 'blog/music_list.html'
     context_object_name = 'musics'
     queryset = Music.objects.all().order_by('-created')
-    paginate_by = 4 
+    paginate_by = 12 
     login_url = '/login/'
 
     def get_context_data(self, **kwargs):
@@ -213,7 +214,7 @@ class MusicListView(ListView):
         
         if form.is_valid():
             form.save()
-            return redirect('music_list')  
+            return redirect('blog:music_list')  
 
         return self.render_to_response(self.get_context_data(form=form))
     
@@ -239,12 +240,15 @@ class MusicUploadView(LoginRequiredMixin, CreateView):
     
 
 class MusicSearch(MusicListView):
+    model = Music
+
     def get_queryset(self):
         q = self.kwargs['q']
         try:
             object_list = Music.objects.filter(
                 Q(title__icontains=q) | 
-                Q(category__name__icontains=q)  
+                Q(category__name__icontains=q)
+                
             )
         except FieldError:
             raise Http404(f"No results found for '{q}'")
@@ -256,7 +260,9 @@ class MusicSearch(MusicListView):
         return context
 
 
-class MusicListByCategory(ListView):
+
+class MusicCategory(ListView):
+    model = Music
 
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -280,5 +286,7 @@ class MusicListByCategory(ListView):
         else:
             category = Category.objects.get(slug=slug)
             context['category'] = category
+
+        context['music_list'] = self.get_queryset()
 
         return context

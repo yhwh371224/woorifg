@@ -22,10 +22,26 @@
                 <a href="/admin/" class="btn btn-secondary">관리자 페이지</a>
             </div>
             {% else %}
-                <a href="{% url 'account_login' %}?next={% url 'pdf_list' %}" class="btn btn-success">PDF파일업로드</a>
+                <a href="{% url 'account_login' %}?next={% url 'blog:pdf_list' %}" class="btn btn-success">PDF파일업로드</a>
             {% endif %}
             <!-- 주보 목록 -->
-        </div>              
+        </div>
+        <!-- <br>
+        
+        <div class="row">
+            <div class="row align-items-center mb-4">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <input type="text" id="pdf-search-input" onkeyup="pdf_wait_for_enterkey(event)" class="form-control" placeholder="Search for..."/>
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="button" onclick="pdf_search_post();">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div> -->
 
         
         <div class="bulletin-list mt-4">
@@ -63,5 +79,21 @@
     </div>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function pdf_search_post() {
+        var search_value = document.getElementById('pdf-search-input').value.trim();
+        if (search_value) {
+            location.href = "/blog/search/" + encodeURIComponent(search_value) + "/";
+        } else {
+            alert("검색하고자 하는 단어를 넣으세요");
+        }
+    }
+
+    function pdf_wait_for_enterkey(event) {
+        if (event.keyCode == 'Enter') {
+            pdf_search_post();
+        }
+    }
+</script>
 {% endblock %}
 

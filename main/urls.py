@@ -10,10 +10,10 @@ admin_site = user_passes_test(lambda u: u.is_superuser)(admin.site.urls)
 urlpatterns = [      
     path('admin/', admin.site.urls),
     path('markdownx/', include('markdownx.urls')),
-    path('blog/', include('blog.urls')),
-    path('gallery/', include('gallery.urls')),
-    path('review/', include('review.urls')),
-    path('', include('basecamp.urls')),
+    path('blog/', include(('blog.urls', 'blog'), namespace='blog')),
+    path('gallery/', include(('gallery.urls', 'gallery'), namespace='gallery')),
+    path('review/', include(('review.urls', 'review'), namespace='review')),
+    path('', include(('basecamp.urls', 'basecamp'), namespace='basecamp')),
     path('accounts/', include('allauth.urls')),
 ]
 

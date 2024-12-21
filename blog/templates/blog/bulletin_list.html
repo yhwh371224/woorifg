@@ -23,7 +23,7 @@
                 <a href="/admin/" class="btn btn-secondary">관리자 페이지</a>
             </div>
             {% else %}
-                <a href="{% url 'account_login' %}?next={% url 'bulletin_list' %}" class="btn btn-success">주보업로드</a>
+                <a href="{% url 'account_login' %}?next={% url 'blog:bulletin_list' %}" class="btn btn-success">주보업로드</a>
             {% endif %}
             <!-- 주보 목록 -->
         </div>              
@@ -69,7 +69,7 @@
         e.preventDefault();  // Prevents the default form submission
 
         $.ajax({
-            url: '{% url "merge_pdfs" %}',  // Django template tag for the correct URL
+            url: '{% url "blog:merge_pdfs" %}',  // Django template tag for the correct URL
             method: 'GET',
             success: function(response) {
                 if (response.message) {

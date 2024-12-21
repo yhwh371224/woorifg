@@ -71,7 +71,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
         if not post.date:
             post.date = datetime.date.today()
         post.save()
-        return redirect('review:post_detail', pk=post.pk)
+        return redirect('review:review_detail', pk=post.pk)
 
     def get_login_url(self):
         login_url = super().get_login_url() or reverse_lazy('account_login')
@@ -200,7 +200,7 @@ class PostSearch(PostList):
             object_list = Post.objects.filter(
                 Q(title__icontains=q) | 
                 Q(content__icontains=q) | 
-                Q(category__name__icontains=q)  
+                Q(name__icontains=q)  
             )
         except FieldError:
             raise Http404(f"No results found for '{q}'")
@@ -212,7 +212,7 @@ class PostSearch(PostList):
         return context
     
 
-class PostListByCategory(ListView):
+class PostCategory(ListView):
 
     def get_queryset(self):
         slug = self.kwargs['slug']

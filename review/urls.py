@@ -6,7 +6,7 @@ app_name = 'review'
 
 urlpatterns = [
     path('search/<str:q>/', views.PostSearch.as_view(), name='review_search'),
-    path('category/<str:slug>/', views.PostListByCategory.as_view(), name='review_list_by_category'),
+    path('category/<str:slug>/', views.PostCategory.as_view(), name='review_list_by_category'),
     path('', views.PostList.as_view(), name="review"),
     path('create/', views.PostCreate.as_view(), name="review_create"),
     path('<int:pk>/', views.PostDetail.as_view(), name="review_detail"),
