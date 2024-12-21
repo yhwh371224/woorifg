@@ -11012,8 +11012,8 @@ header.masthead .masthead-heading {
 }
 @media (max-width: 767.98px) {
   header.masthead {
-    padding-top: 8rem;
-    padding-bottom: 6rem;
+    padding-top: 9rem;
+    padding-bottom: 7rem;
   }
   header.masthead .masthead-subheading {
     font-size: 1.25rem;
@@ -11030,13 +11030,13 @@ header.masthead .masthead-heading {
 }
 @media (max-width: 767.98px) {
   #services .section-heading {
-    font-size: 1.5rem; /* 글자 크기 줄임 (기존 대비 작게 조정) */
+    font-size: 2rem; /* 글자 크기 줄임 (기존 대비 작게 조정) */
     font-weight: 600; /* 굵기 조정 (선택적) */
     line-height: 2rem; /* 줄 간격 조정 */
     margin-bottom: 1rem; /* 여백 조정 */
   }
   #about .section-heading {
-    font-size: 1.5rem; /* 글자 크기 줄임 */
+    font-size: 2rem; /* 글자 크기 줄임 */
     font-weight: 600; /* 글자 굵기 (선택적) */
     line-height: 2rem; /* 줄 간격 조정 */
     margin-bottom: 1rem; /* 아래 여백 조정 */
