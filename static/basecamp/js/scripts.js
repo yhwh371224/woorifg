@@ -39,45 +39,46 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // 🟢 드롭다운 메뉴 이벤트 핸들링
-    document.querySelectorAll('.dropdown').forEach(dropdown => {
-        const menu = dropdown.querySelector('.dropdown-menu');
+    document.querySelectorAll('.nav-item.dropdown > .nav-link.dropdown-toggle').forEach(dropdownToggle => {
+        dropdownToggle.addEventListener('click', function (e) {
+            e.preventDefault(); // 기본 이벤트 방지
+            e.stopPropagation(); // 이벤트 버블링 방지
 
-        // 📱 모바일 드롭다운 (화면 너비 768px 이하)
-        dropdown.addEventListener('click', function (e) {
-            if (window.innerWidth < 768) {
-                e.stopPropagation(); // 이벤트 전파 중단
-                menu.classList.toggle('show');
+            const dropdownMenu = this.nextElementSibling;
+
+            // 모바일 화면에서만 작동
+            if (window.innerWidth < 992) { // Bootstrap 'lg' breakpoint 이하
+                // 현재 드롭다운 메뉴 토글
+                if (dropdownMenu.classList.contains('show')) {
+                    dropdownMenu.classList.remove('show');
+                } else {
+                    // 다른 드롭다운 메뉴 닫기
+                    document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                        menu.classList.remove('show');
+                    });
+                    dropdownMenu.classList.add('show');
+                }
             }
-        });
-
-        // 🖥️ 데스크톱 드롭다운 (화면 너비 768px 이상)
-        dropdown.addEventListener('mouseenter', function () {
-            if (window.innerWidth >= 768) {
-                menu.classList.add('show');
-            }
-        });
-
-        dropdown.addEventListener('mouseleave', function () {
-            if (window.innerWidth >= 768) {
-                menu.classList.remove('show');
-            }
-        });
-
-        // 메뉴 항목 클릭 시 닫히지 않도록 설정 (모바일)
-        menu.querySelectorAll('.dropdown-item').forEach(item => {
-            item.addEventListener('click', function (e) {
-                e.stopPropagation(); // 이벤트 전파 중단
-            });
         });
     });
 
-    // 🟢 드롭다운 외부 클릭 시 닫기
+    // 🟢 외부 클릭 시 드롭다운 닫기
     window.addEventListener('click', function (e) {
-        if (!e.target.closest('.dropdown')) {
+        if (!e.target.closest('.nav-item.dropdown')) {
             document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
                 menu.classList.remove('show');
             });
         }
+    });
+
+    // 🟢 드롭다운 메뉴 항목 클릭 시 메뉴 닫기 (옵션)
+    document.querySelectorAll('.dropdown-menu .dropdown-item').forEach(item => {
+        item.addEventListener('click', function () {
+            if (window.innerWidth < 992) {
+                const dropdownMenu = this.closest('.dropdown-menu');
+                dropdownMenu.classList.remove('show');
+            }
+        });
     });
 
 });
