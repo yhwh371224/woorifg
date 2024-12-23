@@ -1,6 +1,43 @@
-{% extends 'basecamp/base.html' %}
+{% extends 'basecamp/base_sub.html' %}
 {% load static %}
 
 {% block content %}
-<h3>공사중...</h3>
+<h3>교회 위치 안내</h3>
+    
+    <div class="container">
+        <!-- 왼쪽 섹션: 안내글 -->
+        <div class="info-section">
+            <h4>새언약 교회에 오신 것을 환영합니다</h4>
+            <p>새언약 교회는 체스터힐 지역에 위치해 있으며, 예배와 기도, 그리고 공동체 활동을 위한 공간을 제공합니다. 방문하여 예배에 참여하실 수 있습니다!</p>
+            
+            <h5>위치</h5>
+            <p>새언약 교회는 <strong>109 Priam Street, Chester Hill, NSW</strong>에 위치해 있습니다. 대중교통과 차량으로 쉽게 접근할 수 있으며, 주변 환경은 평화롭고 조용한 곳입니다.</p>
+            
+            <h5>예배 시간</h5>
+            <p>새언약 교회에서는 매주 예배를 진행하고 있으며, 누구나 참여하실 수 있습니다:</p>
+            <ul>
+                <li><strong>주일예배:</strong> 주일 오후 12시 30분</li>
+                <li><strong>수요예배:</strong> 수요일 오전 11시</li>
+                <li><strong>주일학교:</strong> 주일 오후 12시 30분</li>
+                <li><strong>학생부모임:</strong> 주일 오후 2시 30분</li>
+            </ul>
+
+            <h5>픽업문의</h5>
+            <p>현재는 스트라스필드 11:20분 Commonwealth Bank 와 리드콤 중앙식품 11:40분에 있습니다.</p>
+            <p>픽업이 필요하신 분은 메일이나 문자로 성함하고 몇 분이신지 꼭 미리 알려주셔야 합니다.</p>
+            <p>이 외 궁금한 사항이 있으시면 언제든지 연락해 주세요:</p>
+            <ul>
+                <li><strong>전화: 0466 386 584 / 0406 783 559</strong></li>
+                <li><strong>이메일:</strong>suychurch1515@gmail.com</li>
+            </ul>
+
+            <p>여러분의 방문을 기대하고 환영합니다!</p>
+        </div>
+        
+        <!-- 오른쪽 섹션: 지도 -->
+        <div class="map-section">
+            <div id="map" style="height: 100%; width: 100%;"></div>
+        </div>
+    </div>
+    
 {% endblock %}

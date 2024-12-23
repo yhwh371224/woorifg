@@ -35,10 +35,6 @@ def column(request):
     return render(request, 'basecamp/column.html')
 
 
-def location(request):
-    return render(request, 'basecamp/location.html')
-
-
 def notice(request):
     return render(request, 'basecamp/notice.html')
 
@@ -61,6 +57,15 @@ def serve_pdf(request):
     
 
 from django.shortcuts import render
+
+
+def location(request):
+    context = {
+        'google_maps_api_key': settings.GOOGLE_MAPS_API_KEY,
+        'church_latitude': -33.8782431,  
+        'church_longitude': 151.0008969,  
+    }
+    return render(request, 'basecamp/location.html', context)
 
 
 # error handler 400 403 404 500 502 503 
