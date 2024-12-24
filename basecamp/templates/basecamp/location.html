@@ -50,7 +50,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/home/">Home</a>
                         </li>                        
-                        <!-- 교회소개 드롭다운 메뉴 -->
+                        <!-- 교회소개 드롭다운 메�� -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
                                 교회소개
@@ -89,16 +89,18 @@
             </div>
         </nav>
 
-        <div class="container" style="margin-top: 100px;"> 
+        <div class="container" style="margin-top: 150px; margin-bottom: 60px;"> <!-- 하단 여백 더 감소 -->
             <div class="row justify-content-center"> 
                 <div class="col-12 col-md-10 col-lg-8"> 
                     <iframe 
                         class="map rounded w-100" 
-                        id="gmap_canvas" 
-                        src="{% url 'basecamp:maps' %}" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.5476711206396!2d151.0019243!3d-33.8916799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b12bd8b7b9bbd09%3A0x9f3654e3e2c8f1f0!2s109%20Priam%20St%2C%20Chester%20Hill%20NSW%202162!5e0!3m2!1sen!2sau!4v1680000000000!5m2!1sen!2sau"
                         frameborder="0"
                         style="height: 600px;" 
-                    ></iframe>
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
         </div>
