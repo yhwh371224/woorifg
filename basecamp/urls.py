@@ -17,6 +17,7 @@ urlpatterns = [
     path('notice/', views.notice, name='notice'),
     path('privacy/', views.privacy, name='privacy'),
     path('terms/', views.terms, name='terms'),
+    path('maps/', views.maps, name='maps'),
     path('protected/contact_list', views.serve_pdf, name='contact_list'), 
 ] 
 

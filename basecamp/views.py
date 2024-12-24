@@ -47,6 +47,10 @@ def terms(request):
     return render(request, 'basecamp/terms.html')
 
 
+def maps(request):
+    return render(request, 'basecamp/maps.html')
+
+
 @login_required
 def serve_pdf(request):
     pdf_path = os.path.join(settings.MEDIA_ROOT, 'protected', 'contact_list.pdf')
@@ -62,8 +66,6 @@ from django.shortcuts import render
 def location(request):
     context = {
         'google_maps_api_key': settings.GOOGLE_MAPS_API_KEY,
-        'church_latitude': -33.8782431,  
-        'church_longitude': 151.0008969,  
     }
     return render(request, 'basecamp/location.html', context)
 

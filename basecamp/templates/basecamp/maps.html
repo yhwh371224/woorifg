@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Google Maps</title>
+    <style>
+    html, body, #mapDiv {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden; /* iframe 내부 스크롤 방지 */
+    }
+
+    #mapDiv {
+        position: relative;
+        will-change: transform;
+        min-height: 400px; /* iframe 최소 높이 설정 */
+        width: 100%;
+        border-radius: inherit; /* 부모의 rounded 클래스 상속 */
+    }
+
+    .controls-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 1; /* 컨트롤이 지도 위에 표시되도록 */
+    }
+    
+    .map-controls {
+        position: absolute;
+        bottom: 25px; /* 위치 조정 */
+        right: 20px;
+        pointer-events: auto;
+    }
+    
+    .control-button {
+        width: 32px; /* 크기 조정 */
+        height: 32px;
+        background: white;
+        border: none;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        cursor: pointer;
+        margin: 4px;
+        font-size: 16px;
+        color: #666;
+        transition: background-color 0.2s;
+    }
+
+    .control-button:hover {
+        background-color: #f1f1f1;
+    }
+
+    .control-button:focus {
+        outline: 2px solid #4285f4;
+        outline-offset: 2px;
+    }
+    
+    .view-larger {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: white;
+        padding: 8px 12px;
+        border-radius: 4px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        pointer-events: auto;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+    }
+
+    .view-larger a {
+        color: #1a73e8;
+        text-decoration: none;
+    }
+
+    .view-larger a:hover {
+        text-decoration: underline;
+    }
+    
+    .keyboard-shortcuts-view {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background: white;
+        padding: 12px;
+        border-radius: 4px;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+        pointer-events: auto;
+        display: none;
+        font-family: Arial, sans-serif;
+        font-size: 13px;
+    }
+    
+    .keyboard-shortcuts-view table {
+        border-collapse: collapse;
+    }
+    
+    .keyboard-shortcuts-view td {
+        padding: 4px 8px;
+    }
+    
+    .keyboard-shortcuts-view kbd {
+        background-color: #e8eaed;
+        border-radius: 3px;
+        padding: 2px 4px;
+        margin: 0 2px;
+        font-family: monospace;
+        font-size: 12px;
+    }
+
+    .loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        background: white;
+        padding: 16px 24px;
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        font-family: Arial, sans-serif;
+    }
+
+    .error-message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 16px 24px;
+        border-radius: 4px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        text-align: center;
+        color: #d32f2f;
+        font-family: Arial, sans-serif;
+    }
+
+    @media (max-width: 768px) {
+        .map-controls {
+            bottom: 20px;
+            right: 15px;
+        }
+
+        .control-button {
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+        }
+
+        .view-larger {
+            font-size: 12px;
+            padding: 6px 10px;
+        }
+    }
+    </style>    
+</head>
+<body>
+    <div id="mapDiv" aria-label="Google 지도"></div>
+
+    <div class="controls-container">
+        <div class="keyboard-shortcuts-view">
+            <table>
+                <tr><td><kbd>←</kbd></td><td>왼쪽으로 이동</td></tr>
+                <tr><td><kbd>→</kbd></td><td>오른쪽으로 이동</td></tr>
+                <tr><td><kbd>↑</kbd></td><td>위로 이동</td></tr>
+                <tr><td><kbd>↓</kbd></td><td>아래로 이동</td></tr>
+                <tr><td><kbd>+</kbd></td><td>확대</td></tr>
+                <tr><td><kbd>-</kbd></td><td>축소</td></tr>
+            </table>
+        </div>
+
+        <div class="map-controls">
+            <button class="control-button zoom-in" aria-label="확대" title="확대">+</button>
+            <button class="control-button zoom-out" aria-label="축소" title="축소">-</button>
+        </div>
+
+        <div class="view-larger">
+            <a href="https://www.google.com/maps?q=109+Priam+St,+Chester+Hill+NSW+2162" 
+               target="_blank">
+               큰 지도로 보기
+            </a>
+        </div>
+    </div>
+    <script>
+        // 유틸리티 함수
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+    
+        // API 인증 실패 처리
+        function gm_authFailure() {
+            const mapDiv = document.getElementById('mapDiv');
+            mapDiv.innerHTML = '<div class="error-message">지도를 불러오는데 실패했습니다. API 키를 확인해주세요.</div>';
+        }
+    
+        // 지도 초기화 함수
+        async function initMap() {
+            try {
+                const mapDiv = document.getElementById('mapDiv');
+                mapDiv.innerHTML = '<div class="loading">지도를 불러오는 중...</div>';
+    
+                // Maps JavaScript API 로드
+                const { Map } = await google.maps.importLibrary("maps");
+                
+                const map = new Map(mapDiv, {
+                    center: { lat: -33.8728889, lng: 151.0022493 }, // Chester Hill 교회 좌표로 변경
+                    zoom: 15, // 더 가까운 줌 레벨로 조정
+                    zoomControl: false,
+                    mapTypeControl: true,
+                    streetViewControl: true,
+                    fullscreenControl: false
+                });
+
+                // 지도 초기화 후 마커 추가
+                const marker = new google.maps.Marker({
+                    position: { lat: -33.8728889, lng: 151.0022493 },
+                    map: map,
+                    title: "새언약교회"
+                });
+    
+                // 줌 컨트롤
+                const zoomIn = document.querySelector('.zoom-in');
+                const zoomOut = document.querySelector('.zoom-out');
+    
+                // 줌 컨트롤에 디바운싱 적용
+                zoomIn.onclick = debounce(() => {
+                    map.setZoom(map.getZoom() + 1);
+                }, 250);
+    
+                zoomOut.onclick = debounce(() => {
+                    map.setZoom(map.getZoom() - 1);
+                }, 250);
+    
+                // 터치 이벤트
+                zoomIn.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    map.setZoom(map.getZoom() + 1);
+                }, { passive: false });
+    
+                zoomOut.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    map.setZoom(map.getZoom() - 1);
+                }, { passive: false });
+    
+                // 키보드 네비게이션
+                document.addEventListener('keydown', (e) => {
+                    const STEP = 50;
+                    switch(e.key) {
+                        case 'ArrowLeft':
+                            map.panBy(-STEP, 0);
+                            break;
+                        case 'ArrowRight':
+                            map.panBy(STEP, 0);
+                            break;
+                        case 'ArrowUp':
+                            map.panBy(0, -STEP);
+                            break;
+                        case 'ArrowDown':
+                            map.panBy(0, STEP);
+                            break;
+                        case '+':
+                            map.setZoom(map.getZoom() + 1);
+                            break;
+                        case '-':
+                            map.setZoom(map.getZoom() - 1);
+                            break;
+                    }
+                });
+    
+                // 키보드 단축키 가이드
+                const shortcutsView = document.querySelector('.keyboard-shortcuts-view');
+                document.addEventListener('keypress', (e) => {
+                    if (e.key === '?') {
+                        shortcutsView.style.display = 
+                            shortcutsView.style.display === 'none' ? 'block' : 'none';
+                    }
+                });
+    
+            } catch (error) {
+                console.error('지도 초기화 중 오류 발생:', error);
+                document.getElementById('mapDiv').innerHTML = 
+                    '<div class="error-message">지도를 불러오는데 실패했습니다.</div>';
+            }
+        }
+    </script>
+    
+    <!-- Google Maps API 로드 -->
+    <script>
+        (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
+            key: "{{ google_maps_api_key }}", // 실제 API 키로 교체 필요
+            v: "weekly"
+        });
+    
+        // 페이지 로드 시 initMap 실행
+        window.initMap = initMap;
+        initMap();
+    </script>
+    
+</body>
+</html>
