@@ -2,11 +2,22 @@
 {% load static %}
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+        <meta charset="utf-8" />       
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />        
         <title>새언약교회</title>
+        <meta name="application-name" content="새언약교회">
+        <meta name="keywords" content="새언약교회, 시드니 한인교회, 시드니 새언약교회, 체스터힐 교회, 리드콤 교회">
+        <meta name="description" content="새언약교회는 호주 시드니 Chestser Hill에 있는 한인교회입니다" />
+        <meta name="author" content="감승재" />
+        <meta property="og:title" content="새언약교회" />
+        <meta name="msapplication-tooltip" content="새언약교회">
+        <meta id="meta_og_title" property="og:title" content="새언약교회">
+        <meta property="og:description" content="새언약교회 공식 홈페이지입니다." />
+        <meta property="og:image" content="https://suychurch.site/static/basecamp/images/church_inside.png" />
+        <meta property="og:url" content="https://suychurch.site/" />
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="627">
+        <meta property="og:type" content="website">      
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="/static/basecamp/favi/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
@@ -34,45 +45,53 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="/home"><span class="logo-text">새언약교회</span></a>
+                <a class="navbar-brand" href="/home"><img src="{% static 'basecamp/assets/img/favicon.png' %}" alt="파비콘" class="favicon-img" /><span class="logo-text">새언약교회</span></a>
+                <a class="btn btn-dark btn-social mx-2" href="https://www.youtube.com" aria-label="Twitter" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a class="btn btn-dark btn-social mx-2" href="https://www.facebook.com/peterkim1515" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-dark btn-social mx-2" href="https://www.google.com/maps/search/?api=1&query=109+Priam+St,+Chester+Hill" aria-label="Google" target="_blank"><i class="fas fa-map-marker-alt"></i></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/home/">Home</a>
+                        </li>                        
                         <!-- 교회소개 드롭다운 메뉴 -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
-                                교회안내
+                                교회소개
                             </a>
                             <ul class="dropdown-menu" >
-                                <li><a class="dropdown-item" href="/home/#about">교회소개</a></li>
+                                <li><a class="dropdown-item" href="#about">교회소개</a></li>
                                 <li><a class="dropdown-item" href="/introduction">목사님소개</a></li>
-                                <li><a class="dropdown-item" href="/workers">섬기는 사람들</a></li>
+                                <li><a class="dropdown-item" href="/workers">섬기는 분들</a></li>
                                 <li><a class="dropdown-item" href="/location">교회위치 및 온라인헌금</a></li>                                
                             </ul>
                         </li>
+                        <li class="nav-item"><a class="nav-link" href="/meetings">예배와 모임</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
-                                예배안내
+                                소식 및 정보
                             </a>
-                            <ul class="dropdown-menu" >
-                                <li><a class="dropdown-item" href="/meetings">예배와 모임</a></li>
+                            <ul class="dropdown-menu" >    
+                                <li><a class="dropdown-item" href="/gallery">교회사진첩</a></li>                            
                                 <li><a class="dropdown-item" href="/blog/bulletins">교회주보</a></li>
-                                <li><a class="dropdown-item" href="/notice">찬양악보</a></li>
+                                <li><a class="dropdown-item" href="/blog/musics">찬양악보</a></li>
+                                <li><a class="dropdown-item" href="{% url 'basecamp:contact_list' %}" target="_blank">교인연락처</a></li>
+                                <li><a class="dropdown-item" href="/blog/pdfs">공지 및 행사안내</a></li>
                             </ul>
                         </li>     
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
-                                하나님의 말씀
+                                설교 및 칼럼
                             </a>
                             <ul class="dropdown-menu" >
-                                <li><a class="dropdown-item" href="/home/#words">주일설교</a></li>
+                                <li><a class="dropdown-item" href="#words">주일설교</a></li>
                                 <li><a class="dropdown-item" href="/review">목사님 칼럼</a></li>
                             </ul>
-                        </li>                             
-                        <li class="nav-item"><a class="nav-link" href="/gallery">갤러리</a></li>                        
+                        </li>                          
                     </ul>
                 </div>
             </div>
@@ -101,7 +120,7 @@
             </div>
             <div class="container" style="">                
                 <div class="row align-items-center">                    
-                    <div class="col-12 text-center" style="color: white;">이메일 주소: <a class="link-dark text-decoration-none hover-effect" href="mailto:suy.church@gmail.com">kkj1515@hotmail.com</a></div>
+                    <div class="col-12 text-center" style="color: white;">이메일 주소: <a class="link-dark text-decoration-none hover-effect" href="mailto:kkj1515@hotmail.com">kkj1515@hotmail.com</a></div>
                 </div>
             </div>
             <div class="container" style="padding-top: 1rem;">                
@@ -128,12 +147,12 @@
                 </div>
             </div>
         </footer>
-
-        <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
         <script src="/static/basecamp/js/scripts.js"></script>
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>    
+        <script src="/static/basecamp/js/suy.js"></script>
+        <script src="{% static 'review/js/jquery.min.js' %}"></script>
+        <script src="{% static 'review/js/bootstrap.min.js' %}"></script>
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>  
         <style>
             /* 링크 및 버튼 색상 변화 */
             .hover-effect {

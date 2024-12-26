@@ -3,12 +3,15 @@ from django.shortcuts import render, redirect
 from django.http import FileResponse, HttpResponseNotFound
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from gallery.models import Gallery
 
 
 def index(request): return redirect('/home/')
 
 
-def home(request): return render(request, 'basecamp/home.html')
+def home(request):
+    recent_photos = Gallery.objects.order_by('-uploaded_at')[:4]  # 최근 4개의 사진
+    return render(request, 'home.html', {'recent_photos': recent_photos})
 
 
 def introduction(request):     

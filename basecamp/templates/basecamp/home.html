@@ -269,30 +269,17 @@
                 </ul>
             </div>
         </section>
-        <!-- Team-->
+        <!-- Gallery -->
         <section class="page-section bg-light" id="subpages">
             <div class="container">
                 <div class="row text-center" id="photo-grid">                    
+                    {% for photo in recent_photos %}
                     <div class="col-md-3 col-sm-6 mb-4 image-container">
-                        <a href="/gallery/14/">
-                            <img src="{% static 'basecamp/assets/img/장로임직1.webp' %}" alt="">
+                        <a href="/gallery/{{ photo.id }}/">
+                            <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
                         </a>
                     </div>
-                    <div class="col-md-3 col-sm-6 mb-4 image-container">
-                        <a href="/gallery/17/">
-                            <img src="{% static 'basecamp/assets/img/장로임직2.webp' %}" alt="">
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 mb-4 image-container">
-                        <a href="/gallery/24/">
-                            <img src="{% static 'basecamp/assets/img/장로임직3.webp' %}" alt="">
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 mb-4 image-container">
-                        <a href="/gallery/22/">
-                            <img src="{% static 'basecamp/assets/img/장로임직4.webp' %}" alt="">
-                        </a>
-                    </div>
+                    {% endfor %}
                 </div>
                 <br><br>
                 <div class="row">
