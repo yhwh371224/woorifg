@@ -276,7 +276,7 @@
                     {% for photo in recent_photos %}
                     <div class="col-md-3 col-sm-6 mb-4 image-container">
                         <a href="/gallery/{{ photo.id }}/">
-                            <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
+                            <img src="{{ photo.image.url }}">
                         </a>
                     </div>
                     {% endfor %}

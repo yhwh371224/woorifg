@@ -28,20 +28,24 @@ class Gallery(models.Model):
     category = models.ForeignKey('Category', blank=True, null=True, on_delete=models.SET_NULL)
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)  # 먼저 이미지를 저장합니다.
+        super().save(*args, **kwargs)
 
-        if self.head_image:  # 이미지가 존재할 때만 최적화 진행
+        if self.head_image:  
             img_path = self.head_image.path
-            img = Image.open(img_path)
-            
-            # 이미지 최적화 (WebP 변환)
-            if img.format != 'WEBP':
-                webp_path = os.path.splitext(img_path)[0] + '.webp'
-                img.save(webp_path, 'WEBP', quality=80)
-                self.head_image.name = os.path.relpath(webp_path, os.path.dirname(self.head_image.path))
-                os.remove(img_path)  # 원본 JPG/PNG 삭제
-            
-            super().save(*args, **kwargs)  # 최적화된 이미지 경로를 저장합니다.
+            try:
+                img = Image.open(img_path)
+                
+                if img.format != 'WEBP':
+                    webp_path = os.path.splitext(img_path)[0] + '.webp'
+                    img.save(webp_path, 'WEBP', quality=80)
+                    
+                    self.head_image.name = os.path.relpath(webp_path, os.path.dirname(self.head_image.path))
+                    
+                    os.remove(img_path)
+
+                    super().save(*args, **kwargs)
+            except Exception as e:
+                print(f"Error processing image: {e}")
 
     class Meta:
         ordering = ['-created']

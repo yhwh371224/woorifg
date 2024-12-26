@@ -10,7 +10,7 @@ def index(request): return redirect('/home/')
 
 
 def home(request):
-    recent_photos = Gallery.objects.order_by('-created')[:4]  # 최근 4개의 사진
+    recent_photos = Gallery.objects.all().order_by('-created')[:4]  # 최근 4개의 사진
     return render(request, 'home.html', {'recent_photos': recent_photos})
 
 
