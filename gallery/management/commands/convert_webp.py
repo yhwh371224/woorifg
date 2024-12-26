@@ -3,6 +3,7 @@ from PIL import Image
 from django.core.management.base import BaseCommand
 from gallery.models import Gallery
 
+
 class Command(BaseCommand):
     help = 'Convert existing JPG/PNG images to WebP format'
 

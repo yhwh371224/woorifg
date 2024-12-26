@@ -27,26 +27,6 @@ class Gallery(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey('Category', blank=True, null=True, on_delete=models.SET_NULL)
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        if self.head_image:  
-            img_path = self.head_image.path
-            try:
-                img = Image.open(img_path)
-                
-                if img.format != 'WEBP':
-                    webp_path = os.path.splitext(img_path)[0] + '.webp'
-                    img.save(webp_path, 'WEBP', quality=80)
-                    
-                    self.head_image.name = os.path.relpath(webp_path, os.path.dirname(self.head_image.path))
-                    
-                    os.remove(img_path)
-
-                    super().save(*args, **kwargs)
-            except Exception as e:
-                print(f"Error processing image: {e}")
-
     class Meta:
         ordering = ['-created']
 
