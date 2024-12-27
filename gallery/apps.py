@@ -5,3 +5,6 @@ class GalleryConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'gallery'
 
+    def ready(self):
+        import gallery.signals  # signals.py를 앱에 연결
+

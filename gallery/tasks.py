@@ -5,9 +5,9 @@ from django.conf import settings
 
 
 @shared_task
-def convert_image_to_webp(gallery_id):
+def convert_webp(gallery_id):
     try:
-        # 모델을 함수 내에서 지연된 import로 가져옵니다.
+        # 모델을 함수 내에서 지연된 import로 가져옴.
         from gallery.models import Gallery
         
         gallery = Gallery.objects.get(id=gallery_id)
