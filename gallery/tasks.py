@@ -2,7 +2,7 @@ from celery import shared_task
 from PIL import Image
 import os
 from django.conf import settings
-from .models import Gallery
+from gallery.models import Gallery
 
 
 @shared_task
