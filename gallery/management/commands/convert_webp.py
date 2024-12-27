@@ -37,10 +37,6 @@ class Command(BaseCommand):
 
                             images_converted += 1
                             self.stdout.write(self.style.SUCCESS(f'Converted {img_path} to {webp_path}'))
-                        # else:                            
-                        #     img = img.rotate(-90, expand=True)
-                        #     img.save(img_path, 'WEBP', quality=80)
-                        #     self.stdout.write(self.style.SUCCESS(f'Rotated {img_path} and saved it.'))
 
                     except Exception as e:
                         self.stdout.write(self.style.ERROR(f'Error processing image {img_path}: {e}'))
