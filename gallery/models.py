@@ -28,18 +28,6 @@ class Gallery(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey('Category', blank=True, null=True, on_delete=models.SET_NULL)
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-
-        if self.head_image:
-            img_path = self.head_image.path
-
-            if img_path.lower().endswith('.webp'):
-                print(f"{img_path} is already in WebP format, no conversion needed.")
-                return
-
-            convert_image_to_webp.apply_async(args=[self.id])
-
     class Meta:
         ordering = ['-created']
 
