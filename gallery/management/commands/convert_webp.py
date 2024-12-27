@@ -6,44 +6,45 @@ from gallery.models import Gallery
 
 
 class Command(BaseCommand):
-    help = 'Convert existing JPG/PNG images to WebP format'
+    help = 'Convert existing JPG/PNG images to WebP format and rotate existing WebP images'
 
     def handle(self, *args, **kwargs):
         images_converted = 0
-        gallery_dir = os.path.join('media', 'gallery')
-
-        if not os.path.exists(gallery_dir):
-            os.makedirs(gallery_dir)
 
         for gallery in Gallery.objects.all():
             if gallery.head_image:
-                img_path = gallery.head_image.path
+                img_path = gallery.head_image.path  # 실제 이미지 경로 (예: media/gallery/12/28/image.jpg)
 
-                if not img_path.lower().endswith('.webp') and os.path.exists(img_path):
+                if os.path.exists(img_path):
                     try:
                         img = Image.open(img_path)
+                        img_dir, img_filename = os.path.split(img_path)  # 디렉터리와 파일명 분리
+                        img_name, img_ext = os.path.splitext(img_filename)  # 파일명과 확장자 분리
 
-                        if img.format not in ['WEBP']:
-                            webp_path = os.path.join(gallery_dir, os.path.basename(img_path)) + '.webp'
+                        # WebP 저장 경로 설정 (기존 날짜별 구조 유지)
+                        webp_path = os.path.join(img_dir, f"{img_name}.webp")
 
-                            new_path = os.path.join(settings.MEDIA_ROOT, 'gallery', str(gallery.date.year),
-                                                    str(gallery.date.month), str(gallery.date.day),
-                                                    os.path.basename(webp_path))
-                            os.makedirs(os.path.dirname(new_path), exist_ok=True)
+                        if img.format != 'WEBP':
+                            # WebP로 변환
+                            img.save(webp_path, 'WEBP', quality=80)
 
-                            img.save(new_path, 'WEBP', quality=80)
-
-                            gallery.head_image.name = os.path.relpath(new_path, settings.MEDIA_ROOT)
+                            # Django 모델에 새로운 이미지 경로 저장
+                            gallery.head_image.name = os.path.relpath(webp_path, settings.MEDIA_ROOT)
                             gallery.save()
 
+                            # 원본 이미지 삭제
                             os.remove(img_path)
 
                             images_converted += 1
-                            self.stdout.write(self.style.SUCCESS(f'Converted {img_path} to {new_path}'))
+                            self.stdout.write(self.style.SUCCESS(f'Converted {img_path} to {webp_path}'))
                         else:
-                            self.stdout.write(self.style.WARNING(f'{img_path} is already in WebP format, skipping.'))
+                            # WebP 이미지라면 회전 적용
+                            img = img.rotate(-90, expand=True)
+                            img.save(img_path, 'WEBP', quality=80)
+                            self.stdout.write(self.style.SUCCESS(f'Rotated {img_path} and saved it.'))
 
                     except Exception as e:
                         self.stdout.write(self.style.ERROR(f'Error processing image {img_path}: {e}'))
 
         self.stdout.write(self.style.SUCCESS(f'Total images converted: {images_converted}'))
+
