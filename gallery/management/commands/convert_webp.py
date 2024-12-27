@@ -1,6 +1,7 @@
 import os
 from PIL import Image
 from django.core.management.base import BaseCommand
+from django.conf import settings
 from gallery.models import Gallery
 
 
@@ -9,7 +10,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         images_converted = 0
-        gallery_dir = os.path.join('media', 'gallery') 
+        gallery_dir = os.path.join('media', 'gallery')
 
         if not os.path.exists(gallery_dir):
             os.makedirs(gallery_dir)
@@ -25,19 +26,22 @@ class Command(BaseCommand):
                         if img.format not in ['WEBP']:
                             webp_path = os.path.join(gallery_dir, os.path.basename(img_path)) + '.webp'
 
-                            if not os.path.exists(webp_path):
-                                img.save(webp_path, 'WEBP', quality=80)
+                            new_path = os.path.join(settings.MEDIA_ROOT, 'gallery', str(gallery.date.year),
+                                                    str(gallery.date.month), str(gallery.date.day),
+                                                    os.path.basename(webp_path))
+                            os.makedirs(os.path.dirname(new_path), exist_ok=True)
 
-                                gallery.head_image.name = os.path.relpath(webp_path, 'media')
-                                
-                                os.remove(img_path)
+                            img.save(new_path, 'WEBP', quality=80)
 
-                                gallery.save()
+                            gallery.head_image.name = os.path.relpath(new_path, settings.MEDIA_ROOT)
+                            gallery.save()
 
-                                images_converted += 1
-                                self.stdout.write(self.style.SUCCESS(f'Converted {img_path} to {webp_path}'))
-                            else:
-                                self.stdout.write(self.style.WARNING(f'{webp_path} already exists, skipping.'))
+                            os.remove(img_path)
+
+                            images_converted += 1
+                            self.stdout.write(self.style.SUCCESS(f'Converted {img_path} to {new_path}'))
+                        else:
+                            self.stdout.write(self.style.WARNING(f'{img_path} is already in WebP format, skipping.'))
 
                     except Exception as e:
                         self.stdout.write(self.style.ERROR(f'Error processing image {img_path}: {e}'))
