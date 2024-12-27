@@ -62,6 +62,12 @@ INSTALLED_APPS = [
     'csp',
 ]
 
+CELERY_BROKER_URL = config('CELERY_BROKER', 'redis://redis:6379')
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Australia/Sydney'
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
 SITE_ID = 1
 SITE_URL = 'https://suychurch.site'
 
