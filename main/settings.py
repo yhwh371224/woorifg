@@ -1,3 +1,4 @@
+import logging
 import os
 
 from decouple import config
@@ -61,6 +62,33 @@ INSTALLED_APPS = [
     'crispy_forms',
     'csp',
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/django.log'),
+            'formatter': 'verbose',
+        },        
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },        
+    },
+}
+
 
 CELERY_BROKER_URL = config('CELERY_BROKER', 'redis://redis:6379')
 CELERY_ACCEPT_CONTENT = ['application/json']
