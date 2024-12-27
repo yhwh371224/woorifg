@@ -1,6 +1,5 @@
 import datetime
 from django.db import models
-from .tasks import convert_image_to_webp
 from markdownx.utils import markdown
 from PIL import Image  # 이미지 최적화를 위해 필요
 import os
