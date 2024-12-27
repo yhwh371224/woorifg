@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 from PIL import Image, ImageOps
 import os
 from django.conf import settings
-from yourapp.models import Gallery
+from gallery.models import Gallery
 
 
 class Command(BaseCommand):
