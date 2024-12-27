@@ -19,7 +19,7 @@ class Category(models.Model):
 
 
 class Gallery(models.Model):
-    title = models.CharField(max_length=30, blank=True, null=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateField(blank=True, null=True, default=datetime.date.today)
     head_image = models.ImageField(upload_to='gallery/%Y/%m/%d/', blank=True)
     created = models.DateTimeField(auto_now_add=True)

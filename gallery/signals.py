@@ -10,7 +10,7 @@ from .tasks import convert_webp
 def convert_webp_after_save(sender, instance, created, **kwargs):
 
     if created and instance.head_image:
-        img_path = instance.head_image.path
+        img_path = instance.head_image.name
 
         if not img_path.lower().endswith('.webp'):
             print(f"Triggering conversion for image: {img_path}")
