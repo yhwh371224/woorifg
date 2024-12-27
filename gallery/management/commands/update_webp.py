@@ -24,23 +24,10 @@ class Command(BaseCommand):
                         # WebP 저장 경로 설정 (기존 날짜별 구조 유지)
                         webp_path = os.path.join(img_dir, f"{img_name}.webp")
 
-                        if img.format != 'WEBP':
-                            # WebP로 변환
-                            img.save(webp_path, 'WEBP', quality=80)
-
-                            # Django 모델에 새로운 이미지 경로 저장
-                            gallery.head_image.name = os.path.relpath(webp_path, settings.MEDIA_ROOT)
-                            gallery.save()
-
-                            # 원본 이미지 삭제
-                            os.remove(img_path)
-
-                            images_converted += 1
-                            self.stdout.write(self.style.SUCCESS(f'Converted {img_path} to {webp_path}'))
-                        # else:                            
-                        #     img = img.rotate(-90, expand=True)
-                        #     img.save(img_path, 'WEBP', quality=80)
-                        #     self.stdout.write(self.style.SUCCESS(f'Rotated {img_path} and saved it.'))
+                        if img.format != 'WEBP':                            
+                            img = img.rotate(90, expand=True)
+                            img.save(img_path, 'WEBP', quality=80)
+                            self.stdout.write(self.style.SUCCESS(f'Rotated {img_path} and saved it.'))
 
                     except Exception as e:
                         self.stdout.write(self.style.ERROR(f'Error processing image {img_path}: {e}'))
