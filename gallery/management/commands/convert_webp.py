@@ -11,9 +11,16 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         images_converted = 0
 
-        for gallery in Gallery.objects.iterator():  # 대용량 쿼리 최적화
+        # 1. 데이터베이스에서 .webp 파일을 제외하고 쿼리
+        galleries = Gallery.objects.exclude(head_image__icontains='.webp').iterator()
+
+        for gallery in galleries:
             if gallery.head_image and gallery.head_image.name:
                 img_path = gallery.head_image.path
+
+                # 2. 파일 확장자 체크: .webp 파일은 건너뛰기
+                if not img_path.lower().endswith(('.jpg', '.png')):
+                    continue
 
                 if not os.path.exists(img_path):
                     continue
