@@ -53,19 +53,18 @@ class Command(BaseCommand):
                     img_dir, img_filename = os.path.split(img_path)
                     img_name, img_ext = os.path.splitext(img_filename)
 
-                    # EXIF 회전 정보 적용 (Orientation 태그만 확인)
-                    if img.format == 'JPEG' and 'exif' in img.info:
-                        exif = img.info.get('exif')  # EXIF 데이터가 있는지 확인
+                    ############## EXIF 회전 정보 적용 (Orientation 태그만 확인)
+                    # if img.format == 'JPEG' and 'exif' in img.info:
+                    #     exif = img.info.get('exif')  
+                    #     if exif: 
+                    #         try:
+                    #             exif_data = img.getexif()
+                    #             orientation = exif_data.get(0x0112) 
 
-                        if exif:  # EXIF 데이터가 실제로 존재할 경우에만 실행
-                            try:
-                                exif_data = img.getexif()
-                                orientation = exif_data.get(0x0112)  # Orientation 태그 (0x0112)
-
-                                if orientation in [3, 6, 8]:
-                                    img = ImageOps.exif_transpose(img)
-                            except Exception as e:
-                                self.stdout.write(self.style.WARNING(f'Failed to apply EXIF orientation: {e}'))
+                    #             if orientation in [3, 6, 8]:
+                    #                 img = ImageOps.exif_transpose(img)
+                    #         except Exception as e:
+                    #             self.stdout.write(self.style.WARNING(f'Failed to apply EXIF orientation: {e}'))
 
                     webp_path = os.path.join(img_dir, f"{img_name}.webp")
 
