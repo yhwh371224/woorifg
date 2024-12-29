@@ -12,19 +12,19 @@ class Command(BaseCommand):
         parser.add_argument(
             '--limit',
             type=int,
-            default=1,
+            default=None,
             help='Number of recent images to process'
         )
 
     def handle(self, *args, **kwargs):
         images_converted = 0
-        limit = kwargs['limit']  # 사용자 입력값 (기본값: 1)
+        limit = kwargs['limit']  
 
         # 사용자 입력을 통해 limit 설정
-        if not limit:
+        if limit is None:
             try:
                 user_input = input("Enter the number of recent images to process (default 5): ").strip()
-                limit = int(user_input) if user_input.isdigit() else 5
+                limit = int(user_input) if user_input.isdigit() else 1
             except KeyboardInterrupt:
                 self.stdout.write(self.style.ERROR("\nOperation cancelled by user."))
                 return
@@ -37,8 +37,8 @@ class Command(BaseCommand):
         # 1. 최근 limit개의 데이터 중 .webp가 아닌 이미지만 선택
         galleries = (
             Gallery.objects
-            .exclude(head_image__icontains='.webp')  # .webp 제외
-            .order_by('-id')[:limit]  # 사용자 입력에 따라 제한
+            .exclude(head_image__icontains='.webp')  
+            .order_by('-id')[:limit]  
         )
 
         for gallery in galleries:
