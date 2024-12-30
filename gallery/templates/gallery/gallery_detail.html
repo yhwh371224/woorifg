@@ -9,9 +9,6 @@
             <h3>{{ object.title }}</h3>            
             {% if request.user %}
                 <button type="button" class="btn btn-sm btn-success float-right" onclick="location.href='{{ object.get_update_url }}'">EDIT</button>
-
-                <!-- Convert Button as Link -->
-                <a href="{% url 'run_image_conversion' %}" class="btn btn-sm btn-danger float-right mr-2">이미지변환</a>
             {% endif %}
             <hr>
 
