@@ -53,9 +53,7 @@ class Command(BaseCommand):
        
                     # EXIF 정보 확인
                     exif_data = img._getexif()
-                    if exif_data:
-                        continue
-                    else:
+                    if not exif_data:                        
                         img = img.rotate(-90, expand=True)
 
                     original_width, original_height = img.size
