@@ -1,8 +1,9 @@
+import os
 from celery import shared_task
 from django.conf import settings
 from .models import Gallery
 from PIL import Image
-import os
+
 
 MAX_WIDTH = 2000
 MAX_HEIGHT = 2000
