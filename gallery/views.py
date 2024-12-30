@@ -8,6 +8,7 @@ from django.http import Http404
 from django.core.exceptions import FieldError
 from django.http import JsonResponse
 from django.core.management import call_command
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
 
@@ -111,6 +112,7 @@ class GalleryListByCategory(ListView):
         return context
 
 
+@login_required
 @require_POST
 def run_image_conversion(request):
     try:
