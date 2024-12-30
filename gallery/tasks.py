@@ -8,7 +8,7 @@ MAX_WIDTH = 2000
 MAX_HEIGHT = 2000
 
 @shared_task
-def process_gallery_image():
+def convert_webp():
     gallery = Gallery.objects.order_by('-id').first()
     if not gallery or not os.path.exists(gallery.head_image.path):
         return

@@ -13,8 +13,6 @@ def convert_webp_after_save(sender, instance, created, **kwargs):
         img_path = instance.head_image.name
 
         if not img_path.lower().endswith('.webp'):
-            print(f"Triggering conversion for image: {img_path}")
-
             convert_webp.apply_async(args=[instance.id])
         else:
             print(f"{img_path} is already in WebP format, no conversion needed.")
