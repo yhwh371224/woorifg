@@ -9,8 +9,8 @@ class Command(BaseCommand):
     help = 'Convert the most recent image to WebP format, resize it, and rotate it -90 degrees'
 
     # 최대 이미지 크기 (너비, 높이)
-    MAX_WIDTH = 3500
-    MAX_HEIGHT = 3500
+    MAX_WIDTH = 2000
+    MAX_HEIGHT = 2000
 
     def handle(self, *args, **kwargs):
         images_converted = 0
