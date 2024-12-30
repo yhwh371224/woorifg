@@ -8,11 +8,7 @@
             <!-- Title -->
             <h3>{{ object.title }}</h3>            
             {% if request.user %}
-                <!-- Edit Button -->
                 <button type="button" class="btn btn-sm btn-success float-right" onclick="location.href='{{ object.get_update_url }}'">EDIT</button>
-
-                <!-- Convert Button -->
-                <button type="button" class="btn btn-sm btn-success float-right mr-2" id="convert-image-btn">이미지변환</button>
             {% endif %}
             <hr>
 
@@ -30,23 +26,5 @@
         </div>
     </div>
 </section>
-
-<script>
-    document.getElementById('convert-image-btn').addEventListener('click', function() {
-        // AJAX 호출 부분, 서버에 POST 요청을 보내기 위한 코드 추가
-        $.ajax({
-            url: '{% url "run_image_conversion" %}',
-            type: 'POST',
-            csrfmiddlewaretoken: '{{ csrf_token }}',
-            success: function(response) {
-                alert(response.message);
-            },
-            error: function(xhr, status, error) {
-                alert('An error occurred: ' + error);
-            }
-        });
-    });
-</script>
-
 
 {% endblock %}

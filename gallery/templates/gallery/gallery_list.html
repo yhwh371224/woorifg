@@ -28,10 +28,14 @@
                         <small class="d-block mt-2">{{ category.name }}</small>
                     {% endif %}
                 </div>            
-
+        
                 <div class="col-md-4 text-center">
                     {% if user.is_authenticated %}
+                        <!-- 사진 올리기 버튼 -->
                         <a href="{% url 'gallery:gallery_create' %}" class="btn btn-success btn-sm px-4 py-2">사진올리기</a>
+        
+                        <!-- 이미지 변환 버튼 추가 -->
+                        <a href="{% url 'run_image_conversion' %}" class="btn btn-danger btn-sm px-4 py-2 ml-2">이미지변환</a>
                     {% endif %}
                 </div>
                 
@@ -113,6 +117,22 @@
             gallery_search_post();
         }
     }
+</script>
+<script>
+    document.getElementById('convert-image-btn').addEventListener('click', function() {
+        // AJAX 호출 부분, 서버에 POST 요청을 보내기 위한 코드 추가
+        $.ajax({
+            url: '{% url "run_image_conversion" %}',
+            type: 'POST',
+            csrfmiddlewaretoken: '{{ csrf_token }}',
+            success: function(response) {
+                alert(response.message);
+            },
+            error: function(xhr, status, error) {
+                alert('An error occurred: ' + error);
+            }
+        });
+    });
 </script>
 
 {% endblock %}
