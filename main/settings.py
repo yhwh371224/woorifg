@@ -14,10 +14,10 @@ ENVIRONMENT = config('ENVIRONMENT', default='production')
 if ENVIRONMENT == 'production':
     DEBUG = config('DEBUG', cast=bool, default=True)
     ALLOWED_HOSTS = [
-	'ec2-3-27-167-92.ap-southeast-2.compute.amazonaws.com',
+	'ec2-3-25-132-128.ap-southeast-2.compute.amazonaws.com',
 	'suychurch.site',
 	'www.suychurch.site',
-	'3.27.167.92' ]
+	'3.25.132.128' ]
 
     SECURE_SSL_REDIRECT = True
     CSRF_COOKIE_SECURE = True
@@ -90,11 +90,13 @@ LOGGING = {
 }
 
 
-CELERY_BROKER_URL = config('CELERY_BROKER', 'redis://redis:6379')
+CELERY_BROKER_URL = config('CELERY_BROKER', 'redis://127.0.0.1:6379')
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Australia/Sydney'
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_ACKS_LATE = True  # 작업 완료 후 메시지를 큐에서 삭제
+CELERY_TASK_TIME_LIMIT = 30 * 60  # 작업이 30분을 넘지 않게 설정
 
 SITE_ID = 1
 SITE_URL = 'https://suychurch.site'
