@@ -1,43 +1,28 @@
-# import os
-# from django.conf import settings
-# from PIL import Image, ImageOps
-# from celery import shared_task
-# from gallery.models import Gallery
-# import logging
+from celery import shared_task
+from django.conf import settings
+from .models import Gallery
+from PIL import Image
+import os
 
-# logger = logging.getLogger(__name__)
+MAX_WIDTH = 2000
+MAX_HEIGHT = 2000
 
-# @shared_task
-# def convert_webp(gallery_id):
-#     try:
-#         gallery = Gallery.objects.get(id=gallery_id)
-#         img_path = gallery.head_image.path
+@shared_task
+def process_gallery_image():
+    gallery = Gallery.objects.order_by('-id').first()
+    if not gallery or not os.path.exists(gallery.head_image.path):
+        return
 
-#         if img_path.lower().endswith(('jpg', 'jpeg', 'png')) and os.path.exists(img_path):
-#             img = Image.open(img_path)
+    img_path = gallery.head_image.path
+    img_dir, img_filename = os.path.split(img_path)
+    img_name, _ = os.path.splitext(img_filename)
+    webp_path = os.path.join(img_dir, f"{img_name}.webp")
 
-#             # EXIF 회전 정보 적용
-#             img = ImageOps.exif_transpose(img)
+    with Image.open(img_path) as img:
+        img = img.rotate(-90, expand=True)
+        img.thumbnail((MAX_WIDTH, MAX_HEIGHT), Image.Resampling.BILINEAR)
+        img.save(webp_path, 'WEBP')
 
-#             # WebP 형식으로 저장할 새로운 경로 계산
-#             webp_path = os.path.splitext(img_path)[0] + '.webp'
-
-#             # WebP 파일로 저장
-#             img.save(webp_path, 'WEBP', quality=80)
-
-#             # 새 파일의 저장 경로를 MEDIA_ROOT 기준으로 수정
-#             new_path = os.path.join(settings.MEDIA_ROOT, 'gallery', str(gallery.date.year),
-#                                     str(gallery.date.month), str(gallery.date.day),
-#                                     os.path.basename(webp_path))
-
-#             os.makedirs(os.path.dirname(new_path), exist_ok=True)
-
-#             gallery.head_image.name = os.path.relpath(new_path, settings.MEDIA_ROOT)
-#             gallery.save()
-
-#             os.remove(img_path)
-
-#             logger.info(f"Converted {img_path} to {new_path}")
-
-#     except Exception as e:
-#         logger.error(f"Error converting image {gallery_id}: {e}", exc_info=True)
+    gallery.head_image.name = os.path.relpath(webp_path, settings.MEDIA_ROOT)
+    gallery.save(update_fields=['head_image'])
+    os.remove(img_path)
