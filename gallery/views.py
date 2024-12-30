@@ -14,20 +14,21 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404
 
 
-
 class GalleryList(ListView):
     model = Gallery
     paginate_by = 12
+    template_name = 'gallery/gallery_list.html'
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        # 카테고리 필터링
+
         category_slug = self.kwargs.get('slug')
         if category_slug:
             self.category = get_object_or_404(Category, slug=category_slug)
             queryset = queryset.filter(category=self.category)
         else:
             self.category = None
+
         page = self.request.GET.get('page')
         paginator = Paginator(queryset, self.paginate_by)
 
@@ -42,6 +43,7 @@ class GalleryList(ListView):
         context = super().get_context_data(object_list=object_list, **kwargs)
         context['category_list'] = Category.objects.all()
         context['posts_without_category'] = Gallery.objects.filter(category=None).count()
+        context['category'] = self.category
 
         return context
 
