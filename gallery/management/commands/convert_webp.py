@@ -57,7 +57,7 @@ class Command(BaseCommand):
                     webp_path = os.path.join(img_dir, f"{img_name}.webp")
 
                     if img_ext.lower() not in ['.webp']:
-                        # img = img.resize((1024, 1024))
+                        img = img.resize((1920, 1920))
                         img.save(webp_path, 'WEBP', quality=80, method=0)
 
                         if os.path.exists(webp_path):
