@@ -12,7 +12,6 @@ urlpatterns = [
     path('<int:pk>/', views.GalleryDetail.as_view(), name='gallery_detail'),
     path('create/', views.GalleryCreate.as_view(), name='gallery_create'),
     path('', views.GalleryList.as_view(), name='gallery_list'),
-    path('run_image_conversion/', views.run_image_conversion, name='run_image_conversion'),
 ]
 
 urlpatterns += static('/media/', document_root=settings.MEDIA_ROOT)

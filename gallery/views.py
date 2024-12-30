@@ -111,12 +111,3 @@ class GalleryListByCategory(ListView):
         # context['title'] = 'Blog - {}'.format(category.name)
         return context
 
-
-@login_required
-@require_POST
-def run_image_conversion(request):
-    try:
-        call_command('convert_webp')  # 커맨드 호출
-        return JsonResponse({'status': 'success', 'message': 'Image converted successfully!'})
-    except Exception as e:
-        return JsonResponse({'status': 'error', 'message': str(e)})
