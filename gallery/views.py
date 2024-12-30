@@ -6,6 +6,9 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from django.http import Http404
 from django.core.exceptions import FieldError
+from django.http import JsonResponse
+from django.core.management import call_command
+from django.views.decorators.http import require_POST
 
 
 
@@ -108,3 +111,10 @@ class GalleryListByCategory(ListView):
         return context
 
 
+@require_POST
+def run_image_conversion(request):
+    try:
+        call_command('convert_image_to_webp')  # 커맨드 호출
+        return JsonResponse({'status': 'success', 'message': 'Image converted successfully!'})
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)})
