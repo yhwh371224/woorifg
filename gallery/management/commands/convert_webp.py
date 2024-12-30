@@ -51,7 +51,12 @@ class Command(BaseCommand):
                     img_dir, img_filename = os.path.split(img_path)
                     img_name, img_ext = os.path.splitext(img_filename)
        
-                    img = img.rotate(-90, expand=True)
+                    # EXIF 정보 확인
+                    exif_data = img._getexif()
+                    if exif_data:
+                        continue
+                    else:
+                        img = img.rotate(-90, expand=True)
 
                     original_width, original_height = img.size
 
