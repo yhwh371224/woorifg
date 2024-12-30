@@ -52,9 +52,9 @@ class Command(BaseCommand):
                     img_name, img_ext = os.path.splitext(img_filename)
        
                     # EXIF 정보 확인
-                    exif_data = img._getexif()
-                    if not exif_data:                        
-                        img = img.rotate(-90, expand=True)
+                    # exif_data = img._getexif()
+                    # if not exif_data:                        
+                    img = img.rotate(-90, expand=True)
 
                     original_width, original_height = img.size
 
@@ -63,7 +63,7 @@ class Command(BaseCommand):
                     webp_path = os.path.join(img_dir, f"{img_name}.webp")
 
                     if img_ext.lower() not in ['.webp']:
-                        img_resized.save(webp_path, 'WEBP', quality=80, method=6)
+                        img_resized.save(webp_path, 'WEBP')
 
                         if os.path.exists(webp_path):
                             gallery.head_image.name = os.path.relpath(webp_path, settings.MEDIA_ROOT)
