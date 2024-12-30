@@ -23,7 +23,7 @@ class Command(BaseCommand):
         # 사용자 입력을 통해 limit 설정
         if limit is None:
             try:
-                user_input = input("Enter the number of recent images to process (default 5): ").strip()
+                user_input = input("Enter the number of recent images to process: ").strip()
                 limit = int(user_input) if user_input.isdigit() else 1
             except KeyboardInterrupt:
                 self.stdout.write(self.style.ERROR("\nOperation cancelled by user."))
@@ -69,8 +69,8 @@ class Command(BaseCommand):
                     webp_path = os.path.join(img_dir, f"{img_name}.webp")
 
                     if img_ext.lower() not in ['.webp']:
-                        # WebP로 저장 (method=6은 빠른 속도와 품질 균형)
-                        img.save(webp_path, 'WEBP', quality=80, method=6)
+                        # img = img.resize((1024, 1024))
+                        img.save(webp_path, 'WEBP', quality=80, method=0)
 
                         if os.path.exists(webp_path):
                             # Django 모델 업데이트
