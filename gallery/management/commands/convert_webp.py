@@ -52,24 +52,12 @@ class Command(BaseCommand):
                     img = Image.open(img_path)
                     img_dir, img_filename = os.path.split(img_path)
                     img_name, img_ext = os.path.splitext(img_filename)
-
-                    ############## EXIF 회전 정보 적용 (Orientation 태그만 확인)
-                    if img.format == 'JPEG' and 'exif' in img.info:
-                        exif = img.info.get('exif')  
-                        if exif: 
-                            try:
-                                exif_data = img.getexif()
-                                orientation = exif_data.get(0x0112) 
-
-                                if orientation in [3, 6, 8]:
-                                    img = ImageOps.exif_transpose(img)
-                            except Exception as e:
-                                self.stdout.write(self.style.WARNING(f'Failed to apply EXIF orientation: {e}'))
+                    img = img.rotate(-90, expand=True)
 
                     webp_path = os.path.join(img_dir, f"{img_name}.webp")
 
                     if img_ext.lower() not in ['.webp']:
-                        # img = img.resize((1024, 1024))
+                        img = img.resize((1024, 1024))
                         img.save(webp_path, 'WEBP', quality=80, method=0)
 
                         if os.path.exists(webp_path):
