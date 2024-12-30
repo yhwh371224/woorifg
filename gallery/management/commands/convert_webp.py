@@ -58,7 +58,7 @@ class Command(BaseCommand):
 
                     if img_ext.lower() not in ['.webp']:
                         img = img.resize((2560, 2560))
-                        img.save(webp_path, 'WEBP', quality=80, method=1)
+                        img.save(webp_path, 'WEBP', quality=80, method=3)
 
                         if os.path.exists(webp_path):
                             # Django 모델 업데이트
