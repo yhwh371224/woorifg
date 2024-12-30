@@ -1,10 +1,8 @@
-import os
-from __future__ import print_function
-
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from gallery.models import Gallery
 from .tasks import convert_webp
+import os
 import logging
 
 
