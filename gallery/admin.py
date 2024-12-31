@@ -7,7 +7,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class GalleryAdmin(admin.ModelAdmin):
-    list_display = ('date', 'title', 'head_image', 'created')
+    list_display = ('id', 'date', 'title', 'head_image', 'created')
     ordering = ['-created']
 
 
