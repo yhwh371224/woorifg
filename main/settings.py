@@ -256,7 +256,7 @@ LOGIN_REDIRECT_URL = '/home/'
 LOGOUT_REDIRECT_URL = '/home/'
 
 CORS_ALLOWED_ORIGINS = [
-    "https://suy.net.au",
+    "https://suychurch.site",
     
 ]
 

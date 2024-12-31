@@ -20,18 +20,20 @@ class GalleryList(ListView):
     template_name = 'gallery/gallery_list.html'
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-
         category_slug = self.kwargs.get('slug')
+        queryset = Gallery.objects.all().order_by('-created')
+
+        # 카테고리 필터링
         if category_slug:
             self.category = get_object_or_404(Category, slug=category_slug)
             queryset = queryset.filter(category=self.category)
         else:
             self.category = None
 
-        page = self.request.GET.get('page')
+        # 페이지네이션 처리
+        page = self.request.GET.get('page', 1)
         paginator = Paginator(queryset, self.paginate_by)
-
+        
         try:
             return paginator.page(page)
         except PageNotAnInteger:
@@ -44,7 +46,6 @@ class GalleryList(ListView):
         context['category_list'] = Category.objects.all()
         context['posts_without_category'] = Gallery.objects.filter(category=None).count()
         context['category'] = self.category
-
         return context
 
 
