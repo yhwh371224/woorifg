@@ -18,11 +18,12 @@ class Command(BaseCommand):
 
         img_path = gallery.head_image.path
         img_dir, img_filename = os.path.split(img_path)
-        img_name, _ = os.path.splitext(img_filename)
+        img_name, img_ext = os.path.splitext(img_filename)
         webp_path = os.path.join(img_dir, f"{img_name}.webp")
 
         with Image.open(img_path) as img:
-            img = img.rotate(-90, expand=True)
+            if img_ext.lower() in ['.jpg', '.jpeg']:
+                img = img.rotate(-90, expand=True)
             img.thumbnail((self.MAX_WIDTH, self.MAX_HEIGHT), Image.Resampling.BILINEAR)
             img.save(webp_path, 'WEBP')
 
