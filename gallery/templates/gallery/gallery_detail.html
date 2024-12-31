@@ -7,23 +7,29 @@
             <br/> 
             <!-- Title -->
             <h3>{{ object.title }}</h3>            
-            {% if request.user %}
-                <button type="button" class="btn btn-sm btn-success float-right" onclick="location.href='{{ object.get_update_url }}'">EDIT</button>
-            {% endif %}
+            <div class="d-flex justify-content-between mb-2">
+                {% if request.user %}
+                    <button type="button" class="btn btn-sm btn-success" onclick="location.href='{{ object.get_update_url }}'">EDIT</button>
+                    <a href="/admin/" class="btn btn-sm btn-secondary">관리자 페이지</a>
+                {% endif %}                
+            </div>
             <hr>
-
+        
             <!-- Date/Time -->
             <div class="d-flex justify-content-between">
                 <p class="mb-0">{{ object.date }}</p>
+                {% if request.user %}
+                    <p class="mb-0"><strong>ID:</strong> {{ object.id }}</p>
+                {% endif %}
             </div>
-
+        
             <hr>
-
+        
             <!-- Preview Image -->
             {% if object.head_image %}
                 <img class="img-fluid rounded" src="{{ object.head_image.url }}" alt="{{ object.title }}">
             {% endif %}
-        </div>
+        </div>        
     </div>
 </section>
 
