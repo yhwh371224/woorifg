@@ -6,19 +6,19 @@
         <div class="gallery-section" style="padding: 20px;">  
             <br/> 
             <!-- Title -->
-            <h3>{{ object.title }}</h3>            
-            <div class="d-flex justify-content-between mb-2">
-                {% if request.user %}
-                    <button type="button" class="btn btn-sm btn-success" onclick="location.href='{{ object.get_update_url }}'">EDIT</button>
-                    <a href="/admin/" class="btn btn-sm btn-secondary">관리자 페이지</a>
-                {% endif %}                
+            <h3>{{ object.title }}</h3> 
+            {% if request.user.is_authenticated %}           
+            <div class="d-flex justify-content-between mb-2">                
+                <button type="button" class="btn btn-sm btn-success" onclick="location.href='{{ object.get_update_url }}'">EDIT</button>
+                <a href="/admin/" class="btn btn-sm btn-secondary">관리자 페이지</a>                             
             </div>
+            {% endif %}   
             <hr>
         
             <!-- Date/Time -->
             <div class="d-flex justify-content-between">
                 <p class="mb-0">{{ object.date }}</p>
-                {% if request.user %}
+                {% if request.user.is_authenticated %}
                     <p class="mb-0"><strong>ID:</strong> {{ object.id }}</p>
                 {% endif %}
             </div>
