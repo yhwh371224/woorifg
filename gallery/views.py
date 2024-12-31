@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404
+from django.views import View
+from django.utils.decorators import method_decorator
 
 
 class GalleryList(ListView):
@@ -134,3 +136,12 @@ class GalleryListByCategory(ListView):
 
         return context
 
+
+@method_decorator(login_required, name='dispatch')
+class ConvertWebpView(View):
+    def post(self, request, *args, **kwargs):
+        try:
+            call_command('convert_webp')
+            return JsonResponse({'status': 'success', 'message': 'Command executed successfully'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=500)

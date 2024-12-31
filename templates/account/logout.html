@@ -11,7 +11,7 @@
         <h3 class="text-dark text-center pt-sm-2" style="padding-top: 30px;">{% trans "Sign Out" %}</h3><br>
         <form class="login text-dark text-center mb-4" method="POST" action="{% url 'account_logout' %}">
             {% csrf_token %}
-            {{ form.logout }}<br><br>                
+            <p>{% trans "Do you want to logout?" %}</p><br><br>                
             {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
             {% endif %}<br>
@@ -22,8 +22,7 @@
 <style>
     @media (max-width: 767.98px) {
         .mx-auto {
-            max-width: 100% !important; 
-            padding: 10px; 
+            padding: 15px; 
         }
     }
 </style>
