@@ -27,11 +27,19 @@ class PostList(ListView):
         user_name = None
         if self.request.user.is_authenticated:
             user_name = self.request.user.username  
-
         context['user_name'] = user_name
         context['search_error'] = self.request.session.get('search_error', None)
 
+        # 현재 선택된 카테고리 정보를 context에 추가
+        selected_category_slug = self.request.GET.get('category_slug')
+
+        if selected_category_slug:
+            context['category'] = Category.objects.filter(slug=selected_category_slug).first()
+        else:
+            context['category'] = None  
+
         return context
+
     
 
 class PostDetail(DetailView):
