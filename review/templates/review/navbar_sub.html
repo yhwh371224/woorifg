@@ -18,10 +18,23 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
+                        소식 및 정보
+                    </a>
+                    <ul class="dropdown-menu" >    
+                        <li><a class="dropdown-item" href="/gallery">교회사진첩</a></li>                            
+                        <li><a class="dropdown-item" href="/blog/bulletins">교회주보</a></li>
+                        <li><a class="dropdown-item" href="/blog/musics">찬양악보</a></li>
+                        <li><a class="dropdown-item" href="{% url 'basecamp:contact_list' %}" target="_blank">교인연락처</a></li>
+                        <li><a class="dropdown-item" href="/blog/pdfs">공지 및 행사안내</a></li>
+                    </ul>
+                </li>     
+                <li class="nav-item"><a class="nav-link text-info" href="/gallery/">사진첩</a></li>                 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" data-bs-toggle="dropdown">
                         설교 및 칼럼
                     </a>
                     <ul class="dropdown-menu" >
-                        <li><a class="dropdown-item" href="/home//home/#words">주일설교</a></li>
+                        <li><a class="dropdown-item" href="/home/#words">주일설교</a></li>
                         <li><a class="dropdown-item" href="/review">목사님 칼럼</a></li>
                     </ul>
                 </li>
@@ -40,10 +53,40 @@
                             </button>
                         </li>
                     {% endif %}
-                </ul>                                
+                </ul>                          
             </ul>
         </div>
     </div>
 </nav>
+
+{% load socialaccount %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Please Log in</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a role="button" class="btn btn-outline-danger" href="{% provider_login_url 'google' %}?next={{ request.path }}"><i class="fab fa-google"></i>  Log in with Google</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a role="button" class="btn btn-outline-info" href="{% url 'account_login' %}?next={{ request.path }}"><i class="fas fa-envelope"></i>  Log in with Email</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
