@@ -44,25 +44,22 @@ class GalleryList(ListView):
         context['category_list'] = Category.objects.all()
         context['posts_without_category'] = Gallery.objects.filter(category=None).count()
         context['category'] = self.category
-        context['total_pages'] = total_pages if total_pages > 0 else 0 
+        context['total_pages'] = total_pages if total_pages > 0 else 1 
 
         # 페이지네이션
-        if total_items > 0:  
-            page = self.request.GET.get('page', 1)
-            paginator = Paginator(queryset, self.paginate_by)
+        page = self.request.GET.get('page', 1)
+        paginator = Paginator(queryset, self.paginate_by)
 
-            try:
-                page_obj = paginator.page(page)
-            except PageNotAnInteger:
-                page_obj = paginator.page(1)
-            except EmptyPage:
-                page_obj = paginator.page(paginator.num_pages)  
+        try:
+            page_obj = paginator.page(page)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)  
 
-            context['page_obj'] = page_obj
-            context['paginator'] = paginator
-        else:
-            context['page_obj'] = None  
-
+        context['page_obj'] = page_obj
+        context['paginator'] = paginator
+        
         return context
 
 
