@@ -32,22 +32,29 @@ class GalleryList(ListView):
         else:
             self.category = None
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
         # 페이지네이션 처리
         page = self.request.GET.get('page', 1)
         paginator = Paginator(queryset, self.paginate_by)
-        
-        try:
-            return paginator.page(page)
-        except PageNotAnInteger:
-            return paginator.page(1)
-        except EmptyPage:
-            return paginator.page(paginator.num_pages)
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(object_list=object_list, **kwargs)
+        try:
+            page_obj = paginator.page(page)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+
         context['category_list'] = Category.objects.all()
         context['posts_without_category'] = Gallery.objects.filter(category=None).count()
         context['category'] = self.category
+
+        # 페이지네이션 결과 추가
+        context['page_obj'] = page_obj
+        context['paginator'] = paginator
+        context['total_pages'] = paginator.num_pages  # 전체 페이지 수 추가
+
         return context
 
 
