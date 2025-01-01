@@ -8,9 +8,10 @@ from django.http import Http404
 from django.core.exceptions import FieldError
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-
 from .models import Post, Comment, Category
 from .forms import CommentForm, PostForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import get_object_or_404
 
 
 class PostList(ListView):
@@ -18,28 +19,46 @@ class PostList(ListView):
     template_name = 'review/post_list.html'
     paginate_by = 4
 
+    def get_queryset(self):
+        category_slug = self.request.GET.get('category_slug')
+        queryset = Post.objects.all().order_by('-created')
+
+        if category_slug:
+            category = get_object_or_404(Category, slug=category_slug)
+            queryset = queryset.filter(category=category)
+            self.category = category  
+        else:
+            self.category = None  
+        
+        return queryset
+
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(PostList, self).get_context_data(**kwargs)
-        context['post_count'] = Post.objects.all().count()
+        context = super().get_context_data(object_list=object_list, **kwargs)
+
+        queryset = self.get_queryset()
+
+        context['post_count'] = queryset.count()
         context['category_list'] = Category.objects.all()
         context['posts_without_category'] = Post.objects.filter(category=None).count()
-
-        user_name = None
-        if self.request.user.is_authenticated:
-            user_name = self.request.user.username  
-        context['user_name'] = user_name
+        context['user_name'] = self.request.user.username if self.request.user.is_authenticated else None
         context['search_error'] = self.request.session.get('search_error', None)
 
-        # 현재 선택된 카테고리 정보를 context에 추가
-        selected_category_slug = self.request.GET.get('category_slug')
+        context['category'] = self.category  
+       
+        page = self.request.GET.get('page', 1)
+        paginator = Paginator(queryset, self.paginate_by)
 
-        if selected_category_slug:
-            context['category'] = Category.objects.filter(slug=selected_category_slug).first()
-        else:
-            context['category'] = None  
+        try:
+            page_obj = paginator.page(page)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+
+        context['page_obj'] = page_obj
+        context['paginator'] = paginator
 
         return context
-
     
 
 class PostDetail(DetailView):
