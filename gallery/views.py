@@ -22,6 +22,7 @@ class GalleryList(ListView):
     template_name = 'gallery/gallery_list.html'
 
     def get_queryset(self):
+        # 전체 데이터를 필터링하지 않고 가져옵니다.
         category_slug = self.kwargs.get('slug')
         queryset = Gallery.objects.all().order_by('-created')
 
@@ -32,10 +33,22 @@ class GalleryList(ListView):
         else:
             self.category = None
 
+        return queryset
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
 
-        # 페이지네이션 처리
+        # 전체 데이터를 계산하는 부분
+        queryset = self.get_queryset()
+        total_items = queryset.count() if queryset else 0  
+        total_pages = (total_items // self.paginate_by) + (1 if total_items % self.paginate_by else 0)  
+
+        context['category_list'] = Category.objects.all()
+        context['posts_without_category'] = Gallery.objects.filter(category=None).count()
+        context['category'] = self.category
+        context['total_pages'] = total_pages  
+
+        # 페이지네이션
         page = self.request.GET.get('page', 1)
         paginator = Paginator(queryset, self.paginate_by)
 
@@ -46,14 +59,9 @@ class GalleryList(ListView):
         except EmptyPage:
             page_obj = paginator.page(paginator.num_pages)
 
-        context['category_list'] = Category.objects.all()
-        context['posts_without_category'] = Gallery.objects.filter(category=None).count()
-        context['category'] = self.category
-
-        # 페이지네이션 결과 추가
+        # 페이지 관련 정보를 context에 추가
         context['page_obj'] = page_obj
         context['paginator'] = paginator
-        context['total_pages'] = paginator.num_pages  # 전체 페이지 수 추가
 
         return context
 
