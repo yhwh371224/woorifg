@@ -24,7 +24,23 @@
                         <li><a class="dropdown-item" href="/home//home/#words">주일설교</a></li>
                         <li><a class="dropdown-item" href="/review">목사님 칼럼</a></li>
                     </ul>
-                </li>      
+                </li>
+                <ul class="nav navbar-nav ml-auto">                
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-info" data-toggle="dropdown" href="#" id="download">{{ user_name }} <span class="caret"></span></a>
+                            <div class="dropdown-menu" aria-labelledby="download">                            
+                                <a class="dropdown-item text-danger" href="/accounts/logout">Log out</a>
+                            </div>
+                        </li>
+                    {% else %}                            
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#loginModal">
+                                Log in 
+                            </button>
+                        </li>
+                    {% endif %}
+                </ul>                                
             </ul>
         </div>
     </div>
