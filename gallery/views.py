@@ -42,7 +42,6 @@ class GalleryList(ListView):
         context['category_list'] = Category.objects.all()
         context['galleries_without_category'] = Gallery.objects.filter(category=None).count()
         context['category'] = self.category
-        context['user_name'] = self.request.user.username if self.request.user.is_authenticated else None
         context['search_error'] = self.request.session.get('search_error', None)
 
         # 페이지네이션 처리

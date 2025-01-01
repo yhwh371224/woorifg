@@ -40,9 +40,7 @@ class PostList(ListView):
         context['post_count'] = queryset.count()
         context['category_list'] = Category.objects.all()
         context['posts_without_category'] = Post.objects.filter(category=None).count()
-        context['user_name'] = self.request.user.username if self.request.user.is_authenticated else None
         context['search_error'] = self.request.session.get('search_error', None)
-
         context['category'] = self.category  
        
         page = self.request.GET.get('page', 1)
@@ -71,12 +69,6 @@ class PostDetail(DetailView):
         context['post_count'] = Post.objects.all().count()
         context['comment_form'] = CommentForm()
 
-        user_name = None
-        if self.request.user.is_authenticated:
-            user_name = self.request.user.username  
-
-        context['user_name'] = user_name
-
         return context
     
 
@@ -88,8 +80,6 @@ class PostCreate(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.user.is_authenticated:
-            context['user_name'] = self.request.user.username
         return context
 
     def form_valid(self, form):
@@ -113,23 +103,18 @@ class PostUpdate(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        if self.request.user.is_authenticated:
-            context['user_name'] = self.request.user.username
+
         return context
 
 
 class CommentCreate(View):
     def get(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
-        user_name = None
-        if request.user.is_authenticated:
-            user_name = request.user.username  
 
         comment_form = CommentForm()
         
         context = {
             'post': post,
-            'user_name': user_name,
             'comment_form': comment_form,
         }
 
@@ -138,21 +123,16 @@ class CommentCreate(View):
     def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
 
-        user_name = None
-        if request.user.is_authenticated:
-            user_name = request.user.username  
-
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.post = post
-            comment.author = user_name
+            comment.author = self.request.user
             comment.save()
             return redirect(post.get_absolute_url())  
 
         context = {
             'post': post,
-            'user_name': user_name,
             'comment_form': comment_form,
         }
         return render(request, 'review/post_detail.html', context)
@@ -165,24 +145,14 @@ class CommentUpdate(UpdateView):
 
     def get_object(self, queryset=None):
         comment = super().get_object(queryset)        
-        user_name = None
 
-        if self.request.user.is_authenticated:
-            user_name = self.request.user.username  
-
-        if comment.author != user_name:
+        if comment.author != self.request.user:
             raise PermissionDenied('No right to edit')
 
         return comment
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        user_name = None
-        if self.request.user.is_authenticated:
-            user_name = self.request.user.username  
-
-        context['user_name'] = user_name
         return context
 
     def get_success_url(self):
@@ -196,24 +166,15 @@ class CommentDelete(DeleteView):
 
     def get_object(self, queryset=None):
         comment = super().get_object(queryset)        
-        user_name = None
 
-        if self.request.user.is_authenticated:
-            user_name = self.request.user.username  
+        if comment.author != self.request.user:
+            raise PermissionDenied('No right to edit')
 
-        if comment.author != user_name:
-            raise PermissionDenied('No right to delete Comment')
 
         return comment
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        user_name = None
-        if self.request.user.is_authenticated:
-            user_name = self.request.user.username  
-
-        context['user_name'] = user_name
         return context
 
     def get_success_url(self):

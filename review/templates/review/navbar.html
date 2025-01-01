@@ -41,7 +41,7 @@
                 <ul class="nav navbar-nav ml-auto">                
                     {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-info" data-toggle="dropdown" href="#" id="download">{{ user_name }} <span class="caret"></span></a>
+                            <a class="nav-link dropdown-toggle text-info" data-toggle="dropdown" href="#" id="download">{{ user }} <span class="caret"></span></a>
                             <div class="dropdown-menu" aria-labelledby="download">                            
                                 <a class="dropdown-item text-danger" href="/accounts/logout">Log out</a>
                             </div>

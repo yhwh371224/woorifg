@@ -12,7 +12,7 @@
             <!-- <span style="margin-left: 10px; ">in {{ category.name }}</span> -->
         </div>
         
-        {% if user_name == object.name %}
+        {% if user == object.author %}
             <button type="button" class="btn btn-primary" style="margin-left: auto;" onclick="location.href='{{ object.get_update_url }}'">EDIT REVIEW</button>
         {% endif %}
     </div>
@@ -45,7 +45,7 @@
         {% for comment in object.comment_set.all %}
             <div class="media mb-4" id="comment-id-{{ comment.pk }}">                
                 <div class="media-body">
-                    {% if comment.author == user_name %}
+                    {% if comment.author == user %}
                         <button class="btn btn-sm btn-info float-right" onclick="location.href='/review/comment/{{ comment.pk }}/update/'">edit</button>
                         <button class="btn btn-sm btn-warning float-right" data-toggle="modal" data-target="#deleteCommentModal-{{ comment.pk }}">delete</button>
                     {% endif %}
@@ -57,7 +57,7 @@
     </div>
 
     {% for comment in object.comment_set.all %}
-        {% if user_name == comment.author %}
+        {% if user == comment.author %}
             <!-- Modal -->
             <div class="modal fade" id="deleteCommentModal-{{ comment.pk }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -69,7 +69,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>{{ comment.get_markdown_content | safe  }}</p>
+                            <p>{{ comment.get_markdown_content | safe }}</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
