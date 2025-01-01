@@ -26,7 +26,6 @@
                     <button id="runConvertWebp" class="btn btn-sm btn-primary">Run Convert WebP</button>
                 </div>
             </div>
-            <p id="commandStatus"></p>
             {% endif %}   
             <hr>
         
@@ -48,31 +47,62 @@
     </div>
 </section>
 
+<!-- ✅ 결과 표시용 모달 -->
+<div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resultModalLabel">Command Result</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- 결과가 여기에 표시됩니다 -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ JavaScript -->
 <script>
     document.getElementById('runConvertWebp').addEventListener('click', function() {
-        // CSRF 토큰 가져오기
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    // CSRF 토큰 가져오기
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        fetch('/gallery/webp/', {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': csrfToken,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok. Status: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            document.getElementById('commandStatus').innerText = data.message;
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-            document.getElementById('commandStatus').innerText = 'Error: ' + error.message;
-        });
+    fetch('/gallery/webp/', {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': csrfToken,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok. Status: ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        const modalBody = document.getElementById('modalBody');
+        modalBody.innerText = '✅ ' + data.message;
+
+        // 모달을 열 때 인스턴스가 중복 생성되지 않도록 수정
+        const myModalEl = document.getElementById('resultModal');
+        const myModal = bootstrap.Modal.getOrCreateInstance(myModalEl);
+        myModal.show();
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+        const modalBody = document.getElementById('modalBody');
+        modalBody.innerText = '❌ Error: ' + error.message;
+
+        // 모달을 열 때 인스턴스가 중복 생성되지 않도록 수정
+        const myModalEl = document.getElementById('resultModal');
+        const myModal = bootstrap.Modal.getOrCreateInstance(myModalEl);
+        myModal.show();
     });
+});
 </script>
 {% endblock %}
