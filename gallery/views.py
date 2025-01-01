@@ -52,10 +52,8 @@ class GalleryList(ListView):
 
         try:
             page_obj = paginator.page(page)
-        except PageNotAnInteger:
-            page_obj = paginator.page(1)
-        except EmptyPage:
-            page_obj = paginator.page(paginator.num_pages)  
+        except (PageNotAnInteger, InvalidPage, EmptyPage):
+            page_obj = paginator.page(1)   
 
         context['page_obj'] = page_obj
         context['paginator'] = paginator
