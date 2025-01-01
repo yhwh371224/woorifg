@@ -35,31 +35,33 @@ class GalleryList(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
-
-        # 전체 데이터를 계산하는 부분
+        
         queryset = self.get_queryset()
-        total_items = queryset.count() if queryset else 0  
-        total_pages = (total_items // self.paginate_by) + (1 if total_items % self.paginate_by else 0)  
-
+       
+        context['gallery_count'] = queryset.count()
         context['category_list'] = Category.objects.all()
-        context['posts_without_category'] = Gallery.objects.filter(category=None).count()
+        context['galleries_without_category'] = Gallery.objects.filter(category=None).count()
         context['category'] = self.category
-        context['total_pages'] = total_pages if total_pages > 0 else 1 
+        context['user_name'] = self.request.user.username if self.request.user.is_authenticated else None
+        context['search_error'] = self.request.session.get('search_error', None)
 
-        # 페이지네이션
-        page = self.request.GET.get('page', 1)
+        # 페이지네이션 처리
         paginator = Paginator(queryset, self.paginate_by)
+        page = self.request.GET.get('page', 1)
 
         try:
             page_obj = paginator.page(page)
-        except (PageNotAnInteger, InvalidPage, EmptyPage):
-            page_obj = paginator.page(1)   
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
 
         context['page_obj'] = page_obj
         context['paginator'] = paginator
-        
-        return context
+        context['total_pages'] = paginator.num_pages
 
+        return context
+        
 
 class GallerySearch(GalleryList):
     def get_queryset(self):

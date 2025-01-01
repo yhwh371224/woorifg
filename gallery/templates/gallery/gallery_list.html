@@ -75,15 +75,19 @@
         <!-- Pagination Controls -->
         <div class="pagination mt-4 text-center" style="font-size: small;">
             <span class="page-links">                
-                {% if page_obj.has_previous %}
-                    <a href="?page=1">[처음페이지]&nbsp;&nbsp;</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">next&nbsp;&nbsp;</a>
-                {% endif %}
-                <span class="current-page">Page {{ page_obj.number }} of {{ total_pages }}</span>
-                {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">&nbsp;&nbsp;previous</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">&nbsp;&nbsp;[끝페이지]</a>
-                {% endif %}                
+                {% if page_obj %}
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">[처음페이지]&nbsp;&nbsp;</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">next&nbsp;&nbsp;</a>
+                    {% endif %}
+                    <span class="current-page">Page {{ page_obj.number }} of {{ total_pages }}</span>
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">&nbsp;&nbsp;previous</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">&nbsp;&nbsp;[끝페이지]</a>
+                    {% endif %}
+                {% else %}
+                    <span>Page 1</span>
+                {% endif %}           
             </span>
         </div>
     </div>
