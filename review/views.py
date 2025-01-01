@@ -57,6 +57,7 @@ class PostList(ListView):
 
         context['page_obj'] = page_obj
         context['paginator'] = paginator
+        context['total_pages'] = paginator.num_pages
 
         return context
     
