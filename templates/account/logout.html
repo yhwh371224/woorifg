@@ -7,7 +7,7 @@
 
 {% block content %}
 <section class="bg-light position-relative pt-5 pb-5 py-sm-5">
-    <div class="mx-auto mt-n3 mt-sm-0" style="max-width: 380px; background-color: #8da6be; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <div class="mx-auto mt-n3 mt-sm-0" style="max-width: 380px; background-color: #95aec5; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
         <h3 class="text-dark text-center pt-sm-2" style="padding-top: 30px;">{% trans "Sign Out" %}</h3><br>
         <form class="login text-dark text-center mb-4" method="POST" action="{% url 'account_logout' %}">
             {% csrf_token %}
