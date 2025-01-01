@@ -53,7 +53,7 @@
         // CSRF 토큰 가져오기
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-        fetch('/webp/', {
+        fetch('/gallery/webp/', {
             method: 'POST',
             headers: {
                 'X-CSRFToken': csrfToken,
