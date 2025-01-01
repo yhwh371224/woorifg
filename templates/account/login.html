@@ -6,8 +6,8 @@
 {% block head_title %}{% trans "Log In" %}{% endblock %}
 
 {% block content %}
-<section class="bg-light position-relative pt-4 pt-sm-6 pb-5 py-sm-6">
-    <div class="mx-auto mt-n3 mt-sm-0" style="max-width: 460px; background-color: #8da6be; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+<section class="bg-light position-relative pt-5 pb-5 py-sm-5">
+    <div class="mx-auto mt-n3 mt-sm-0" style="max-width: 380px; background-color: #8da6be; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
         <h3 class="text-dark text-center pt-sm-2" style="padding-top: 180px;">{% trans "Sign In" %}</h3><br>
         <form class="login text-dark text-center mb-4" method="POST" action="{% url 'account_login' %}">
             {% csrf_token %}
@@ -25,7 +25,7 @@
 <style>
     @media (max-width: 767.98px) {
         .mx-auto {
-            padding: 15px; 
+            margin: 15px; 
         }
     }
 </style>
