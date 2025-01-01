@@ -18,7 +18,6 @@ from .forms import BulletinForm, PdfForm, MusicForm
 
 
 def merge_latest_pdfs(request):
-        # 최신 두 개의 Bulletin 객체를 가져옵니다.
         bulletins = Bulletin.objects.all().order_by('-created')[:2]
 
         if len(bulletins) < 2:
@@ -49,20 +48,16 @@ def merge_latest_pdfs(request):
             pdf_file=f'bulletins/{merged_filename}' 
         )
         
-        # 병합 후 파일 삭제 및 객체 삭제
         for bulletin in bulletins:
             if bulletin.pdf_file:
                 try:
-                    # 파일이 열린 상태라면 닫기
                     if hasattr(bulletin.pdf_file, 'close'):
                         bulletin.pdf_file.close()
 
-                    # 파일 삭제
                     os.remove(bulletin.pdf_file.path)
                 except Exception as e:
                     return JsonResponse({"error": f"파일 삭제 실패: {str(e)}"}, status=500)
 
-            # Bulletin 객체 삭제
             bulletin.delete()
 
         updated_bulletins = Bulletin.objects.all().order_by('-created')  
@@ -174,25 +169,6 @@ class PdfUploadView(LoginRequiredMixin, CreateView):
     def get_login_url(self):
         login_url = super().get_login_url() or reverse_lazy('account_login')
         return f'{login_url}?next={self.request.path}'
-    
-
-# class PdfSearch(PdfListView):
-#     model = Pdf
-#     def get_queryset(self):
-#         q = self.kwargs['q']
-#         try:
-#             object_list = Pdf.objects.filter(
-#                 Q(title__icontains=q) | 
-#                 Q(date__icontains=q)   
-#             )
-#         except FieldError:
-#             raise Http404(f"No results found for '{q}'")
-#         return object_list
-
-#     def get_context_data(self, *, object_list=None, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['search_info'] = f'Search: "{self.kwargs["q"]}"'
-#         return context
 
 
 class MusicListView(ListView):
@@ -205,8 +181,7 @@ class MusicListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = PdfForm()  # 폼을 컨텍스트에 추가
-        context['category_list'] = Category.objects.all() 
+        context['form'] = PdfForm()
         return context
 
     def post(self, request, *args, **kwargs):
@@ -257,36 +232,4 @@ class MusicSearch(MusicListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search_info'] = f'Search: "{self.kwargs["q"]}"'
-        return context
-
-
-
-class MusicCategory(ListView):
-    model = Music
-
-    def get_queryset(self):
-        slug = self.kwargs['slug']
-
-        if slug == '_none':
-            category = None
-        else:
-            category = Category.objects.get(slug=slug)
-
-        return Music.objects.filter(category=category).order_by('-created')
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(type(self), self).get_context_data(**kwargs)
-        context['category_list'] = Category.objects.all()
-        context['musics_without_category'] = Music.objects.filter(category=None).count()
-
-        slug = self.kwargs['slug']
-
-        if slug == '_none':
-            context['category'] = '미분류'
-        else:
-            category = Category.objects.get(slug=slug)
-            context['category'] = category
-
-        context['music_list'] = self.get_queryset()
-
         return context
