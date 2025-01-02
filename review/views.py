@@ -193,13 +193,13 @@ class PostSearch(PostList):
             )
         except FieldError:
             raise Http404(f"No results found for '{q}'")
-        self.category = 'Search Results'
+        self.search_title = f'Search Results for: "{q}"' 
         return object_list
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['search_info'] = f'Search: "{self.kwargs["q"]}"'
-        context['category'] = self.category 
+        context['search_info'] = self.search_title
+        context['category'] = None 
         return context
     
 
