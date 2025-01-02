@@ -77,6 +77,7 @@ class GallerySearch(GalleryList):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search_info'] = f'Search: "{self.kwargs["q"]}"'
+        context['category'] = self.kwargs.get('category', 'Search Results')
         return context
 
 
