@@ -72,12 +72,12 @@ class GallerySearch(GalleryList):
             )
         except FieldError:
             raise Http404(f"No results found for '{q}'")
+        self.category = 'Search Results'
         return object_list
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search_info'] = f'Search: "{self.kwargs["q"]}"'
-        self.category = 'Search Results'
         context['category'] = self.category
         return context
 

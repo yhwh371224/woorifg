@@ -115,7 +115,7 @@
     }
 
     function wait_for_enterkey(event) {
-        if (event.keyCode == 13) {
+        if (event.key === 'Enter') {
             gallery_search_post();
         }
     }
