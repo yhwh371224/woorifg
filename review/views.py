@@ -193,6 +193,8 @@ class PostSearch(PostList):
             )
         except FieldError:
             raise Http404(f"No results found for '{q}'")
+        
+        print(object_list)
         self.category = 'Search Results' 
         return object_list
 
