@@ -69,6 +69,9 @@ class PostDetail(DetailView):
         context['post_count'] = Post.objects.all().count()
         context['comment_form'] = CommentForm()
 
+        if self.object.category:
+            context['category'] = self.object.category
+
         return context
     
 

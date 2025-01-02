@@ -9,7 +9,9 @@
         <div><br>
             <span style="color: #3E2723; font-weight: bold;">{{ object.title }}</span>            
             <span style="margin-left: 10px; ">posted on {{ object.date }}</span>
-            <!-- <span style="margin-left: 10px; ">in {{ category.name }}</span> -->
+        {% if object.category %}
+            <span style="margin-left: 10px;">in {{ object.category.name }}</span>
+        {% endif %}
         </div>
         
         {% if user == object.author %}
@@ -26,17 +28,17 @@
     <div class="card my-4">
         <h5 class="card-header">Leave a Comment:</h5>
         <div class="card-body">
-            {% if not email %}
+            {% if not user.is_authenticated %}
             <button type="button" class="btn btn-outline-success btn-block" data-toggle="modal" data-target="#loginModal">
                 Log in
             </button>            
             {% else %}
-            <form method="post" action="{{ object.get_absolute_url }}new_comment/">{% csrf_token %}
-                <div class="form-group">
-                    {{ comment_form.as_p }}
-                </div>
-                <button type="submit" class="btn btn-primary btn-sm float-right">Submit Comment</button>                
-            </form>
+                <form method="post" action="{{ object.get_absolute_url }}new_comment/">{% csrf_token %}
+                    <div class="form-group">
+                        {{ comment_form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm float-right">Submit Comment</button>                
+                </form>
             {% endif %}
         </div>
     </div>
