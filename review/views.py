@@ -198,7 +198,7 @@ class PostSearch(PostList):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['search_query'] = self.kwargs['q'] 
+        context['search_info'] = f'Search: "{self.kwargs["q"]}"'
         context['category'] = self.category  
         return context
     
