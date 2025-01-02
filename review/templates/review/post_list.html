@@ -24,10 +24,10 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    {% if category and category != 'Search Results' %}
+                    {% if category %}
                         <small class="d-block mt-2">{{ category.name }}</small>
                     {% else %}
-                        <small class="d-block mt-2">{{ search_info|default:"No category selected" }}</small> 
+                        <small class="d-block mt-2">No category selected</small>
                     {% endif %}
                 </div>            
 
@@ -44,6 +44,7 @@
                             <button class="btn btn-success" type="button" onclick="review_search_post();">Go!</button>
                         </span>
                     </div>
+                    <small class="d-block mt-2">{{ search_query|default:"검색어를 입력하지 않았습니다" }}</small>
                 </div>
             </div>
         </div>
