@@ -25,7 +25,11 @@
                         </ul>
                     </div>
                     {% if category %}
-                        <small class="d-block mt-2">{{ category.name }}</small>
+                        {% if category == "Search Results" %}
+                            <small class="d-block mt-2">{{ category }}</small>
+                        {% else %}
+                            <small class="d-block mt-2">{{ category.name }}</small>
+                        {% endif %}
                     {% else %}
                         <small class="d-block mt-2">No category selected</small>
                     {% endif %}
