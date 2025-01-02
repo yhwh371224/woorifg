@@ -16,14 +16,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/home/">Home</a>
                 </li>
-                <li class="nav-item"><a class="nav-link text-info" href="/gallery/">사진첩</a></li>                
+                <li class="nav-item"><a class="nav-link" href="/gallery/">사진첩</a></li>                
                 <ul class="nav navbar-nav ml-auto">                
                     {% if user.is_authenticated %}
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-info" data-toggle="dropdown" href="#" id="download">{{ user }} <span class="caret"></span></a>
-                            <div class="dropdown-menu" aria-labelledby="download">                            
-                                <a class="dropdown-item text-danger" href="/accounts/logout">Log out</a>
-                            </div>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-info btn-block" href="/accounts/logout">Log out</a>
                         </li>
                     {% else %}                        
                         <li class="nav-item">
