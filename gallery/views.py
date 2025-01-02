@@ -154,7 +154,11 @@ class GalleryListByCategory(ListView):
 class ConvertWebpView(View):
     def post(self, request, *args, **kwargs):
         try:
-            call_command('convert_webp')
+            if '/rotate/' in request.path:
+                call_command('convert_with_rotation')  # 컴에서 변환할 때 
+            elif '/no-rotate/' in request.path:
+                call_command('convert_without_rotation')  # 모발폰에서 변환할 때
+
             return JsonResponse({'status': 'success', 'message': 'Command executed successfully'})
         except Exception as e:
             return JsonResponse({'status': 'error', 'message': str(e)}, status=500)

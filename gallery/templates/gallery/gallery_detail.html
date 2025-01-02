@@ -1,8 +1,6 @@
 {% extends 'gallery/base.html' %}
 
 {% block content %}
-<meta name="csrf-token" content="{{ csrf_token }}">
-
 <section class="page-section" id="subpages">
     <div class="container">
         <div class="gallery-section" style="padding: 20px;">  
@@ -10,20 +8,16 @@
             <!-- Title -->
             <h3>{{ object.title }}</h3> 
             {% if request.user.is_authenticated %}           
-            <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="d-flex justify-content-between mb-2">
                 <!-- 왼쪽: EDIT 버튼 -->
                 <div>
                     <button type="button" class="btn btn-sm btn-success" onclick="location.href='{{ object.get_update_url }}'">EDIT</button>
                 </div>
-            
-                <!-- 가운데: 관리자 페이지 버튼 -->
-                <div>
-                    <a href="/admin/" class="btn btn-sm btn-secondary">관리자 페이지</a>
-                </div>
-            
+                           
                 <!-- 오른쪽: Run Convert WebP 버튼 -->
                 <div>
-                    <button id="runConvertWebp" class="btn btn-sm btn-primary">Run Convert WebP</button>
+                    <button id="rotate-btn" class="btn btn-sm btn-primary mx-1">컴에서 Webp 변환</button>
+                    <button id="no-rotate-btn" class="btn btn-sm btn-primary">모발폰 Webp 변환</button>
                 </div>
             </div>
             {% endif %}   
@@ -52,11 +46,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="resultModalLabel">Command Result</h5>
+        <h5 class="modal-title" id="resultModalLabel">Webp 변환 결과</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" id="modalBody">
-        <!-- 결과가 여기에 표시됩니다 -->
+        <!-- 결과가 여기에 표시 -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -67,42 +61,57 @@
 
 <!-- ✅ JavaScript -->
 <script>
-    document.getElementById('runConvertWebp').addEventListener('click', function() {
-    // CSRF 토큰 가져오기
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-    fetch('/gallery/webp/', {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': csrfToken,
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok. Status: ' + response.status);
-        }
-        return response.json();
-    })
-    .then(data => {
-        const modalBody = document.getElementById('modalBody');
-        modalBody.innerText = '✅ ' + data.message;
-
-        // 모달을 열 때 인스턴스가 중복 생성되지 않도록 수정
-        const myModalEl = document.getElementById('resultModal');
-        const myModal = bootstrap.Modal.getOrCreateInstance(myModalEl);
-        myModal.show();
-    })
-    .catch(error => {
-        console.error('Fetch error:', error);
-        const modalBody = document.getElementById('modalBody');
-        modalBody.innerText = '❌ Error: ' + error.message;
-
-        // 모달을 열 때 인스턴스가 중복 생성되지 않도록 수정
-        const myModalEl = document.getElementById('resultModal');
-        const myModal = bootstrap.Modal.getOrCreateInstance(myModalEl);
-        myModal.show();
+    // 컴에서 변환할 때 
+    document.getElementById('rotate-btn').addEventListener('click', function() {
+        sendRequest(true);  
     });
-});
+
+    // 모발폰에서 변환할 때 
+    document.getElementById('no-rotate-btn').addEventListener('click', function() {
+        sendRequest(false);  
+    });
+
+    function sendRequest(rotate) {
+        // CSRF token
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        // Dynamically set the URL based on whether rotation is true or false
+        const url = rotate ? '/gallery/webp/rotate/' : '/gallery/webp/no-rotate/';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ rotate: rotate })  
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok. Status: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerText = '✅ ' + data.message;
+
+            // Open the modal without creating a new instance each time
+            const myModalEl = document.getElementById('resultModal');
+            const myModal = bootstrap.Modal.getOrCreateInstance(myModalEl);
+            myModal.show();
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerText = '❌ Error: ' + error.message;
+
+            // Open the modal without creating a new instance each time
+            const myModalEl = document.getElementById('resultModal');
+            const myModal = bootstrap.Modal.getOrCreateInstance(myModalEl);
+            myModal.show();
+        });
+    }
 </script>
+
 {% endblock %}

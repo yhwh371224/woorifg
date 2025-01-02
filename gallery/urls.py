@@ -12,7 +12,8 @@ urlpatterns = [
     path('<int:pk>/update/', views.GalleryUpdate.as_view(), name='gallery_update'),
     path('<int:pk>/', views.GalleryDetail.as_view(), name='gallery_detail'),
     path('create/', views.GalleryCreate.as_view(), name='gallery_create'),
-    path('webp/', ConvertWebpView.as_view(), name='convert_webp'),
+    path('webp/rotate/', ConvertWebpView.as_view(), name='convert_with_rotation'),
+    path('webp/no-rotate/', ConvertWebpView.as_view(), name='convert_without_rotation'),
     path('', views.GalleryList.as_view(), name='gallery_list'),
 ]
 
