@@ -24,10 +24,10 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    {% if category %}
+                    {% if category and category != 'Search Results' %}
                         <small class="d-block mt-2">{{ category.name }}</small>
                     {% else %}
-                        <small class="d-block mt-2">No category selected</small>
+                        <small class="d-block mt-2">{{ search_info|default:"No category selected" }}</small> 
                     {% endif %}
                 </div>            
 
